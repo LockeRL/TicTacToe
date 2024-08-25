@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+
+    <string name="ic_back_arrow_name">Back arrow icon</string>
+    <string name="ic_cross">Cross icon</string>
+    <string name="ic_circle">Circle icon</string>
+
+    <string name="block_animate_alpha">Block animate alpha</string>
+    <string name="winner_animate_alpha">Winner animate alpha</string>
+    <string name="winner_block_animate_alpha">Winner block animate alpha</string>
+
+    <string name="play">Play</string>
+    <string name="tic_x_tac">Tic x Tac</string>
+    <string name="toe">Toe</string>
+
+    <string name="wins">Wins</string>
+    <string name="draw">Draw</string>
+    <string name="next_game">Next Game</string>
+
+    <string name="turn">Turn</string>
+</resources>
