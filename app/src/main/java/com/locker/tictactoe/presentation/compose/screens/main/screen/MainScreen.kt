@@ -16,8 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.locker.tictactoe.R
 import com.locker.tictactoe.presentation.common.TicTacToeButton
 import com.locker.tictactoe.presentation.compose.screens.main.view.MainMenuText
-import com.locker.tictactoe.presentation.theme.AccentColor
-import com.locker.tictactoe.presentation.theme.MenuButtonPercent
+import com.locker.tictactoe.presentation.theme.MENU_BUTTON_PERCENT
 import com.locker.tictactoe.presentation.theme.Space16
 import com.locker.tictactoe.presentation.theme.TicTacToeTheme
 
@@ -33,14 +32,13 @@ fun MainScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             MainMenuText(
-                color = AccentColor,
                 modifier = Modifier.fillMaxWidth()
             )
 
             TicTacToeButton(
                 text = stringResource(id = R.string.play),
                 onClick = onStartGameClick,
-                modifier = Modifier.fillMaxWidth(MenuButtonPercent)
+                modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
             )
         }
     }

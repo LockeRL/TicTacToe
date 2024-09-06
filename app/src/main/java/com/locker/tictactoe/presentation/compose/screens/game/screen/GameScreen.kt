@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -33,17 +34,15 @@ import com.locker.tictactoe.presentation.compose.screens.game.viewmodel.GameView
 import com.locker.tictactoe.presentation.model.BoardState
 import com.locker.tictactoe.presentation.model.CellState
 import com.locker.tictactoe.presentation.model.Player
-import com.locker.tictactoe.presentation.theme.AccentColor
-import com.locker.tictactoe.presentation.theme.AdditionalColor
 import com.locker.tictactoe.presentation.theme.DefaultShape
 import com.locker.tictactoe.presentation.theme.DefaultStrokeSize
 import com.locker.tictactoe.presentation.theme.FADE_WIN_BLOCK_TIME
-import com.locker.tictactoe.presentation.theme.HalfAlpha
-import com.locker.tictactoe.presentation.theme.LowAlpha
+import com.locker.tictactoe.presentation.theme.HALF_ALPHA
+import com.locker.tictactoe.presentation.theme.LOW_ALPHA
 import com.locker.tictactoe.presentation.theme.NEXT_GAME_SCREEN_CHANGE_DELAY_DURATION
 import com.locker.tictactoe.presentation.theme.SlimStrokeSize
 import com.locker.tictactoe.presentation.theme.Space8
-import com.locker.tictactoe.presentation.theme.SubFieldLinePercent
+import com.locker.tictactoe.presentation.theme.SUB_FIELD_LINE_LENGTH_PERCENT
 import com.locker.tictactoe.presentation.util.GameBlock
 import com.locker.tictactoe.presentation.util.GameField
 import kotlinx.coroutines.delay
@@ -52,18 +51,16 @@ import org.koin.compose.koinInject
 
 @Composable
 fun GameScreen(
-    onInitGameScreen: () -> Unit,
     onEndGameAction: (Player?) -> Unit,
     modifier: Modifier = Modifier,
     gameViewModel: GameViewModel = koinInject()
 ) {
     var isFirstLaunch by rememberSaveable { mutableStateOf(true) }
     LaunchedEffect(Unit) {
-        if (isFirstLaunch) {
+        if (isFirstLaunch)
             isFirstLaunch = false
-            onInitGameScreen()
-        }
     }
+
     GameField(
         field = gameViewModel.field,
         gameActivePlayer = gameViewModel.activePlayer,
@@ -81,6 +78,8 @@ fun GameField(
     onBlockClick: (Int, Int, Int, Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val colors = MaterialTheme.colors
+
     var winScreenAlpha by remember { mutableFloatStateOf(1f) }
     val winAlpha by animateFloatAsState(
         targetValue = winScreenAlpha,
@@ -96,7 +95,8 @@ fun GameField(
         if (boardState != BoardState.InProgress) {
             delay(NEXT_GAME_SCREEN_CHANGE_DELAY_DURATION.toLong())
             winScreenAlpha = 0f
-            onEndGameAction(((boardState as? BoardState.Winner)?.winner as? CellState.Occupied)?.player)
+            val winner = ((boardState as? BoardState.Winner)?.winner as? CellState.Occupied)?.player
+            onEndGameAction(winner)
         }
     }
 
@@ -115,7 +115,7 @@ fun GameField(
 
         GameBlockContainer(
             dimensionSize = field.dimensionSize,
-            border = Border(DefaultStrokeSize, AccentColor),
+            border = Border(DefaultStrokeSize, colors.primary),
             boardState = boardState,
             showAlphaAnimation = false,
             showGameCell = false,
@@ -143,15 +143,17 @@ fun GameFieldBlock(
     onCellClick: (Int, Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val colors = MaterialTheme.colors
+
     val isActive by block.isActive.collectAsState()
     val winState by block.winState.collectAsState()
     GameBlockContainer(
         dimensionSize = block.dimensionSize,
-        border = Border(SlimStrokeSize, AdditionalColor.copy(HalfAlpha), SubFieldLinePercent),
+        border = Border(SlimStrokeSize, colors.secondary.copy(HALF_ALPHA), SUB_FIELD_LINE_LENGTH_PERCENT),
         boardState = winState,
         modifier = modifier
             .clip(DefaultShape)
-            .background(if (isActive) AccentColor.copy(LowAlpha) else Color.Transparent)
+            .background(if (isActive) colors.primary.copy(LOW_ALPHA) else Color.Transparent)
     ) { i, j ->
         val cell by block.getCellFlow(i, j).collectAsState()
         GameCell(

@@ -7,13 +7,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.locker.tictactoe.presentation.theme.AccentColor
 import com.locker.tictactoe.presentation.theme.RoundCornerPercent
 import com.locker.tictactoe.presentation.theme.TicTacToeTheme
 import com.locker.tictactoe.presentation.theme.Typography
@@ -25,8 +25,8 @@ fun TicTacToeButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     borderStroke: BorderStroke? = null,
-    containerColor: Color = AccentColor,
-    contentColor: Color = Color.Black,
+    containerColor: Color = MaterialTheme.colors.primary,
+    contentColor: Color = MaterialTheme.colors.background,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
 ) {
     Button(

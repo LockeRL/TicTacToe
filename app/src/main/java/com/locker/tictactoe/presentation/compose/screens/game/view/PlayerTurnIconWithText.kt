@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +30,7 @@ fun PlayerTurnIconWithText(
     ) {
         Text(
             text = "${stringResource(id = R.string.turn)}:",
-            color = Color.White,
+            color = MaterialTheme.colors.primaryVariant,
             style = Typography.h4
         )
         PlayerIconWithState(

@@ -1,6 +1,7 @@
 package com.locker.tictactoe.presentation.compose.screens.game.view
 
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,7 +38,7 @@ fun PlayerIcon(
                 Player.CROSS -> R.drawable.ic_cross
             }
         ),
-        tint = Color.White,
+        tint = MaterialTheme.colors.primaryVariant,
         contentDescription = stringResource(
             id = when(player) {
                 Player.CIRCLE -> R.string.ic_circle

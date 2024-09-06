@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,7 +19,7 @@ import com.locker.tictactoe.R
 import com.locker.tictactoe.presentation.common.TicTacToeButton
 import com.locker.tictactoe.presentation.compose.screens.game.view.PlayerIconNullable
 import com.locker.tictactoe.presentation.model.Player
-import com.locker.tictactoe.presentation.theme.MenuButtonPercent
+import com.locker.tictactoe.presentation.theme.MENU_BUTTON_PERCENT
 import com.locker.tictactoe.presentation.theme.Size64
 import com.locker.tictactoe.presentation.theme.Space8
 import com.locker.tictactoe.presentation.theme.Typography
@@ -41,7 +42,7 @@ fun NextGameScreen(
 
         Text(
             text = "${stringResource(id = if (winner == null) R.string.draw else R.string.wins)}!",
-            color = Color.White,
+            color = MaterialTheme.colors.primaryVariant,
             style = Typography.h3,
             modifier = Modifier.padding(Space8)
         )
@@ -49,7 +50,7 @@ fun NextGameScreen(
         TicTacToeButton(
             text = stringResource(id = R.string.next_game),
             onClick = onNextGameClick,
-            modifier = Modifier.fillMaxWidth(MenuButtonPercent)
+            modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
         )
     }
 }

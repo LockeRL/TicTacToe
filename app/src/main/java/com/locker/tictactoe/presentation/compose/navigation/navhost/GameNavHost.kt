@@ -34,7 +34,6 @@ fun GameNavHost(
     ) {
         composable(GameScreen.GameScreen.name) {
             GameScreen(
-                onInitGameScreen = { gameNavViewModel.setGameWinner(null) },
                 onEndGameAction = { winner ->
                     gameNavViewModel.setGameWinner(winner)
                     navController.navigate(GameScreen.NextGameScreen.name)

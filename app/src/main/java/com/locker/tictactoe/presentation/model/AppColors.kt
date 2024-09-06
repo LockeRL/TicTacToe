@@ -1,6 +1,11 @@
 package com.locker.tictactoe.presentation.model
 
+import androidx.compose.ui.graphics.Color
+
 data class AppColors(
-    val backgroundColor: Long = 0xFF1C1C1C,
-    val uiColor: Long = 0xFFF92673
+    val background: Color,
+    val accent: Color,
+    val additional: Color,
+    val additionalVariant: Color,
+    val accentVariant: Color
 )

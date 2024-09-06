@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -22,9 +23,9 @@ import com.locker.tictactoe.presentation.common.border
 import com.locker.tictactoe.presentation.common.matrixLine
 import com.locker.tictactoe.presentation.model.BoardState
 import com.locker.tictactoe.presentation.model.CellState
-import com.locker.tictactoe.presentation.theme.AccentColor
 import com.locker.tictactoe.presentation.theme.FADE_WIN_BLOCK_TIME
 import com.locker.tictactoe.presentation.theme.StrokeSize4
+import kotlin.math.max
 
 @Composable
 fun MatrixFieldBlock(
@@ -74,12 +75,7 @@ fun GameBlockContainer(
     showWinAfterAnimation: Boolean = false,
     content: @Composable (Int, Int) -> Unit
 ) {
-    var fieldAlpha by remember { mutableFloatStateOf(1f) }
-    val blockAlpha by animateFloatAsState(
-        targetValue = fieldAlpha,
-        label = stringResource(id = R.string.block_animate_alpha),
-        animationSpec = tween(durationMillis = FADE_WIN_BLOCK_TIME)
-    )
+    val colors = MaterialTheme.colors
 
     var winBlockAlpha by remember { mutableFloatStateOf(0f) }
     val winAlpha by animateFloatAsState(
@@ -88,6 +84,8 @@ fun GameBlockContainer(
         animationSpec = tween(durationMillis = FADE_WIN_BLOCK_TIME)
     )
 
+    val shadowAlpha = max(0.2f, 1f - if (showAlphaAnimation) winAlpha else 0f)
+
     Box(modifier = modifier) {
         MatrixFieldBlock(
             dimensionSize = dimensionSize,
@@ -95,20 +93,19 @@ fun GameBlockContainer(
             content = content,
             modifier = Modifier
                 .fillMaxSize()
-                .alpha(if (showAlphaAnimation) blockAlpha else 1f)
+                .alpha(shadowAlpha)
         )
 
         if (boardState != BoardState.InProgress) {
-            fieldAlpha = 0.2f
             winBlockAlpha = 1f
 
-            if (!showWinAfterAnimation || blockAlpha == 1f) {
+            if (!showWinAfterAnimation || winAlpha == 0f) {
                 Box(
                     modifier = Modifier
-                        .alpha(if (showAlphaAnimation) blockAlpha else 1f)
+                        .alpha(shadowAlpha)
                         .fillMaxSize()
                         .matrixLine(
-                            border = Border(StrokeSize4, AccentColor),
+                            border = Border(StrokeSize4, colors.primary),
                             dimensionSize = dimensionSize,
                             column = if (boardState is BoardState.Winner.Column) boardState.columnId else null,
                             row = if (boardState is BoardState.Winner.Row) boardState.rowId else null,

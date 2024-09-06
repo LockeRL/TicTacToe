@@ -26,8 +26,7 @@ fun TicTacNavHost(
 ) {
     NavHost(
         navController = navController,
-        modifier = modifier
-            .background(Color.Black),
+        modifier = modifier,
         startDestination = startDestination,
         enterTransition = enterTransition,
         exitTransition = exitTransition

@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -21,26 +22,39 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
     private val navViewModel: NavigationViewModel by viewModel()
+    private val colorsViewModel: ColorsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TicTacToeTheme {
+            val colors by colorsViewModel.appColors.collectAsState()
+            TicTacToeTheme(
+                appColors = colors
+            ) {
+                val backgroundColor = MaterialTheme.colors.background
                 Scaffold(
                     topBar = {
                         val backButton by navViewModel.backButton.collectAsState()
                         TopAppBar(
                             button = backButton,
-                            modifier = Modifier.background(Color.Black).fillMaxWidth()
+                            colorsViewModel = colorsViewModel,
+                            modifier = Modifier
+                                .background(backgroundColor)
+                                .fillMaxWidth()
                         )
                     },
-                    backgroundColor = Color.Black,
-                    modifier = Modifier.background(Color.Black).fillMaxSize().padding(Space16)
+                    backgroundColor = backgroundColor,
+                    modifier = Modifier
+                        .background(backgroundColor)
+                        .fillMaxSize()
+                        .padding(Space16)
                 ) { innerPadding ->
                     MainNavHost(
                         innerPadding = innerPadding,
                         updateTopAppBar = navViewModel::setBackButton,
-                        modifier = Modifier.fillMaxSize().background(Color.Black)
+                        modifier = Modifier
+                            .background(backgroundColor)
+                            .fillMaxSize()
                     )
                 }
             }

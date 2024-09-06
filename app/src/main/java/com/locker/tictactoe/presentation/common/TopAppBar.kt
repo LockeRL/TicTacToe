@@ -7,14 +7,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.locker.tictactoe.presentation.ColorsViewModel
 import com.locker.tictactoe.presentation.compose.screens.main.view.PalettePicker
-import com.locker.tictactoe.presentation.model.AppColors
 import com.locker.tictactoe.presentation.model.BackButton
 import com.locker.tictactoe.presentation.theme.Size4
 
 @Composable
 fun TopAppBar(
     button: BackButton?,
+    colorsViewModel: ColorsViewModel,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -27,7 +28,7 @@ fun TopAppBar(
         button?.backButton?.invoke()
 
         PalettePicker(
-            colorsList = listOf(AppColors(), AppColors()),
+            colorsViewModel = colorsViewModel,
             modifier = Modifier.weight(1f)
         )
     }
