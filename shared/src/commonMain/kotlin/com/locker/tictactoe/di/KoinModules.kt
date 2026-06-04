@@ -1,0 +1,19 @@
+package com.locker.tictactoe.di
+
+import com.locker.core.navigation.di.navigationModule
+import com.locker.feature.colorpicker.di.colorPickerModule
+import com.locker.feature.gamescreen.di.gameScreenModule
+import com.locker.feature.mainscreen.di.mainScreenModule
+import org.koin.core.module.Module
+
+internal val coreModules: List<Module> = listOf(
+	navigationModule,
+	colorPickerModule,
+)
+
+internal val screenModules: List<Module> = listOf(
+	mainScreenModule,
+	gameScreenModule,
+)
+
+expect val platformModules: List<Module>
