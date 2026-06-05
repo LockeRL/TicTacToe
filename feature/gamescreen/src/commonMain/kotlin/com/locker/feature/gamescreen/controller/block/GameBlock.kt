@@ -3,7 +3,7 @@ package com.locker.feature.gamescreen.controller.block
 import com.locker.feature.gamescreen.controller.model.BoardState
 import com.locker.feature.gamescreen.controller.model.CellState
 import com.locker.feature.gamescreen.controller.model.SetCellResults
-import com.locker.models.Player
+import com.locker.feature.gamescreen.controller.model.Player
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -31,4 +31,8 @@ class GameBlock : GameMatrix<MutableStateFlow<CellState>>({ MutableStateFlow(Cel
 	fun getCellFlow(i: Int, j: Int): StateFlow<CellState> = get(i, j)
 
 	override fun getCellStateFromItem(item: MutableStateFlow<CellState>): CellState = item.value
+
+	override fun resetItem(item: MutableStateFlow<CellState>) {
+		item.value = CellState.Empty
+	}
 }

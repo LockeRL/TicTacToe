@@ -16,6 +16,9 @@ kotlin {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
         }
+        androidResources {
+            enable = true
+        }
     }
 
     listOf(
@@ -30,8 +33,14 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.core.navigation)
             implementation(libs.kotlin.stdlib)
+
+            // Core
+            implementation(projects.core.navigation)
+
+            // Feature
+            implementation(projects.feature.core)
+            implementation(projects.feature.component)
 
             // Compose
             implementation(libs.compose.runtime)
@@ -39,6 +48,7 @@ kotlin {
             implementation(libs.compose.material3)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
+            implementation(libs.compose.uiToolingPreview)
 
             // Koin
             implementation(libs.koin.core)
@@ -54,4 +64,12 @@ kotlin {
             implementation(libs.kotlin.test)
         }
     }
+}
+
+compose.resources {
+    packageOfResClass = "com.locker.feature.mainscreen"
+}
+
+dependencies {
+    androidRuntimeClasspath(libs.compose.uiTooling)
 }

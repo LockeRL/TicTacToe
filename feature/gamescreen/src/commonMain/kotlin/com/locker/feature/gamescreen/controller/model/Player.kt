@@ -1,4 +1,4 @@
-package com.locker.models
+package com.locker.feature.gamescreen.controller.model
 
 import com.locker.resources.Res
 import com.locker.resources.ic_circle

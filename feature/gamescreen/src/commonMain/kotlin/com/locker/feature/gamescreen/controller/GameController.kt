@@ -2,7 +2,7 @@ package com.locker.feature.gamescreen.controller
 
 import com.locker.feature.gamescreen.controller.block.GameField
 import com.locker.feature.gamescreen.controller.handler.CellClickEventHandler
-import com.locker.models.Player
+import com.locker.feature.gamescreen.controller.model.Player
 import com.locker.feature.gamescreen.controller.model.BoardState
 import com.locker.feature.gamescreen.controller.model.SetCellResults
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +25,12 @@ class GameController(
             blockI = cell.blockI,
             blockJ = cell.blockJ
         )
+    }
+
+    fun reset() {
+        activeBlock = null
+        _activePlayer.value = Player.CROSS
+        field.reset()
     }
 
     private fun setFieldState(fieldI: Int, fieldJ: Int, blockI: Int, blockJ: Int) {

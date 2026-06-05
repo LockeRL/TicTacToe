@@ -16,9 +16,6 @@ kotlin {
 		compilerOptions {
 			jvmTarget = JvmTarget.JVM_11
 		}
-		androidResources {
-			enable = true
-		}
 	}
 
 	listOf(
@@ -56,9 +53,4 @@ kotlin {
 			implementation(libs.kotlin.test)
 		}
 	}
-}
-
-compose.resources {
-	packageOfResClass = "com.locker.feature.core"
-	publicResClass = true
 }

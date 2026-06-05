@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import com.locker.feature.core.theme.TicTacToeTheme
-import com.locker.models.Player
+import com.locker.feature.gamescreen.controller.model.Player
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

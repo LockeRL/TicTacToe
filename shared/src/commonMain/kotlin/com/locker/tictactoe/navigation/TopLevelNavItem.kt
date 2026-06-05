@@ -6,6 +6,7 @@ import com.locker.core.navigation.keys.MainScreenNavKey
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
+// TODO Не нужно, пока нет нижней навигации
 internal data class TopLevelNavItem(
 	val selectedIconRes: DrawableResource? = null,
 	val unselectedIconRes: DrawableResource? = null,

@@ -7,7 +7,7 @@ import com.locker.feature.gamescreen.controller.GameController
 import com.locker.feature.gamescreen.controller.block.GameField
 import com.locker.feature.gamescreen.controller.handler.CellClickEventHandler
 import com.locker.feature.gamescreen.screen.GameScreen
-import com.locker.feature.gamescreen.screen.GameViewModel
+import com.locker.feature.gamescreen.screen.GameScreenViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -18,7 +18,7 @@ val gameScreenModule = module {
 	factory { GameField() }
 	factory { GameController(get(), get()) }
 	single { CellClickEventHandler() }
-	viewModel { GameViewModel(gameController = get(), eventHandler = get(), navigator = get()) }
+	viewModel { GameScreenViewModel(gameController = get(), eventHandler = get(), navigator = get()) }
 
 	navigation<GameScreenNavKey> {
 		GameScreen(modifier = Modifier.fillMaxSize())

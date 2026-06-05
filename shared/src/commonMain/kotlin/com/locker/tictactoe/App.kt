@@ -36,7 +36,6 @@ import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.resources.Res
 import com.locker.resources.ic_back
 import com.locker.tictactoe.component.TopAppBar
-import com.locker.tictactoe.navigation.TOP_LEVEL_NAV_ITEMS
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 
@@ -45,7 +44,7 @@ fun App(
 	navigator: Navigator = koinInject(),
 	colorsViewModel: ColorsViewModel = koinInject(),
 ) {
-	navigator.state = rememberNavigationState(MainScreenNavKey, TOP_LEVEL_NAV_ITEMS.keys)
+	navigator.state = rememberNavigationState(MainScreenNavKey, setOf(MainScreenNavKey))
 	val snackbarHostState = remember { SnackbarHostState() }
 
 	val colors by colorsViewModel.appColors.collectAsState()

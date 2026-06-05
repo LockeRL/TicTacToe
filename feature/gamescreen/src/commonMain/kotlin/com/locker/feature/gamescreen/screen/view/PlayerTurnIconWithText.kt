@@ -14,7 +14,7 @@ import com.locker.feature.core.theme.Size48
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamescreen.Res
 import com.locker.feature.gamescreen.turn
-import com.locker.models.Player
+import com.locker.feature.gamescreen.controller.model.Player
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -35,9 +35,11 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlin.stdlib)
 
+            // Resources
+            implementation(projects.resources)
+
             // Core
             implementation(projects.core.navigation)
-            implementation(projects.models)
 
             // Feature
             implementation(projects.feature.core)

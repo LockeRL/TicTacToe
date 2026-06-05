@@ -11,6 +11,10 @@ class GameField : GameMatrix<GameBlock>(::GameBlock) {
             else -> CellState.Empty
         }
 
+    override fun resetItem(item: GameBlock) {
+        item.reset()
+    }
+
     fun setActiveFieldState(i: Int, j: Int, state: Boolean) {
         get(i, j).setActiveState(state)
     }

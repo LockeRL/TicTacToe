@@ -1,3 +1,7 @@
 <resources>
     <string name="turn">Turn</string>
+    <string name="wins">Wins</string>
+    <string name="draw">Draw</string>
+    <string name="next_game">Next Game</string>
+    <string name="main_menu">Main Menu</string>
 </resources>

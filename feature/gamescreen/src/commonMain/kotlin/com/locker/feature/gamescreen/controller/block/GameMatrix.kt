@@ -2,7 +2,7 @@ package com.locker.feature.gamescreen.controller.block
 
 import com.locker.feature.gamescreen.controller.model.BoardState
 import com.locker.feature.gamescreen.controller.model.CellState
-import com.locker.models.Player
+import com.locker.feature.gamescreen.controller.model.Player
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -18,6 +18,8 @@ abstract class GameMatrix<T>(
 
 	abstract fun getCellStateFromItem(item: T): CellState
 
+	protected abstract fun resetItem(item: T)
+
 	operator fun get(i: Int, j: Int): T = matrix[i][j]
 
 	fun getCellState(i: Int, j: Int): CellState = getCellStateFromItem(get(i, j))
@@ -30,6 +32,15 @@ abstract class GameMatrix<T>(
 
 		_winState.value = finishState
 		return finishState
+	}
+
+	fun reset() {
+		_winState.value = BoardState.InProgress
+		matrix.forEach { row ->
+			row.forEach { item ->
+				resetItem(item)
+			}
+		}
 	}
 
 	private fun isFull(): Boolean =

@@ -9,9 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -75,9 +72,8 @@ fun GameBlockContainer(
 ) {
     val colors = TicTacToeTheme.colors
 
-    var winBlockAlpha by remember { mutableFloatStateOf(0f) }
     val winAlpha by animateFloatAsState(
-        targetValue = winBlockAlpha,
+        targetValue = if (boardState == BoardState.InProgress) 0f else 1f,
         label = "winner_block",
         animationSpec = tween(durationMillis = FADE_WIN_BLOCK_TIME)
     )
@@ -95,8 +91,6 @@ fun GameBlockContainer(
         )
 
         if (boardState != BoardState.InProgress) {
-            winBlockAlpha = 1f
-
             if (!showWinAfterAnimation || winAlpha == 0f) {
                 Box(
                     modifier = Modifier

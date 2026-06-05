@@ -1,0 +1,5 @@
+<resources>
+    <string name="play">Play</string>
+    <string name="tic_x_tac">Tic x Tac</string>
+    <string name="toe">Toe</string>
+</resources>

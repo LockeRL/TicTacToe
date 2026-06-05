@@ -1,7 +1,9 @@
 package com.locker.feature.gamescreen.screen
 
-import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,12 +21,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import com.locker.feature.component.modifier.Border
@@ -45,28 +43,30 @@ import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamescreen.controller.block.GameBlock
 import com.locker.feature.gamescreen.controller.block.GameField
 import com.locker.feature.gamescreen.controller.model.BoardState
-import com.locker.feature.gamescreen.controller.model.CellState
 import com.locker.feature.gamescreen.screen.event.CellClickEvent
-import com.locker.feature.gamescreen.screen.event.GameEnd
+import com.locker.feature.gamescreen.screen.event.GameEndEvent
 import com.locker.feature.gamescreen.screen.view.GameBlockContainer
 import com.locker.feature.gamescreen.screen.view.GameCell
 import com.locker.feature.gamescreen.screen.view.PlayerTurnIconWithText
-import com.locker.models.Player
-import kotlinx.coroutines.delay
+import com.locker.feature.gamescreen.controller.model.Player
+import com.locker.feature.gamescreen.screen.model.EndGameScreenState
+import com.locker.feature.gamescreen.screen.view.NextGameContent
 import org.koin.compose.koinInject
 
 @Composable
 fun GameScreen(
-	viewModel: GameViewModel = koinInject(),
+	viewModel: GameScreenViewModel = koinInject(),
 	modifier: Modifier = Modifier
 ) {
 	ProvideScreenEvents(
 		viewModel = viewModel
 	) { viewModel ->
 		val player = viewModel.activePlayer.collectAsState()
+		val endGameScreenState = viewModel.endScreen.collectAsState()
 		GameScreenContent(
 			field = viewModel.field,
 			player = player,
+			endGame = endGameScreenState,
 			modifier = modifier
 		)
 	}
@@ -76,52 +76,70 @@ fun GameScreen(
 private fun GameScreenContent(
 	field: GameField,
 	player: State<Player>,
+	endGame: State<EndGameScreenState>,
 	modifier: Modifier = Modifier,
 ) {
+	val fireEvent = LocalFireEvent.current
+	val boardState = field.winState.collectAsState()
+
+	LaunchedEffect(boardState.value) {
+		if (boardState.value != BoardState.InProgress) {
+			fireEvent(GameEndEvent)
+		}
+	}
+
 	Box(
 		contentAlignment = Alignment.Center,
 		modifier = modifier
 			.windowInsetsPadding(WindowInsets.statusBars)
 	) {
-		GameFieldContent(
-			field = field,
-			player = player,
+		AnimatedVisibility(
+			visible = boardState.value == BoardState.InProgress,
+			enter = fadeIn(animationSpec = tween(FADE_WIN_BLOCK_TIME)),
+			exit = fadeOut(
+				animationSpec = tween(
+					durationMillis = FADE_WIN_BLOCK_TIME,
+					delayMillis = NEXT_GAME_SCREEN_CHANGE_DELAY_DURATION
+				)
+			),
 			modifier = Modifier
 				.widthIn(max = Size400)
 				.padding(bottom = Size40)
-		)
+		) {
+			GameFieldContent(
+				field = field,
+				boardState = boardState,
+				player = player,
+			)
+		}
+
+		AnimatedVisibility(
+			visible = boardState.value != BoardState.InProgress,
+			enter = fadeIn(
+				animationSpec = tween(
+					durationMillis = FADE_WIN_BLOCK_TIME,
+					delayMillis = NEXT_GAME_SCREEN_CHANGE_DELAY_DURATION
+				)
+			),
+			exit = fadeOut(animationSpec = tween(FADE_WIN_BLOCK_TIME)),
+			modifier = Modifier.fillMaxWidth()
+		) {
+			NextGameContent(
+				endGame = endGame.value,
+			)
+		}
 	}
 }
 
 @Composable
 private fun GameFieldContent(
 	field: GameField,
+	boardState: State<BoardState>,
 	player: State<Player>,
 	modifier: Modifier = Modifier,
 ) {
 	val colors = TicTacToeTheme.colors
 	val fireEvent = LocalFireEvent.current
-
-	var winScreenAlpha by remember { mutableFloatStateOf(1f) }
-	val winAlpha by animateFloatAsState(
-		targetValue = winScreenAlpha,
-		label = "winner_block_animate_alpha",
-		animationSpec = tween(
-			durationMillis = FADE_WIN_BLOCK_TIME,
-			delayMillis = NEXT_GAME_SCREEN_CHANGE_DELAY_DURATION
-		)
-	)
-
-	val boardState = field.winState.collectAsState()
-	LaunchedEffect(key1 = boardState.value) {
-		if (boardState.value != BoardState.InProgress) {
-			delay(NEXT_GAME_SCREEN_CHANGE_DELAY_DURATION.toLong())
-			winScreenAlpha = 0f
-			val winner =
-				((boardState.value as? BoardState.Winner)?.winner as? CellState.Occupied)?.player
-			fireEvent(GameEnd(winner))
-		}
-	}
 
 
 	Column(
@@ -145,7 +163,6 @@ private fun GameFieldContent(
 			modifier = Modifier
 				.fillMaxWidth()
 				.aspectRatio(1f)
-				.alpha(winAlpha)
 		) { i, j ->
 			GameFieldBlock(
 				block = field[i, j],
