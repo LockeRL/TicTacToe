@@ -64,7 +64,7 @@ jobs:
       - name: Zip iOS App
         run: |
           cd build-ios/Build/Products/Debug-iphonesimulator
-          zip -r iosApp.zip iosApp.app
+          zip -r iosApp.zip *.app
 
       - name: Upload iOS App
         uses: actions/upload-artifact@v4
