@@ -79,6 +79,9 @@ jobs:
       - name: Setup CocoaPods path
         run: echo "kotlin.apple.cocoapods.bin=$(which pod)" >> local.properties
 
+      - name: Generate Dummy Framework
+        run: ./gradlew :shared:generateDummyFramework
+
       - name: Install CocoaPods
         run: |
           cd iosApp
