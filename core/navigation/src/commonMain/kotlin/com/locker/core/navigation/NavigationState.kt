@@ -13,7 +13,6 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavBackStack
 import com.locker.core.navigation.keys.BaseNavKey
-import kotlinx.serialization.serializer
 import org.koin.compose.navigation3.koinEntryProvider
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -37,7 +36,7 @@ fun rememberNavigationState(
 
 @Composable
 fun rememberNavBackStack(vararg elements: BaseNavKey): NavBackStack<BaseNavKey> {
-    return rememberSerializable(serializer = serializer()) {
+    return rememberSerializable(serializer = NavBackStackSerializer) {
         NavBackStack(*elements)
     }
 }

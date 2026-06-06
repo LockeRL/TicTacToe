@@ -1,21 +1,29 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
-    listOf(
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
+    iosArm64()
+    iosSimulatorArm64()
+
+    cocoapods {
+        summary = "Shared module for TicTacToe"
+        homepage = "https://github.com/locker/tictactoe"
+        version = "1.0"
+        framework {
             baseName = "Shared"
-            isStatic = true
+            isStatic = false
         }
+
+        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
     }
 
     android {

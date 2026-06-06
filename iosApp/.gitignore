@@ -1,0 +1,11 @@
+# CocoaPods
+#
+# It is recommended to not store the Pods/ directory in the git repository,
+# and let the CocoaPods system manage it.
+#
+Pods/
+
+# User-specific files
+*.moved-aside
+*.xcuserstate
+xcuserdata/

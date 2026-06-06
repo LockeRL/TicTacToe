@@ -78,3 +78,6 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 
 # Lint
 androidLint = { id = "com.android.lint", version.ref = "agp" }
+
+# CocoaPod
+kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
