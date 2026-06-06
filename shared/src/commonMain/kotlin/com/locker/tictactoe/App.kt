@@ -1,5 +1,9 @@
 package com.locker.tictactoe
 
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -29,6 +33,7 @@ import com.locker.core.navigation.toEntries
 import com.locker.core.navigation.keys.MainScreenNavKey
 import com.locker.feature.colorpicker.view.ColorsViewModel
 import com.locker.feature.component.TicTacToeIconButton
+import com.locker.feature.core.theme.SCREEN_CHANGE_ANIM_DURATION
 import com.locker.feature.core.theme.Size24
 import com.locker.feature.core.theme.Size40
 import com.locker.feature.core.theme.Space16
@@ -101,6 +106,15 @@ fun App(
 					.windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal)),
 				entries = navigator.state.toEntries(),
 				onBack = navigator::goBack,
+				transitionSpec = {
+					fadeIn(tween(SCREEN_CHANGE_ANIM_DURATION)) togetherWith fadeOut(tween(SCREEN_CHANGE_ANIM_DURATION))
+				},
+				popTransitionSpec = {
+					fadeIn(tween(SCREEN_CHANGE_ANIM_DURATION)) togetherWith fadeOut(tween(SCREEN_CHANGE_ANIM_DURATION))
+				},
+				predictivePopTransitionSpec = {
+					fadeIn(tween(SCREEN_CHANGE_ANIM_DURATION)) togetherWith fadeOut(tween(SCREEN_CHANGE_ANIM_DURATION))
+				}
 			)
 //            }
 		}
