@@ -17,6 +17,7 @@ kotlin {
         summary = "Shared module for TicTacToe"
         homepage = "https://github.com/locker/tictactoe"
         version = "1.0"
+        podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "Shared"
             isStatic = false

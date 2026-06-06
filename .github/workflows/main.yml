@@ -24,6 +24,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Setup CocoaPods path
+        run: echo "kotlin.apple.cocoapods.bin=$(which pod)" >> local.properties
+
       - name: Run shared tests
         run: ./gradlew :shared:allTests
 
@@ -73,8 +76,13 @@ jobs:
         with:
           xcode-version: latest-stable
 
+      - name: Setup CocoaPods path
+        run: echo "kotlin.apple.cocoapods.bin=$(which pod)" >> local.properties
+
       - name: Install CocoaPods
-        run: ./gradlew :shared:podInstall
+        run: |
+          cd iosApp
+          pod install
 
       - name: Build iOS App (Simulator)
         run: |
@@ -84,7 +92,7 @@ jobs:
             -configuration Debug \
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
             -derivedDataPath build-ios \
-            build
+            clean build
 
       - name: Zip iOS App
         run: |
