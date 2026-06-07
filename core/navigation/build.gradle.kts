@@ -35,9 +35,6 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.compose.runtime)
 
-            // Models
-            implementation(projects.models)
-
             // Koin
             implementation(libs.koin.core)
             implementation(libs.koin.compose.core)

@@ -7,7 +7,7 @@ plugins {
 
 kotlin {
     android {
-        namespace = "com.locker.models"
+        namespace = "com.locker.core.data"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
@@ -21,15 +21,18 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "Models"
+            baseName = "CoreData"
             isStatic = true
         }
     }
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.resources)
-            implementation(libs.compose.components.resources)
+            implementation(projects.core.models)
+            implementation(projects.core.database)
+
+            implementation(libs.koin.core)
+            implementation(libs.kotlinx.coroutines.core)
         }
     }
 }

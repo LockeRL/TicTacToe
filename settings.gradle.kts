@@ -32,11 +32,12 @@ dependencyResolutionManagement {
 include(":androidApp")
 include(":shared")
 include(":resources")
-include(":models")
 
 // Core
 include(":core:navigation")
 include(":core:database")
+include(":core:models")
+include(":core:data")
 
 // Feature
 include(":feature:core")
