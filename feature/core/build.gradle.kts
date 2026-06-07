@@ -31,7 +31,6 @@ kotlin {
 	sourceSets {
 		commonMain.dependencies {
 			implementation(projects.core.navigation)
-			implementation(libs.kotlin.stdlib)
 
 			// Compose
 			implementation(libs.compose.runtime)

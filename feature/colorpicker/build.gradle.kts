@@ -35,7 +35,6 @@ kotlin {
 		commonMain.dependencies {
 			implementation(projects.core.navigation)
 			implementation(projects.core.database)
-			implementation(libs.kotlin.stdlib)
 
 			// Feature
 			implementation(projects.feature.core)

@@ -14,7 +14,6 @@ import com.locker.core.database.entity.ColorThemeEntity
 abstract class InMemoryDatabase : RoomDatabase() {
 }
 
-//@Suppress("KotlinNoActualForExpect")
 @Suppress("NO_ACTUAL_FOR_EXPECT")
 expect object AppInMemoryDataBaseConstructor : RoomDatabaseConstructor<InMemoryDatabase> {
 	override fun initialize(): InMemoryDatabase
