@@ -36,6 +36,7 @@ include(":models")
 
 // Core
 include(":core:navigation")
+include(":core:database")
 
 // Feature
 include(":feature:core")

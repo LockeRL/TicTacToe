@@ -8,4 +8,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
 	alias(libs.plugins.androidLint) apply false
     alias(libs.plugins.kotlinCocoapods) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.androidx.room) apply false
 }

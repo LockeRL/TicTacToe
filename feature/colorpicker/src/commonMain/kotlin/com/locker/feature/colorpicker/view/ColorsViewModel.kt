@@ -2,8 +2,6 @@ package com.locker.feature.colorpicker.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.locker.feature.colorpicker.Res
-import com.locker.feature.colorpicker.ic_palette
 import com.locker.feature.core.model.AppColors
 import com.locker.feature.core.theme.ColorsList
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +9,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import org.jetbrains.compose.resources.getString
 
 class ColorsViewModel : ViewModel() {
     val colorsList: List<AppColors> = ColorsList

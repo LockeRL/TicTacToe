@@ -98,10 +98,9 @@ abstract class GameMatrix<T>(
 		return checkList(list)
 	}
 
-	private fun checkList(list: List<CellState>): CellState =
-		if (list.all { it is CellState.Occupied && it.player == Player.CROSS })
-			CellState.Occupied(Player.CROSS)
-		else if (list.all { it is CellState.Occupied && it.player == Player.CIRCLE })
-			CellState.Occupied(Player.CIRCLE)
-		else CellState.Empty
+	private fun checkList(list: List<CellState>): CellState = when {
+		list.all { it is CellState.Occupied && it.player == Player.CROSS } -> CellState.Occupied(Player.CROSS)
+		list.all { it is CellState.Occupied && it.player == Player.CIRCLE } -> CellState.Occupied(Player.CIRCLE)
+		else -> CellState.Empty
+	}
 }
