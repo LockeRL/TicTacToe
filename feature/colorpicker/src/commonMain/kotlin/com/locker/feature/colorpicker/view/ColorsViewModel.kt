@@ -2,32 +2,34 @@ package com.locker.feature.colorpicker.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.locker.feature.core.model.AppColors
-import com.locker.feature.core.theme.ColorsList
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.locker.core.data.repository.IThemeRepository
+import com.locker.feature.colorpicker.mapper.toUi
+import com.locker.feature.core.theme.AppColorTheme
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
-class ColorsViewModel : ViewModel() {
-    val colorsList: List<AppColors> = ColorsList
+class ColorsViewModel(
+	private val themeRepository: IThemeRepository
+) : ViewModel() {
+	val colorsList: StateFlow<List<AppColorTheme>> =
+		themeRepository.getColorThemes().map { list ->
+			list.map { it.toUi() }
+		}.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    private val _activeColorIndex: MutableStateFlow<Int> = MutableStateFlow(INITIAL_INDEX)
-    val activeColorIndex: StateFlow<Int> = _activeColorIndex
+	val currentColorTheme: StateFlow<AppColorTheme> =
+		themeRepository.getCurrentColorTheme().map { it.toUi() }
+			.stateIn(viewModelScope, SharingStarted.Eagerly, AppColorTheme.DEFAULT)
 
-    val appColors: StateFlow<AppColors> = activeColorIndex.map { id ->
-        colorsList[id]
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, ColorsList[INITIAL_INDEX])
+	val currentColorThemeIndex: StateFlow<Int> =
+		themeRepository.getCurrentColorThemeIndex()
+			.stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
-    fun setAppColorsIndex(index: Int) {
-        if (index >= colorsList.size || index < 0)
-            return
-
-        _activeColorIndex.value = index
-    }
-
-    private companion object {
-        const val INITIAL_INDEX = 0
-    }
+	fun setAppColorsIndex(index: Int) {
+		viewModelScope.launch {
+			themeRepository.selectColorTheme(index)
+		}
+	}
 }

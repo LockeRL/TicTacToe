@@ -52,7 +52,7 @@ fun App(
 	navigator.state = rememberNavigationState(MainScreenNavKey, setOf(MainScreenNavKey))
 	val snackbarHostState = remember { SnackbarHostState() }
 
-	val colors by colorsViewModel.appColors.collectAsState()
+	val colors by colorsViewModel.currentColorTheme.collectAsState()
 	TicTacToeTheme(
 		appColors = colors,
 	) {

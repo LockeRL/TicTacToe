@@ -54,6 +54,7 @@ kotlin {
             // Core
             implementation(projects.core.navigation)
             implementation(projects.core.database)
+            implementation(projects.core.data)
 
             // Feature
             implementation(projects.feature.gamescreen)

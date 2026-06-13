@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.androidx.sqlite.bundled)
 
             implementation(projects.feature.core)
+            implementation(projects.core.models)
 
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)

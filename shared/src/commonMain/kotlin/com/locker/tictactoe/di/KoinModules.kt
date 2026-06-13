@@ -1,5 +1,6 @@
 package com.locker.tictactoe.di
 
+import com.locker.core.data.di.repositoryModule
 import com.locker.core.database.di.databaseModule
 import com.locker.core.navigation.di.navigationModule
 import com.locker.feature.colorpicker.di.colorPickerModule
@@ -11,6 +12,7 @@ internal val coreModules: List<Module> = listOf(
 	navigationModule,
 	databaseModule,
 	colorPickerModule,
+	repositoryModule,
 )
 
 internal val screenModules: List<Module> = listOf(

@@ -2,7 +2,6 @@ package com.locker.feature.core.theme
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -10,9 +9,8 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.locker.feature.core.model.AppColors
 
-private val LocalAppColors = staticCompositionLocalOf<AppColors> {
+private val LocalAppColors = staticCompositionLocalOf<AppColorTheme> {
 	error("LocalAppColors not provided")
 }
 
@@ -21,7 +19,7 @@ private val LocalTypography = staticCompositionLocalOf<Typography> {
 }
 
 object TicTacToeTheme {
-	val colors: AppColors
+	val colors: AppColorTheme
 		@Composable
 		@ReadOnlyComposable
 		get() = LocalAppColors.current
@@ -43,7 +41,7 @@ private fun Color.animateColor(): Color {
 }
 
 @Composable
-fun AppColors.animate(): AppColors = AppColors(
+fun AppColorTheme.animate(): AppColorTheme = AppColorTheme(
 	background = background.animateColor(),
 	accent = accent.animateColor(),
 	additional = additional.animateColor(),
@@ -53,7 +51,7 @@ fun AppColors.animate(): AppColors = AppColors(
 
 @Composable
 fun TicTacToeTheme(
-	appColors: AppColors = AppColors1,
+	appColors: AppColorTheme = AppColorTheme.DEFAULT,
 	content: @Composable () -> Unit
 ) {
 	val animatedColors = appColors.animate()

@@ -34,7 +34,8 @@ kotlin {
 	sourceSets {
 		commonMain.dependencies {
 			implementation(projects.core.navigation)
-			implementation(projects.core.database)
+			implementation(projects.core.data)
+			implementation(projects.core.models)
 
 			// Feature
 			implementation(projects.feature.core)

@@ -29,7 +29,9 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.resources)
-            implementation(libs.compose.components.resources)
+
+            implementation(libs.compose.ui)
+            implementation(projects.feature.core)
         }
     }
 }
