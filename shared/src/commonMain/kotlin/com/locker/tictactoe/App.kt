@@ -53,8 +53,10 @@ fun App(
 	val snackbarHostState = remember { SnackbarHostState() }
 
 	val colors by colorsViewModel.currentColorTheme.collectAsState()
+	val theme = colors ?: return
+
 	TicTacToeTheme(
-		appColors = colors,
+		appColors = theme,
 	) {
 		val colors = TicTacToeTheme.colors
 		val backgroundColor = colors.background

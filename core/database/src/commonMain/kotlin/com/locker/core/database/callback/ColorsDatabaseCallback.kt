@@ -12,17 +12,26 @@ object ColorsDatabaseCallback : RoomDatabase.Callback() {
 	override fun onCreate(connection: SQLiteConnection) {
 		connection.execSQL(
 			"""
-				INSERT INTO ${ColorThemeEntity::class.simpleName} (id, background, accent, additional, additionalContainer, accentContainer, isSelected)
+				INSERT INTO ${ColorThemeEntity::class.simpleName} ${getColumnNames()}
 				VALUES ${getValuesString()};
 			""".trimIndent()
 		)
 	}
 
-	private fun getValuesString(): String = ColorsList.foldIndexed("") { index, acc, colors ->
-		acc + "${transformColor(index = index, colors = colors)}${if (index < ColorsList.size - 1) ", " else ""}"
-	}
+	private fun getColumnNames(): String = listOf(
+		ColorThemeEntity::id,
+		ColorThemeEntity::background,
+		ColorThemeEntity::accent,
+		ColorThemeEntity::additional,
+		ColorThemeEntity::additionalContainer,
+		ColorThemeEntity::accentContainer,
+		ColorThemeEntity::isSelected
+	).joinToString(separator = ", ", prefix = "(", postfix = ")") { it.name }
 
-	private fun transformColor(index: Int, colors: AppColors): String =
-		"($index, ${colors.background.toLong()}, ${colors.accent.toLong()}, ${colors.additional.toLong()}, " +
-			"${colors.additionalContainer.toLong()}, ${colors.accentContainer.toLong()}, ${index == 0})"
+	private fun getValuesString(): String =
+		ColorsList.mapIndexed { index, colors -> colors.toDbString(index) }.joinToString(separator = ", ")
+
+	private fun AppColors.toDbString(index: Int): String =
+		"($index, ${background.toLong()}, ${accent.toLong()}, ${additional.toLong()}, " +
+			"${additionalContainer.toLong()}, ${accentContainer.toLong()}, ${index == 0})"
 }

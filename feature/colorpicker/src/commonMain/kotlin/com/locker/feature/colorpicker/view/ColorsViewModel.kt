@@ -19,9 +19,9 @@ class ColorsViewModel(
 			list.map { it.toUi() }
 		}.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-	val currentColorTheme: StateFlow<AppColorTheme> =
+	val currentColorTheme: StateFlow<AppColorTheme?> =
 		themeRepository.getCurrentColorTheme().map { it.toUi() }
-			.stateIn(viewModelScope, SharingStarted.Eagerly, AppColorTheme.DEFAULT)
+			.stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
 	val currentColorThemeIndex: StateFlow<Int> =
 		themeRepository.getCurrentColorThemeIndex()
