@@ -1,4 +1,4 @@
-package com.locker.feature.gamescreen.controller.model
+package com.locker.core.logic.model
 
 sealed interface CellState {
     data class Occupied(val player: Player?) : CellState

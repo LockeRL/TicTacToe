@@ -30,6 +30,7 @@ kotlin {
 
 	sourceSets {
 		commonMain.dependencies {
+			implementation(projects.resources)
 			implementation(projects.core.navigation)
 
 			// Feature

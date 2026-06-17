@@ -1,34 +1,32 @@
-package com.locker.feature.gamescreen.controller
+package com.locker.core.logic.controller
 
-import com.locker.feature.gamescreen.controller.block.GameField
-import com.locker.feature.gamescreen.controller.handler.CellClickEventHandler
-import com.locker.feature.gamescreen.controller.model.Player
-import com.locker.feature.gamescreen.controller.model.BoardState
-import com.locker.feature.gamescreen.controller.model.SetCellResults
+import com.locker.core.logic.controller.block.GameField
+import com.locker.core.logic.model.Player
+import com.locker.core.logic.model.BoardState
+import com.locker.core.logic.model.SetCellResults
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.onEach
 
 class GameController(
-    val field: GameField,
-    eventsHandler: CellClickEventHandler
+    val field: GameField
 ) {
     private val _activePlayer: MutableStateFlow<Player> = MutableStateFlow(Player.CROSS)
     val activePlayer: StateFlow<Player> = _activePlayer
 
-    private var activeBlock: Pair<Int, Int>? = null
+    private var _activeBlock: Pair<Int, Int>? = null
+    val activeBlock: Pair<Int, Int>? get() = _activeBlock
 
-    val eventsFlow = eventsHandler.eventFlow.onEach { cell ->
+    fun onCellClick(fieldI: Int, fieldJ: Int, blockI: Int, blockJ: Int) {
         setFieldState(
-            fieldI = cell.fieldI,
-            fieldJ = cell.fieldJ,
-            blockI = cell.blockI,
-            blockJ = cell.blockJ
+            fieldI = fieldI,
+            fieldJ = fieldJ,
+            blockI = blockI,
+            blockJ = blockJ
         )
     }
 
     fun reset() {
-        activeBlock = null
+        _activeBlock = null
         _activePlayer.value = Player.CROSS
         field.reset()
     }
@@ -59,7 +57,7 @@ class GameController(
     }
 
     private fun isActiveBlock(i: Int, j: Int): Boolean =
-        activeBlock?.let { block -> block.first == i && block.second == j } ?: true
+        _activeBlock?.let { block -> block.first == i && block.second == j } ?: true
 
 
     private fun setActiveBlock(i: Int, j: Int) {
@@ -67,20 +65,20 @@ class GameController(
 
         val block = field[i, j]
         if (block.winState.value != BoardState.InProgress) {
-            activeBlock = null
+            _activeBlock = null
         } else {
-            activeBlock = Pair(i, j)
+            _activeBlock = Pair(i, j)
             field.setActiveFieldState(i, j, true)
         }
     }
 
     private fun setActiveBlockNull() {
         setPreviousBlockFalse()
-        activeBlock = null
+        _activeBlock = null
     }
 
     private fun setPreviousBlockFalse() {
-        activeBlock?.let { block ->
+        _activeBlock?.let { block ->
             field.setActiveFieldState(block.first, block.second, false)
         }
     }

@@ -1,4 +1,4 @@
-package com.locker.feature.gamescreen.controller.model
+package com.locker.core.logic.model
 
 sealed class BoardState {
     data object InProgress : BoardState()

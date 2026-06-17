@@ -9,15 +9,12 @@ plugins {
 
 kotlin {
     android {
-        namespace = "com.locker.feature.mainscreen"
+        namespace = "com.locker.core.logic"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
-        }
-        androidResources {
-            enable = true
         }
     }
 
@@ -26,51 +23,19 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "MainScreen"
+            baseName = "CoreLogic"
             isStatic = true
         }
     }
 
     sourceSets {
         commonMain.dependencies {
-            // Resources
             implementation(projects.resources)
-
-            // Core
-            implementation(projects.core.navigation)
-
-            // Feature
-            implementation(projects.feature.core)
-            implementation(projects.feature.component)
-
-            // Compose
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
-            implementation(libs.compose.material3)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
-            implementation(libs.compose.uiToolingPreview)
-
-            // Koin
-            implementation(libs.koin.core)
-            implementation(libs.koin.compose.core)
-            implementation(libs.koin.compose.viewmodel)
-            implementation(libs.koin.compose.navigation)
-
-            // Coroutines
             implementation(libs.kotlinx.coroutines.core)
         }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
-}
-
-compose.resources {
-    packageOfResClass = "com.locker.feature.mainscreen"
-}
-
-dependencies {
-    androidRuntimeClasspath(libs.compose.uiTooling)
 }

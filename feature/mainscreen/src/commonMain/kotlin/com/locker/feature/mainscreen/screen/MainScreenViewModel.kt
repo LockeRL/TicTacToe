@@ -2,9 +2,11 @@ package com.locker.feature.mainscreen.screen
 
 import androidx.lifecycle.viewModelScope
 import com.locker.core.navigation.Navigator
+import com.locker.core.navigation.keys.BotGameScreenNavKey
 import com.locker.core.navigation.keys.GameScreenNavKey
 import com.locker.feature.core.screen.BaseViewModel
 import com.locker.feature.core.screen.ScreenEvent
+import com.locker.feature.mainscreen.screen.event.BotPlayClickEvent
 import com.locker.feature.mainscreen.screen.event.PlayClickEvent
 import com.locker.feature.mainscreen.screen.factory.MainScreenStateFactory
 import com.locker.feature.mainscreen.screen.model.MainScreenState
@@ -24,6 +26,9 @@ class MainScreenViewModel(
 	override fun onEvent(event: ScreenEvent) = when(event) {
 		is PlayClickEvent -> {
 			navigator.navigate(GameScreenNavKey)
+		}
+		is BotPlayClickEvent -> {
+			navigator.navigate(BotGameScreenNavKey(event.difficulty, event.symbol))
 		}
 		else -> Unit
 	}

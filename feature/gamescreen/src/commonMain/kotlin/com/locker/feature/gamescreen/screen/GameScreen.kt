@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import com.locker.core.models.Player
 import com.locker.feature.component.modifier.Border
 import com.locker.feature.core.screen.LocalFireEvent
 import com.locker.feature.core.screen.ProvideScreenEvents
@@ -48,7 +49,6 @@ import com.locker.feature.gamescreen.screen.event.GameEndEvent
 import com.locker.feature.gamescreen.screen.view.GameBlockContainer
 import com.locker.feature.gamescreen.screen.view.GameCell
 import com.locker.feature.gamescreen.screen.view.PlayerTurnIconWithText
-import com.locker.feature.gamescreen.controller.model.Player
 import com.locker.feature.gamescreen.screen.model.EndGameScreenState
 import com.locker.feature.gamescreen.screen.view.NextGameContent
 import org.koin.compose.koinInject

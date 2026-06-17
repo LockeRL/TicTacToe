@@ -9,7 +9,7 @@ plugins {
 
 kotlin {
     android {
-        namespace = "com.locker.feature.mainscreen"
+        namespace = "com.locker.feature.gamebot"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
@@ -26,7 +26,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "MainScreen"
+            baseName = "GameBot"
             isStatic = true
         }
     }
@@ -38,10 +38,12 @@ kotlin {
 
             // Core
             implementation(projects.core.navigation)
+            implementation(projects.core.models)
 
             // Feature
             implementation(projects.feature.core)
             implementation(projects.feature.component)
+            implementation(projects.feature.gamescreen)
 
             // Compose
             implementation(libs.compose.runtime)
@@ -49,16 +51,12 @@ kotlin {
             implementation(libs.compose.material3)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
-            implementation(libs.compose.uiToolingPreview)
 
             // Koin
             implementation(libs.koin.core)
             implementation(libs.koin.compose.core)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose.navigation)
-
-            // Coroutines
-            implementation(libs.kotlinx.coroutines.core)
         }
 
         commonTest.dependencies {
@@ -68,9 +66,5 @@ kotlin {
 }
 
 compose.resources {
-    packageOfResClass = "com.locker.feature.mainscreen"
-}
-
-dependencies {
-    androidRuntimeClasspath(libs.compose.uiTooling)
+    packageOfResClass = "com.locker.feature.gamebot"
 }

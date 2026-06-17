@@ -1,8 +1,8 @@
-package com.locker.feature.gamescreen.controller.block
+package com.locker.core.logic.controller.block
 
-import com.locker.feature.gamescreen.controller.model.BoardState
-import com.locker.feature.gamescreen.controller.model.CellState
-import com.locker.feature.gamescreen.controller.model.Player
+import com.locker.core.logic.model.BoardState
+import com.locker.core.logic.model.CellState
+import com.locker.core.logic.model.Player
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

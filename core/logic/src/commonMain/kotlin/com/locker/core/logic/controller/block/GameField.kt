@@ -1,7 +1,7 @@
-package com.locker.feature.gamescreen.controller.block
+package com.locker.core.logic.controller.block
 
-import com.locker.feature.gamescreen.controller.model.BoardState
-import com.locker.feature.gamescreen.controller.model.CellState
+import com.locker.core.logic.model.BoardState
+import com.locker.core.logic.model.CellState
 
 class GameField : GameMatrix<GameBlock>(::GameBlock) {
     override fun getCellStateFromItem(item: GameBlock): CellState =
