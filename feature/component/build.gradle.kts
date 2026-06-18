@@ -35,6 +35,8 @@ kotlin {
 
 			// Feature
 			implementation(projects.feature.core)
+			implementation(projects.core.gamelogic)
+			implementation(projects.core.models)
 
 			// Compose
 			implementation(libs.compose.runtime)

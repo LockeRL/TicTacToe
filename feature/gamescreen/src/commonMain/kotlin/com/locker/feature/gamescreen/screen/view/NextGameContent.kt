@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,20 +16,17 @@ import com.locker.feature.core.theme.MENU_BUTTON_PERCENT
 import com.locker.feature.core.theme.Size64
 import com.locker.feature.core.theme.Space8
 import com.locker.feature.core.theme.TicTacToeTheme
-import com.locker.feature.gamescreen.Res
-import com.locker.feature.gamescreen.main_menu
-import com.locker.feature.gamescreen.next_game
 import com.locker.feature.gamescreen.screen.event.MainMenuEvent
 import com.locker.feature.gamescreen.screen.event.NextGameEvent
 import com.locker.feature.gamescreen.screen.model.EndGameScreenState
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun NextGameContent(
 	endGame: EndGameScreenState,
 	modifier: Modifier = Modifier
 ) {
+	val colors = TicTacToeTheme.colors
 	val typography = TicTacToeTheme.typography
 	val fireEvent = LocalFireEvent.current
 	Column(
@@ -41,7 +37,7 @@ fun NextGameContent(
 		if (endGame.icon != null) {
 			Icon(
 				painter = painterResource(endGame.icon),
-				tint = TicTacToeTheme.colors.accentContainer,
+				tint = colors.accentContainer,
 				contentDescription = null,
 				modifier = Modifier.size(Size64)
 			)
@@ -49,7 +45,7 @@ fun NextGameContent(
 
 		Text(
 			text = endGame.title,
-			color = MaterialTheme.colorScheme.primaryContainer,
+			color = colors.accentContainer,
 			style = typography.titleLarge,
 			modifier = Modifier.padding(Space8)
 		)
@@ -60,13 +56,13 @@ fun NextGameContent(
 			modifier = Modifier.fillMaxWidth(),
 		) {
 			TicTacToeButton(
-				text = stringResource(Res.string.next_game),
+				text = endGame.nextGame,
 				onClick = { fireEvent(NextGameEvent) },
 				modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
 			)
 
 			TicTacToeButton(
-				text = stringResource(Res.string.main_menu),
+				text = endGame.mainMenu,
 				onClick = { fireEvent(MainMenuEvent) },
 				modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
 			)

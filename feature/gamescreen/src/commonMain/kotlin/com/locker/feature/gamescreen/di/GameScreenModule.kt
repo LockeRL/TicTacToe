@@ -3,8 +3,8 @@ package com.locker.feature.gamescreen.di
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import com.locker.core.navigation.keys.GameScreenNavKey
-import com.locker.core.logic.controller.GameController
-import com.locker.core.logic.controller.block.GameField
+import com.locker.core.gamelogic.controller.GameController
+import com.locker.core.gamelogic.controller.block.GameField
 import com.locker.feature.gamescreen.screen.GameScreen
 import com.locker.feature.gamescreen.screen.GameScreenViewModel
 import org.koin.core.annotation.KoinExperimentalAPI

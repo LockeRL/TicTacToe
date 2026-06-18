@@ -38,6 +38,7 @@ kotlin {
 
             // Core
             implementation(projects.core.navigation)
+            implementation(projects.core.models)
 
             // Feature
             implementation(projects.feature.core)

@@ -1,8 +1,6 @@
 package com.locker.core.models
 
-import kotlinx.serialization.Serializable
 
-@Serializable
 enum class Difficulty {
     EASY, MEDIUM, HARD
 }

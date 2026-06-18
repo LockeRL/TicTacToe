@@ -39,7 +39,7 @@ kotlin {
             // Core
             implementation(projects.core.navigation)
             implementation(projects.core.models)
-            implementation(projects.core.logic)
+            implementation(projects.core.gamelogic)
 
             // Feature
             implementation(projects.feature.core)

@@ -3,9 +3,9 @@ package com.locker.feature.gamescreen.screen
 import androidx.lifecycle.viewModelScope
 import com.locker.core.navigation.Navigator
 import com.locker.core.navigation.keys.MainScreenNavKey
-import com.locker.core.logic.controller.GameController
-import com.locker.core.logic.model.BoardState
-import com.locker.core.logic.model.CellState
+import com.locker.core.gamelogic.controller.GameController
+import com.locker.core.gamelogic.model.BoardState
+import com.locker.core.gamelogic.model.CellState
 import com.locker.feature.core.screen.BaseViewModel
 import com.locker.feature.core.screen.ScreenEvent
 import com.locker.feature.gamescreen.screen.event.CellClickEvent
