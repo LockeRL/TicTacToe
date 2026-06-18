@@ -12,13 +12,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.unit.dp
 import com.locker.core.gamelogic.model.BoardState
 import com.locker.core.gamelogic.model.CellState
 import com.locker.feature.component.modifier.Border
 import com.locker.feature.component.modifier.border
 import com.locker.feature.component.modifier.matrixLine
 import com.locker.feature.core.theme.FADE_WIN_BLOCK_TIME
-import com.locker.feature.core.theme.StrokeSize4
 import com.locker.feature.core.theme.TicTacToeTheme
 import kotlin.math.max
 
@@ -97,7 +97,7 @@ fun GameBlockContainer(
                         .alpha(shadowAlpha)
                         .fillMaxSize()
                         .matrixLine(
-                            border = Border(strokeWidth = StrokeSize4, color = colors.accent),
+                            border = Border(strokeWidth = 4.dp, color = colors.accent),
                             dimensionSize = dimensionSize,
                             column = if (boardState is BoardState.Winner.Column) boardState.columnNum else null,
                             row = if (boardState is BoardState.Winner.Row) boardState.rowNum else null,

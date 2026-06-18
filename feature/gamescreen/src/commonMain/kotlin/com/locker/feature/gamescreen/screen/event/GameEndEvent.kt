@@ -1,5 +1,0 @@
-package com.locker.feature.gamescreen.screen.event
-
-import com.locker.feature.core.screen.ScreenEvent
-
-data object GameEndEvent : ScreenEvent

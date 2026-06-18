@@ -12,8 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.locker.feature.core.theme.Size48
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamebotscreen.screen.model.HeaderState
 import org.jetbrains.compose.resources.painterResource
@@ -34,12 +32,12 @@ fun Header(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.height(Size48)
+            modifier = Modifier.height(48.dp)
         ) {
             Text(
                 text = header.playingAs,
                 color = colors.accentContainer,
-                style = typography.titleMedium
+                style = typography.titleLarge
             )
 
             if (header.icon != null) {
@@ -57,7 +55,6 @@ fun Header(
             text = header.subtitle,
             color = if (header.isUserTurn) colors.accent else colors.accentContainer,
             style = typography.titleLarge,
-            fontSize = 24.sp
         )
     }
 }

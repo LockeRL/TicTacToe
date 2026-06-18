@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.locker.core.models.Player
 import com.locker.feature.component.field.PlayerIconWithState
-import com.locker.feature.core.theme.Size48
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamescreen.Res
 import com.locker.feature.gamescreen.turn
@@ -27,7 +27,7 @@ fun PlayerTurnIconWithText(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
-        modifier = modifier.height(Size48)
+        modifier = modifier.height(48.dp)
     ) {
         Text(
             text = "${stringResource(Res.string.turn)}:",

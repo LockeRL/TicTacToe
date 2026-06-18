@@ -10,11 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.locker.feature.component.TicTacToeButton
 import com.locker.feature.core.screen.LocalFireEvent
 import com.locker.feature.core.theme.MENU_BUTTON_PERCENT
-import com.locker.feature.core.theme.Size64
-import com.locker.feature.core.theme.Space8
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamescreen.screen.event.MainMenuEvent
 import com.locker.feature.gamescreen.screen.event.NextGameEvent
@@ -39,7 +38,7 @@ fun NextGameContent(
 				painter = painterResource(endGame.icon),
 				tint = colors.accentContainer,
 				contentDescription = null,
-				modifier = Modifier.size(Size64)
+				modifier = Modifier.size(64.dp)
 			)
 		}
 
@@ -47,11 +46,11 @@ fun NextGameContent(
 			text = endGame.title,
 			color = colors.accentContainer,
 			style = typography.titleLarge,
-			modifier = Modifier.padding(Space8)
+			modifier = Modifier.padding(8.dp)
 		)
 
 		Column(
-			verticalArrangement = Arrangement.spacedBy(Space8),
+			verticalArrangement = Arrangement.spacedBy(8.dp),
 			horizontalAlignment = Alignment.CenterHorizontally,
 			modifier = Modifier.fillMaxWidth(),
 		) {

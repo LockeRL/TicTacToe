@@ -1,7 +1,11 @@
 package com.locker.feature.mainscreen.screen.factory
 
-import com.locker.feature.mainscreen.*
+import com.locker.feature.mainscreen.Res
+import com.locker.feature.mainscreen.play_vs_bot
+import com.locker.feature.mainscreen.play_vs_friend
 import com.locker.feature.mainscreen.screen.model.MainScreenState
+import com.locker.feature.mainscreen.tic_x_tac
+import com.locker.feature.mainscreen.toe
 import org.jetbrains.compose.resources.getString
 
 object MainScreenStateFactory {
@@ -9,10 +13,8 @@ object MainScreenStateFactory {
 		return MainScreenState(
 			firstTitle = getString(Res.string.tic_x_tac),
 			secondTitle = getString(Res.string.toe),
-			playButton = getString(Res.string.play),
-			easyBotButton = getString(Res.string.bot_easy),
-			mediumBotButton = getString(Res.string.bot_medium),
-			hardBotButton = getString(Res.string.bot_hard)
+			playVsFriend = getString(Res.string.play_vs_friend),
+			playVsBot = getString(Res.string.play_vs_bot),
 		)
 	}
 }

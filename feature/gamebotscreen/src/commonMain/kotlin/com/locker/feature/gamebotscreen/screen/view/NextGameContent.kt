@@ -16,12 +16,11 @@ import com.locker.feature.component.PlayerSelector
 import com.locker.feature.component.TicTacToeButton
 import com.locker.feature.core.screen.LocalFireEvent
 import com.locker.feature.core.theme.MENU_BUTTON_PERCENT
-import com.locker.feature.core.theme.Size64
-import com.locker.feature.core.theme.Space8
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamebotscreen.screen.event.MainMenuEvent
 import com.locker.feature.gamebotscreen.screen.event.NextGameEvent
-import com.locker.feature.gamebotscreen.screen.event.UpdateBotSettingsEvent
+import com.locker.feature.gamebotscreen.screen.event.UpdateBotDifficulty
+import com.locker.feature.gamebotscreen.screen.event.UpdateUserPlayer
 import com.locker.feature.gamebotscreen.screen.model.EndGameScreenState
 import org.jetbrains.compose.resources.painterResource
 
@@ -39,13 +38,12 @@ fun NextGameContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.padding(bottom = 32.dp)
     ) {
-        val icon = endGame.icon
-        if (icon != null) {
+        if (endGame.icon != null) {
             Icon(
-                painter = painterResource(icon),
+                painter = painterResource(endGame.icon),
                 tint = colors.accentContainer,
                 contentDescription = null,
-                modifier = Modifier.size(Size64)
+                modifier = Modifier.size(64.dp)
             )
         }
 
@@ -59,18 +57,22 @@ fun NextGameContent(
                 text = endGame.title,
                 color = colors.accentContainer,
                 style = typography.titleLarge,
-                modifier = Modifier.padding(Space8)
+                modifier = Modifier.padding(8.dp)
             )
 
             PlayerSelector(
                 selectedPlayer = endGame.player,
-                onSymbolSelected = {
-                    fireEvent(UpdateBotSettingsEvent(endGame.difficulty, it))
-                }
+                onSymbolSelected = { fireEvent(UpdateUserPlayer(it)) }
+            )
+
+            DifficultySelector(
+                selectedDifficulty = endGame.difficulty,
+                onDifficultySelected = { fireEvent(UpdateBotDifficulty(it)) },
+                modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
             )
 
             Column(
-                verticalArrangement = Arrangement.spacedBy(Space8),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth(),
             ) {
@@ -86,13 +88,6 @@ fun NextGameContent(
                     modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
                 )
             }
-
-            DifficultySelector(
-                selectedDifficulty = endGame.difficulty,
-                onDifficultySelected = {
-                    fireEvent(UpdateBotSettingsEvent(it, endGame.player))
-                }
-            )
         }
     }
 }

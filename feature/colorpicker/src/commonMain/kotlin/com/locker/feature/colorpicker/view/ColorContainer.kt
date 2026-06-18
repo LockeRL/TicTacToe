@@ -22,12 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.locker.feature.core.theme.AppColorTheme
 import com.locker.feature.core.theme.COLOR_PICKED_ANIM_DURATION
 import com.locker.feature.core.theme.MAX_INNER_COLOR_PERCENT
 import com.locker.feature.core.theme.MIN_INNER_COLOR_PERCENT
-import com.locker.feature.core.theme.Size32
-import com.locker.feature.core.theme.Space2
 
 
 @Composable
@@ -55,8 +54,8 @@ fun ColorsContainer(
 					onColorClick = { onColorClick(index) },
 					isActive = index == activeIndex,
 					modifier = Modifier
-						.size(Size32)
-						.padding(Space2)
+						.size(32.dp)
+						.padding(2.dp)
 				)
 			}
 		}

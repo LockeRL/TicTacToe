@@ -22,19 +22,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.locker.feature.colorpicker.Res
 import com.locker.feature.colorpicker.ic_palette
 import com.locker.feature.component.TicTacToeIconButton
 import com.locker.feature.core.theme.AppColorTheme
 import com.locker.feature.core.theme.PALETTE_SLIDE_ANIM_DURATION
-import com.locker.feature.core.theme.Size32
-import com.locker.feature.core.theme.Size48
-import com.locker.feature.core.theme.Space2
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.core.theme.VERY_LOW_STIFFNESS
 import org.jetbrains.compose.resources.painterResource
@@ -48,11 +45,11 @@ fun PalettePicker(
 	modifier: Modifier = Modifier
 ) {
 	val themeColors = TicTacToeTheme.colors
-	var isExpanded by rememberSaveable { mutableStateOf(false) }
+	val isExpanded = rememberSaveable { mutableStateOf(false) }
+	val buttonSize = 48.dp
 
 	val slideInPadding by animateDpAsState(
-		targetValue = if (isExpanded) Size48 + Space2 else Size48 / 2,
-		label = "colors_slider_animate_padding",
+		targetValue = if (isExpanded.value) buttonSize + 2.dp else buttonSize / 2,
 		animationSpec = tween(easing = LinearEasing)
 	)
 
@@ -68,7 +65,7 @@ fun PalettePicker(
 				.padding(end = slideInPadding)
 		) {
 			AnimatedVisibility(
-				visible = isExpanded,
+				visible = isExpanded.value,
 				enter = slideInHorizontally(
 					tween(
 						PALETTE_SLIDE_ANIM_DURATION,
@@ -93,15 +90,15 @@ fun PalettePicker(
 		TicTacToeIconButton(
 			icon = painterResource(Res.drawable.ic_palette),
 			shape = CircleShape,
-			onClick = { isExpanded = !isExpanded },
+			onClick = { isExpanded.value = !isExpanded.value },
 			contentDescription = "palette_icon",
-			containerColor = if (isExpanded) themeColors.accent else themeColors.background,
-			contentColor = if (isExpanded) themeColors.background else themeColors.additionalContainer,
+			containerColor = if (isExpanded.value) themeColors.accent else themeColors.background,
+			contentColor = if (isExpanded.value) themeColors.background else themeColors.additionalContainer,
 			modifier = Modifier
-				.size(Size48)
+				.size(buttonSize)
 				.align(Alignment.CenterEnd),
 			iconModifier = Modifier
-				.size(Size32)
+				.size(32.dp)
 		)
 	}
 }

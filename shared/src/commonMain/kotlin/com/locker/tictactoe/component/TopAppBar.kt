@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.locker.feature.colorpicker.view.ColorsViewModel
 import com.locker.feature.colorpicker.view.PalettePicker
-import com.locker.feature.core.theme.Size4
 
 @Composable
 fun TopAppBar(
@@ -22,7 +22,7 @@ fun TopAppBar(
         horizontalArrangement = Arrangement.End,
         modifier = modifier
     ) {
-        Spacer(modifier = Modifier.size(Size4))
+        Spacer(modifier = Modifier.size(4.dp))
 
         navigationContent()
 

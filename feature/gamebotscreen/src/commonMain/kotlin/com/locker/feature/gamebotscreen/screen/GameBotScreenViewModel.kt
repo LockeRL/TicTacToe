@@ -14,7 +14,8 @@ import com.locker.feature.gamebotscreen.bot.BotFactory
 import com.locker.feature.gamebotscreen.screen.event.CellClickEvent
 import com.locker.feature.gamebotscreen.screen.event.MainMenuEvent
 import com.locker.feature.gamebotscreen.screen.event.NextGameEvent
-import com.locker.feature.gamebotscreen.screen.event.UpdateBotSettingsEvent
+import com.locker.feature.gamebotscreen.screen.event.UpdateBotDifficulty
+import com.locker.feature.gamebotscreen.screen.event.UpdateUserPlayer
 import com.locker.feature.gamebotscreen.screen.factory.EndGameScreenStateFactory
 import com.locker.feature.gamebotscreen.screen.factory.HeaderStateFactory
 import com.locker.feature.gamebotscreen.screen.model.EndGameScreenState
@@ -119,9 +120,12 @@ class GameBotScreenViewModel(
             navigator.navigate(MainScreenNavKey)
         }
 
-        is UpdateBotSettingsEvent -> {
+        is UpdateUserPlayer -> {
+            _userPlayer.value = event.player
+        }
+
+        is UpdateBotDifficulty -> {
             _difficulty.value = event.difficulty
-            _userPlayer.value = event.userPlayer
         }
 
         else -> Unit

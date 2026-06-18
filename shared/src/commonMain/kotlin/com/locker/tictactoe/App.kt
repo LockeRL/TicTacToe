@@ -26,6 +26,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation3.ui.NavDisplay
 import com.locker.core.navigation.Navigator
 import com.locker.core.navigation.rememberNavigationState
@@ -34,9 +35,6 @@ import com.locker.core.navigation.keys.MainScreenNavKey
 import com.locker.feature.colorpicker.view.ColorsViewModel
 import com.locker.feature.component.TicTacToeIconButton
 import com.locker.feature.core.theme.SCREEN_CHANGE_ANIM_DURATION
-import com.locker.feature.core.theme.Size24
-import com.locker.feature.core.theme.Size40
-import com.locker.feature.core.theme.Space16
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.resources.Res
 import com.locker.resources.ic_back
@@ -73,8 +71,8 @@ fun App(
 								onClick = navigator::goBack,
 								contentDescription = "Back",
 								contentColor = colors.additionalContainer,
-								iconModifier = Modifier.size(Size24),
-								modifier = Modifier.size(Size40)
+								iconModifier = Modifier.size(24.dp),
+								modifier = Modifier.size(40.dp)
 							)
 						}
 					},
@@ -98,7 +96,7 @@ fun App(
 			modifier = Modifier
 				.background(backgroundColor)
 				.fillMaxSize()
-				.padding(all = Space16)
+				.padding(all = 16.dp)
 		) { innerPadding ->
 			//            CompositionLocalProvider(LocalSnackbarHostState provides snackbarHostState) {
 			NavDisplay(
