@@ -32,6 +32,8 @@ kotlin {
 
             implementation(libs.compose.ui)
             implementation(projects.feature.core)
+
+            implementation(libs.compose.components.resources)
         }
     }
 }

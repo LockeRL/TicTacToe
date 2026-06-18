@@ -33,8 +33,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            // Resources
+            implementation(projects.resources)
+
             // Core
             implementation(projects.core.navigation)
+            implementation(projects.core.models)
 
             // Feature
             implementation(projects.feature.core)

@@ -30,10 +30,13 @@ kotlin {
 
 	sourceSets {
 		commonMain.dependencies {
+			implementation(projects.resources)
 			implementation(projects.core.navigation)
 
 			// Feature
 			implementation(projects.feature.core)
+			implementation(projects.core.gamelogic)
+			implementation(projects.core.models)
 
 			// Compose
 			implementation(libs.compose.runtime)

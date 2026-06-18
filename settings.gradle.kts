@@ -38,6 +38,7 @@ include(":core:navigation")
 include(":core:database")
 include(":core:models")
 include(":core:data")
+include(":core:gamelogic")
 
 // Feature
 include(":feature:core")
@@ -45,4 +46,5 @@ include(":feature:component")
 include(":feature:colorpicker")
 include(":feature:gamescreen")
 include(":feature:mainscreen")
+include(":feature:gamebotscreen")
 

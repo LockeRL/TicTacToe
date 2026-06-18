@@ -10,11 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.locker.core.models.Player
+import com.locker.feature.component.field.PlayerIconWithState
 import com.locker.feature.core.theme.Size48
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamescreen.Res
 import com.locker.feature.gamescreen.turn
-import com.locker.feature.gamescreen.controller.model.Player
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

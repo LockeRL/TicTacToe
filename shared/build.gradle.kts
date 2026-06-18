@@ -58,6 +58,7 @@ kotlin {
 
             // Feature
             implementation(projects.feature.gamescreen)
+            implementation(projects.feature.gamebotscreen)
             implementation(projects.feature.mainscreen)
             implementation(projects.feature.colorpicker)
             implementation(projects.feature.core)

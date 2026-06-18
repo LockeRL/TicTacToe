@@ -38,6 +38,8 @@ kotlin {
 
             // Core
             implementation(projects.core.navigation)
+            implementation(projects.core.models)
+            implementation(projects.core.gamelogic)
 
             // Feature
             implementation(projects.feature.core)
