@@ -24,7 +24,9 @@ data class AppColors(
 	val accent: Color,
 	val additional: Color,
 	val additionalContainer: Color,
-	val accentContainer: Color
+	val accentContainer: Color,
+	val id: Int = 0,
+	val isSystem: Boolean = false,
 ) {
 	companion object {
 		val Default = AppColors(
@@ -32,7 +34,8 @@ data class AppColors(
 			additional = WeakYellow,
 			background = DefaultBlackBackgroundColor,
 			additionalContainer = VariantLightColor,
-			accentContainer = Color.White
+			accentContainer = Color.White,
+			isSystem = true,
 		)
 
 		private val AppColors2 = AppColors(
@@ -40,7 +43,8 @@ data class AppColors(
 			additional = StrongYellow,
 			background = BlueBlackBackgroundColor,
 			additionalContainer = VariantLightColor,
-			accentContainer = Color.White
+			accentContainer = Color.White,
+			isSystem = true,
 		)
 
 		private val AppColors3 = AppColors(
@@ -48,7 +52,8 @@ data class AppColors(
 			additional = StrongOrange,
 			background = DefaultBlackBackgroundColor,
 			additionalContainer = VariantLightColor,
-			accentContainer = Color.White
+			accentContainer = Color.White,
+			isSystem = true,
 		)
 
 		private val AppColors4 = AppColors(
@@ -56,7 +61,8 @@ data class AppColors(
 			additional = DarkBlue,
 			background = DefaultWhiteBackgroundColor,
 			additionalContainer = VariantDarkColor,
-			accentContainer = Color.Black
+			accentContainer = Color.Black,
+			isSystem = true,
 		)
 
 		private val AppColors5 = AppColors(
@@ -64,7 +70,8 @@ data class AppColors(
 			additional = DarkOlive,
 			background = DefaultWhiteBackgroundColor,
 			additionalContainer = VariantDarkColor,
-			accentContainer = Color.Black
+			accentContainer = Color.Black,
+			isSystem = true,
 		)
 
 		private val AppColors6 = AppColors(
@@ -72,7 +79,8 @@ data class AppColors(
 			additional = Blue,
 			background = DefaultBlackBackgroundColor,
 			additionalContainer = VariantLightColor,
-			accentContainer = Color.White
+			accentContainer = Color.White,
+			isSystem = true,
 		)
 
 		private val AppColors7 = AppColors(
@@ -80,7 +88,8 @@ data class AppColors(
 			additional = Blue,
 			background = GreyBackgroundColor,
 			additionalContainer = VariantLightColor,
-			accentContainer = Color.White
+			accentContainer = Color.White,
+			isSystem = true,
 		)
 
 		val ColorsList: List<AppColors> =

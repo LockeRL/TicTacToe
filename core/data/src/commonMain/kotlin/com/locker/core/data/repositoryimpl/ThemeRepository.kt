@@ -11,11 +11,11 @@ internal class ThemeRepository(
 	override fun getColorThemes(): Flow<List<AppColors>> =
 		colorsDaoService.getThemes()
 
+	override fun getUserThemes(): Flow<List<AppColors>> =
+		colorsDaoService.getUserThemes()
+
 	override fun getCurrentColorTheme(): Flow<AppColors> =
 		colorsDaoService.getCurrentTheme()
-
-	override fun getCurrentColorThemeIndex(): Flow<Int> =
-		colorsDaoService.getCurrentThemeIndex()
 
 	override suspend fun selectColorTheme(id: Int) {
 		colorsDaoService.selectTheme(id)
@@ -23,5 +23,12 @@ internal class ThemeRepository(
 
 	override suspend fun insertColorTheme(colors: AppColors) {
 		colorsDaoService.insertTheme(colors)
+	}
+
+	override suspend fun deleteColorTheme(id: Int) {
+		colorsDaoService.deleteTheme(id)
+		if (colorsDaoService.getCurrentThemeId() == null) {
+			colorsDaoService.selectTheme(1)
+		}
 	}
 }

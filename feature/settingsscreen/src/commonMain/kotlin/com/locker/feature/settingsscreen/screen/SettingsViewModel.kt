@@ -6,16 +6,18 @@ import com.locker.core.models.AppColors
 import com.locker.feature.core.screen.BaseViewModel
 import com.locker.feature.core.screen.ScreenEvent
 import com.locker.feature.core.theme.AppColorTheme
+import com.locker.feature.settingsscreen.screen.event.DeleteThemeEvent
 import com.locker.feature.settingsscreen.screen.event.SaveThemeEvent
 import com.locker.feature.settingsscreen.screen.event.UpdateColorsEvent
 import com.locker.feature.settingsscreen.screen.factory.SettingsScreenStateFactory
+import com.locker.feature.settingsscreen.screen.mapper.toUi
 import com.locker.feature.settingsscreen.screen.model.SettingsScreenState
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.lastOrNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -30,9 +32,14 @@ class SettingsViewModel(
 		emit(SettingsScreenStateFactory.create())
 	}.stateIn(viewModelScope, SharingStarted.Eagerly, SettingsScreenState())
 
+	val userThemes: StateFlow<List<AppColorTheme>> = themeRepository.getUserThemes().map { list ->
+		list.map { it.toUi() }
+	}
+		.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
 	override fun onEvent(event: ScreenEvent): Any = when (event) {
 		is SaveThemeEvent -> {
-			saveTheme()
+			saveTheme(event.theme)
 		}
 
 		is UpdateColorsEvent -> {
@@ -41,23 +48,31 @@ class SettingsViewModel(
 			}
 		}
 
+		is DeleteThemeEvent -> {
+			val id = userThemes.value.getOrNull(event.pos)?.id
+			if (id != null) {
+				viewModelScope.launch {
+					themeRepository.deleteColorTheme(id)
+				}
+			}
+			Unit
+		}
+
 		else -> Unit
 	}
 
-	private fun saveTheme() {
+	private fun saveTheme(theme: AppColorTheme) {
 		viewModelScope.launch {
-			val theme = currentEditTheme.lastOrNull()
-			if (theme != null) {
-				themeRepository.insertColorTheme(
-					AppColors(
-						background = theme.background,
-						accent = theme.accent,
-						additional = theme.additional,
-						additionalContainer = theme.additionalContainer,
-						accentContainer = theme.accentContainer
-					)
+			themeRepository.insertColorTheme(
+				AppColors(
+					background = theme.background,
+					accent = theme.accent,
+					additional = theme.additional,
+					additionalContainer = theme.additionalContainer,
+					accentContainer = theme.accentContainer,
+					isSystem = false
 				)
-			}
+			)
 		}
 	}
 }

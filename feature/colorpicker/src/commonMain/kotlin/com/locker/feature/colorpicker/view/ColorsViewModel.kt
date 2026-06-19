@@ -23,11 +23,7 @@ class ColorsViewModel(
 		themeRepository.getCurrentColorTheme().map { it.toUi() }
 			.stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
-	val currentColorThemeIndex: StateFlow<Int> =
-		themeRepository.getCurrentColorThemeIndex()
-			.stateIn(viewModelScope, SharingStarted.Eagerly, 0)
-
-	fun setAppColorsIndex(index: Int) {
+	fun setAppColorsId(index: Int) {
 		viewModelScope.launch {
 			themeRepository.selectColorTheme(index)
 		}

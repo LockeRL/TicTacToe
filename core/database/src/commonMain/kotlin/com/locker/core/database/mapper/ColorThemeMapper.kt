@@ -11,14 +11,18 @@ fun ColorThemeEntity.toDomain(): AppColors = AppColors(
 	additional = Color(additional),
 	additionalContainer = Color(additionalContainer),
 	accentContainer = Color(accentContainer),
+	id = id,
+	isSystem = isSystem
 )
 
 fun AppColors.toEntity(): ColorThemeEntity = ColorThemeEntity(
+	id = id,
 	background = background.toLong(),
 	accent = accent.toLong(),
 	additional = additional.toLong(),
 	additionalContainer = additionalContainer.toLong(),
 	accentContainer = accentContainer.toLong(),
+	isSystem = isSystem
 )
 
 fun Color.toLong(): Long = toArgb().toLong()

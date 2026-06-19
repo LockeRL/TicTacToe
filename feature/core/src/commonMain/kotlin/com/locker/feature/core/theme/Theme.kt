@@ -47,6 +47,7 @@ fun AppColorTheme.animate(): AppColorTheme = AppColorTheme(
 	additional = additional.animateColor(),
 	additionalContainer = additionalContainer.animateColor(),
 	accentContainer = accentContainer.animateColor(),
+	id = id,
 )
 
 @Composable

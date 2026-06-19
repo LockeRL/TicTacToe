@@ -7,4 +7,5 @@ data class SettingsScreenState(
 	val additionalContainer: String = "",
 	val accentContainer: String = "",
 	val saveButton: String = "",
+	val userThemes: String = "",
 )

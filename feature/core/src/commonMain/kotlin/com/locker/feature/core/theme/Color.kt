@@ -34,7 +34,8 @@ data class AppColorTheme(
 	val accent: Color,
 	val additional: Color,
 	val additionalContainer: Color,
-	val accentContainer: Color
+	val accentContainer: Color,
+	val id: Int = 0,
 ) {
 	companion object {
 		val DEFAULT = AppColorTheme(

@@ -1,5 +1,6 @@
 package com.locker.feature.settingsscreen.screen
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import com.locker.feature.settingsscreen.screen.model.SettingsScreenState
 import com.locker.feature.settingsscreen.screen.view.ColorPickerDialog
 import com.locker.feature.settingsscreen.screen.view.ColorSettingItem
 import com.locker.feature.settingsscreen.screen.view.ThemePreview
+import com.locker.feature.settingsscreen.screen.view.UserThemes
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -40,9 +42,12 @@ fun SettingsScreen(
 	) { viewModel ->
 		val strings = viewModel.settingsStrings.collectAsState()
 		val theme = viewModel.currentEditTheme.collectAsState(initial = colors)
+		val userThemes = viewModel.userThemes.collectAsState()
+
 		SettingsScreen(
 			strings = strings,
 			theme = theme,
+			userThemes = userThemes,
 			modifier = modifier,
 		)
 	}
@@ -52,6 +57,7 @@ fun SettingsScreen(
 fun SettingsScreen(
 	strings: State<SettingsScreenState>,
 	theme: State<AppColorTheme>,
+	userThemes: State<List<AppColorTheme>>,
 	modifier: Modifier = Modifier,
 ) {
 	val fireEvent = LocalFireEvent.current
@@ -70,6 +76,17 @@ fun SettingsScreen(
 				.padding(16.dp),
 		) {
 			ThemePreview(theme = theme.value)
+
+			AnimatedVisibility(
+				visible = userThemes.value.isNotEmpty()
+			) {
+				UserThemes(
+					title = strings.userThemes,
+					userThemes = userThemes.value,
+					modifier = Modifier
+						.fillMaxWidth()
+				)
+			}
 
 			Column(
 				verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -118,7 +135,7 @@ fun SettingsScreen(
 
 			TicTacToeButton(
 				text = strings.saveButton,
-				onClick = { fireEvent(SaveThemeEvent) },
+				onClick = { fireEvent(SaveThemeEvent(currentTheme)) },
 				modifier = Modifier
 					.fillMaxWidth()
 			)
@@ -137,10 +154,11 @@ fun SettingsScreen(
 	}
 }
 
-private fun AppColorTheme.update(colorType: ColorType, color: Color): AppColorTheme = when(colorType) {
-	ColorType.ACCENT -> copy(accent = color)
-	ColorType.BACKGROUND -> copy(background = color)
-	ColorType.ADDITIONAL -> copy(additional = color)
-	ColorType.ADDITIONAL_CONTAINER -> copy(additionalContainer = color)
-	ColorType.ACCENT_CONTAINER -> copy(accentContainer = color)
-}
+private fun AppColorTheme.update(colorType: ColorType, color: Color): AppColorTheme =
+	when (colorType) {
+		ColorType.ACCENT -> copy(accent = color)
+		ColorType.BACKGROUND -> copy(background = color)
+		ColorType.ADDITIONAL -> copy(additional = color)
+		ColorType.ADDITIONAL_CONTAINER -> copy(additionalContainer = color)
+		ColorType.ACCENT_CONTAINER -> copy(accentContainer = color)
+	}

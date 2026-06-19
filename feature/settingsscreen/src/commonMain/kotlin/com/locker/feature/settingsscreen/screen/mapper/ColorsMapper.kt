@@ -1,4 +1,4 @@
-package com.locker.feature.colorpicker.mapper
+package com.locker.feature.settingsscreen.screen.mapper
 
 import com.locker.core.models.AppColors
 import com.locker.feature.core.theme.AppColorTheme

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c4c5c29434e5f4ec7992527c71bdfa4f",
+    "identityHash": "188d9ea8d3ca8e80d3f4bb00ea0aaa55",
     "entities": [
       {
         "tableName": "ColorThemeEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `background` INTEGER NOT NULL, `accent` INTEGER NOT NULL, `additional` INTEGER NOT NULL, `additionalContainer` INTEGER NOT NULL, `accentContainer` INTEGER NOT NULL, `isSelected` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `background` INTEGER NOT NULL, `accent` INTEGER NOT NULL, `additional` INTEGER NOT NULL, `additionalContainer` INTEGER NOT NULL, `accentContainer` INTEGER NOT NULL, `isSelected` INTEGER NOT NULL, `isSystem` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -49,6 +49,12 @@
             "columnName": "isSelected",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "isSystem",
+            "columnName": "isSystem",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -61,7 +67,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c4c5c29434e5f4ec7992527c71bdfa4f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '188d9ea8d3ca8e80d3f4bb00ea0aaa55')"
     ]
   }
 }

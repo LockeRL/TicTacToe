@@ -11,5 +11,6 @@ data class ColorThemeEntity(
 	val additional: Long,
 	val additionalContainer: Long,
 	val accentContainer: Long,
-	val isSelected: Boolean = false
+	val isSelected: Boolean = false,
+	val isSystem: Boolean = false,
 )

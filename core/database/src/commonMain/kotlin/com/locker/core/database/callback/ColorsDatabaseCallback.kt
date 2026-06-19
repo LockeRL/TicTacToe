@@ -25,13 +25,14 @@ object ColorsDatabaseCallback : RoomDatabase.Callback() {
 		ColorThemeEntity::additional,
 		ColorThemeEntity::additionalContainer,
 		ColorThemeEntity::accentContainer,
-		ColorThemeEntity::isSelected
+		ColorThemeEntity::isSelected,
+		ColorThemeEntity::isSystem
 	).joinToString(separator = ", ", prefix = "(", postfix = ")") { it.name }
 
 	private fun getValuesString(): String =
 		ColorsList.mapIndexed { index, colors -> colors.toDbString(index) }.joinToString(separator = ", ")
 
 	private fun AppColors.toDbString(index: Int): String =
-		"($index, ${background.toLong()}, ${accent.toLong()}, ${additional.toLong()}, " +
-			"${additionalContainer.toLong()}, ${accentContainer.toLong()}, ${index == 0})"
+		"(${index + 1}, ${background.toLong()}, ${accent.toLong()}, ${additional.toLong()}, " +
+			"${additionalContainer.toLong()}, ${accentContainer.toLong()}, ${index == 0}, $isSystem)"
 }

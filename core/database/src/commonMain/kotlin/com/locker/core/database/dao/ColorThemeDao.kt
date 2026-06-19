@@ -13,11 +13,14 @@ interface ColorThemeDao {
 	@Query("SELECT * FROM ColorThemeEntity")
 	fun getAllThemes(): Flow<List<ColorThemeEntity>>
 
+	@Query("SELECT * FROM ColorThemeEntity WHERE isSystem = false")
+	fun getUserThemes(): Flow<List<ColorThemeEntity>>
+
 	@Query("SELECT * FROM ColorThemeEntity WHERE isSelected = true LIMIT 1")
 	fun getSelectedTheme(): Flow<ColorThemeEntity?>
 
 	@Query("SELECT id FROM ColorThemeEntity WHERE isSelected = true LIMIT 1")
-	fun getSelectedThemeIndex(): Flow<Int?>
+	suspend fun getSelectedThemeId(): Int?
 
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	suspend fun insertThemes(themes: List<ColorThemeEntity>)
@@ -30,6 +33,9 @@ interface ColorThemeDao {
 
 	@Query("UPDATE ColorThemeEntity SET isSelected = true WHERE id = :themeId")
 	suspend fun selectTheme(themeId: Int)
+
+	@Query("DELETE FROM ColorThemeEntity WHERE id = :themeId")
+	suspend fun deleteTheme(themeId: Int)
 
 	@Transaction
 	suspend fun setSelectedTheme(themeId: Int) {

@@ -41,7 +41,6 @@ import org.koin.compose.koinInject
 fun PalettePicker(
 	colorsList: List<AppColorTheme>,
 	onColorsPick: (Int) -> Unit,
-	activeIndex: Int,
 	modifier: Modifier = Modifier
 ) {
 	val themeColors = TicTacToeTheme.colors
@@ -60,9 +59,8 @@ fun PalettePicker(
 			verticalAlignment = Alignment.CenterVertically,
 			horizontalArrangement = Arrangement.End,
 			modifier = Modifier
-				.fillMaxWidth()
 				.align(Alignment.CenterEnd)
-				.padding(end = slideInPadding)
+				.padding(end = slideInPadding + 8.dp)
 		) {
 			AnimatedVisibility(
 				visible = isExpanded.value,
@@ -82,7 +80,6 @@ fun PalettePicker(
 				ColorsContainer(
 					colorsList = colorsList,
 					onColorClick = onColorsPick,
-					activeIndex = activeIndex
 				)
 			}
 		}
@@ -109,11 +106,9 @@ fun PalettePicker(
 	colorsViewModel: ColorsViewModel = koinInject()
 ) {
 	val colorsList = colorsViewModel.colorsList.collectAsState()
-	val themeIndex = colorsViewModel.currentColorThemeIndex.collectAsState()
 	PalettePicker(
 		colorsList = colorsList.value,
-		onColorsPick = colorsViewModel::setAppColorsIndex,
-		activeIndex = themeIndex.value,
+		onColorsPick = colorsViewModel::setAppColorsId,
 		modifier = modifier
 	)
 }
@@ -125,7 +120,6 @@ fun PalettePreview() {
 		PalettePicker(
 			colorsList = listOf(AppColorTheme.DEFAULT),
 			onColorsPick = {},
-			activeIndex = 0,
 			modifier = Modifier
 				.fillMaxWidth()
 				.background(Color.Black)

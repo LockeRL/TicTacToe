@@ -22,11 +22,18 @@ internal class ColorThemeDaoService(
 			list.map { it.toDomain() }
 		}.flowOn(dispatchers)
 
+	override fun getUserThemes(): Flow<List<AppColors>> =
+		dao.getUserThemes().map { list ->
+			list.map { it.toDomain() }
+		}.flowOn(dispatchers)
+
 	override fun getCurrentTheme(): Flow<AppColors> =
 		dao.getSelectedTheme().map { it?.toDomain() ?: AppColors.Default }.flowOn(dispatchers)
 
-	override fun getCurrentThemeIndex(): Flow<Int> =
-		dao.getSelectedThemeIndex().map { it ?: 0 }.flowOn(dispatchers)
+	override suspend fun getCurrentThemeId(): Int? =
+		withContext(dispatchers) {
+			dao.getSelectedThemeId()
+		}
 
 	override suspend fun selectTheme(id: Int) {
 		withContext(dispatchers) {
@@ -37,6 +44,12 @@ internal class ColorThemeDaoService(
 	override suspend fun insertTheme(theme: AppColors) {
 		withContext(dispatchers) {
 			dao.insertTheme(theme.toEntity())
+		}
+	}
+
+	override suspend fun deleteTheme(id: Int) {
+		withContext(dispatchers) {
+			dao.deleteTheme(id)
 		}
 	}
 }
