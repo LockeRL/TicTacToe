@@ -1,7 +1,6 @@
 package com.locker.feature.settingsscreen.screen.view
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -84,7 +83,6 @@ fun ColorPickerDialog(
 									.clip(CircleShape)
 									.background(color)
 									.clickable { onColorSelected(color) }
-									.border(1.dp, Color.White.copy(alpha = 0.2f), CircleShape)
 							)
 						}
 					}
