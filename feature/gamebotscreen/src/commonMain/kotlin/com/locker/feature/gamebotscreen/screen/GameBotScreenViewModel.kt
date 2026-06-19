@@ -94,6 +94,7 @@ class GameBotScreenViewModel(
         field.winState,
     ) { user, difficulty, boardState ->
         if (boardState != BoardState.InProgress) {
+            _isBotThinking.value = false
             _endScreen.value = EndGameScreenStateFactory.create(
                 winner = ((field.winState.value as? BoardState.Winner)?.winner as? CellState.Occupied)?.player,
                 userPlayer = user,

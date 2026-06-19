@@ -11,4 +11,7 @@ data object MainScreenNavKey : BaseNavKey
 data object GameScreenNavKey : BaseNavKey
 
 @Serializable
+data object SettingsScreenNavKey : BaseNavKey
+
+@Serializable
 data class BotGameScreenNavKey(val difficulty: DifficultyNavModel, val playerSymbol: PlayerNavModel) : BaseNavKey

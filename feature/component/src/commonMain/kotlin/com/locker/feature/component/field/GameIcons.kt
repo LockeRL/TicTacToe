@@ -4,6 +4,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.locker.core.models.Player
 import com.locker.feature.core.theme.TicTacToeTheme
 import org.jetbrains.compose.resources.painterResource
@@ -22,11 +23,12 @@ fun PlayerIconWithState(
 @Composable
 fun PlayerIcon(
     player: Player,
+    color: Color = TicTacToeTheme.colors.accentContainer,
     modifier: Modifier = Modifier
 ) {
     Icon(
         painter = painterResource(player.icon),
-        tint = TicTacToeTheme.colors.accentContainer,
+        tint = color,
         contentDescription = null,
         modifier = modifier
     )

@@ -7,6 +7,7 @@ import com.locker.feature.colorpicker.di.colorPickerModule
 import com.locker.feature.gamebotscreen.di.botGameModule
 import com.locker.feature.gamescreen.di.gameScreenModule
 import com.locker.feature.mainscreen.di.mainScreenModule
+import com.locker.feature.settingsscreen.di.settingsScreenModule
 import org.koin.core.module.Module
 
 internal val coreModules: List<Module> = listOf(
@@ -20,6 +21,7 @@ internal val screenModules: List<Module> = listOf(
 	mainScreenModule,
 	gameScreenModule,
 	botGameModule,
+	settingsScreenModule,
 )
 
 expect val platformModules: List<Module>

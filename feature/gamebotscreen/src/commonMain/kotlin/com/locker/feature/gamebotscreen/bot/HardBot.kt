@@ -49,7 +49,15 @@ class HardBot : TicTacToeBot() {
             if (isTimeUp()) break
             
             // We use a deeper search. Depth 6 is usually viable with Alpha-Beta and good sorting.
-            val score = minimax(field, move, 6, Int.MIN_VALUE, Int.MAX_VALUE, false, activePlayer)
+            val score = minimax(
+	            field = field,
+	            move = move,
+	            depth = 6,
+	            alpha = Int.MIN_VALUE,
+	            beta = Int.MAX_VALUE,
+	            isMaximizing = false,
+	            botPlayer = activePlayer
+            )
             if (score > bestScore) {
                 bestScore = score
                 bestMove = move

@@ -47,4 +47,5 @@ include(":feature:colorpicker")
 include(":feature:gamescreen")
 include(":feature:mainscreen")
 include(":feature:gamebotscreen")
+include(":feature:settingsscreen")
 

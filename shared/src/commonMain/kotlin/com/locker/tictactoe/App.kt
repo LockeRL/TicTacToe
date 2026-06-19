@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -32,12 +33,14 @@ import com.locker.core.navigation.Navigator
 import com.locker.core.navigation.rememberNavigationState
 import com.locker.core.navigation.toEntries
 import com.locker.core.navigation.keys.MainScreenNavKey
+import com.locker.core.navigation.keys.SettingsScreenNavKey
 import com.locker.feature.colorpicker.view.ColorsViewModel
 import com.locker.feature.component.TicTacToeIconButton
 import com.locker.feature.core.theme.SCREEN_CHANGE_ANIM_DURATION
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.resources.Res
 import com.locker.resources.ic_back
+import com.locker.resources.ic_settings
 import com.locker.tictactoe.component.TopAppBar
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
@@ -65,7 +68,17 @@ fun App(
 				TopAppBar(
 					colorsViewModel = colorsViewModel,
 					navigationContent = {
-						if (currentKey != MainScreenNavKey) {
+						if (currentKey == MainScreenNavKey) {
+							TicTacToeIconButton(
+								icon = painterResource(Res.drawable.ic_settings),
+								shape = CircleShape,
+								onClick = { navigator.navigate(SettingsScreenNavKey) },
+								contentDescription = "Settings",
+								contentColor = colors.additionalContainer,
+								iconModifier = Modifier.size(32.dp),
+								modifier = Modifier.size(48.dp),
+							)
+						} else {
 							TicTacToeIconButton(
 								icon = painterResource(Res.drawable.ic_back),
 								onClick = navigator::goBack,
