@@ -25,6 +25,7 @@ import com.locker.feature.core.theme.AppColorTheme
 import com.locker.feature.core.theme.HALF_ALPHA
 import com.locker.feature.core.theme.SUB_FIELD_LINE_LENGTH_PERCENT
 import com.locker.feature.core.theme.TicTacToeTheme
+import com.locker.feature.core.theme.animate
 import com.locker.resources.Res
 import com.locker.resources.ic_settings
 import org.jetbrains.compose.resources.painterResource
@@ -32,6 +33,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun ThemePreview(theme: AppColorTheme) {
 	val appColors = TicTacToeTheme.colors
+	val theme = theme.animate()
 
 	Row(
 		verticalAlignment = Alignment.CenterVertically,
