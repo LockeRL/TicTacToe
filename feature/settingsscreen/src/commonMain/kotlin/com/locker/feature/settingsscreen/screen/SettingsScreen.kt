@@ -20,6 +20,7 @@ import com.locker.feature.core.screen.LocalFireEvent
 import com.locker.feature.core.screen.ProvideScreenEvents
 import com.locker.feature.core.theme.AppColorTheme
 import com.locker.feature.core.theme.TicTacToeTheme
+import com.locker.feature.core.theme.animate
 import com.locker.feature.settingsscreen.screen.event.ColorType
 import com.locker.feature.settingsscreen.screen.event.SaveThemeEvent
 import com.locker.feature.settingsscreen.screen.event.UpdateColorsEvent
@@ -61,7 +62,7 @@ fun SettingsScreen(
 	modifier: Modifier = Modifier,
 ) {
 	val fireEvent = LocalFireEvent.current
-	val currentTheme = theme.value
+	val currentTheme = theme.value.animate()
 	val strings = strings.value
 	val editableColor = remember { mutableStateOf<ColorType?>(null) }
 
@@ -75,7 +76,7 @@ fun SettingsScreen(
 			modifier = Modifier
 				.padding(16.dp),
 		) {
-			ThemePreview(theme = theme.value)
+			ThemePreview(theme = currentTheme)
 
 			AnimatedVisibility(
 				visible = userThemes.value.isNotEmpty()
