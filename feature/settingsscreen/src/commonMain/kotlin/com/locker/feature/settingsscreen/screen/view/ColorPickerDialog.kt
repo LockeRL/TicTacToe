@@ -2,6 +2,7 @@ package com.locker.feature.settingsscreen.screen.view
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -48,6 +49,7 @@ import kotlin.math.sqrt
 @Composable
 fun ColorPickerDialog(
 	title: String,
+	initialColor: Color,
 	strings: SettingsScreenState,
 	onDismissRequest: () -> Unit,
 	onColorSelected: (Color) -> Unit
@@ -55,10 +57,10 @@ fun ColorPickerDialog(
 	val themeColors = TicTacToeTheme.colors
 	val typography = TicTacToeTheme.typography
 	
-	val initialHsv = remember { colorToHsv(themeColors.accent) }
-	var currentHue by remember { mutableFloatStateOf(initialHsv.first) }
-	var currentSaturation by remember { mutableFloatStateOf(initialHsv.second) }
-	var currentBrightness by remember { mutableFloatStateOf(initialHsv.third) }
+	val initialHsv = remember(initialColor) { colorToHsv(initialColor) }
+	var currentHue by remember(initialHsv) { mutableFloatStateOf(initialHsv.first) }
+	var currentSaturation by remember(initialHsv) { mutableFloatStateOf(initialHsv.second) }
+	var currentBrightness by remember(initialHsv) { mutableFloatStateOf(initialHsv.third) }
 
 	val selectedColor = hsvToColor(currentHue, currentSaturation, currentBrightness)
 
@@ -102,6 +104,7 @@ fun ColorPickerDialog(
 							.size(60.dp)
 							.clip(CircleShape)
 							.background(selectedColor)
+							.border(width = 2.dp, color = themeColors.accent, shape = CircleShape)
 					)
 				}
 

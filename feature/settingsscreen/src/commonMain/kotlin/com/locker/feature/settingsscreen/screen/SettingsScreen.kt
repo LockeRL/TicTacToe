@@ -144,6 +144,7 @@ fun SettingsScreen(
 		editableColor.value?.let { type ->
 			ColorPickerDialog(
 				title = stringResource(type.titleRes),
+				initialColor = currentTheme.getColorByType(type),
 				onDismissRequest = { editableColor.value = null },
 				strings = strings,
 				onColorSelected = {
@@ -154,6 +155,15 @@ fun SettingsScreen(
 		}
 	}
 }
+
+private fun AppColorTheme.getColorByType(colorType: ColorType): Color =
+	when (colorType) {
+		ColorType.ACCENT -> accent
+		ColorType.BACKGROUND -> background
+		ColorType.ADDITIONAL -> additional
+		ColorType.ADDITIONAL_CONTAINER -> additionalContainer
+		ColorType.ACCENT_CONTAINER -> accentContainer
+	}
 
 private fun AppColorTheme.update(colorType: ColorType, color: Color): AppColorTheme =
 	when (colorType) {
