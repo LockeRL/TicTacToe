@@ -6,4 +6,7 @@
     <string name="additional_container_color">System buttons</string>
     <string name="accent_container_color">Players</string>
     <string name="save_button">Save</string>
+    <string name="select_color">Select</string>
+    <string name="cancel_color">Cancel</string>
+    <string name="brightness_color">Brightness</string>
 </resources>

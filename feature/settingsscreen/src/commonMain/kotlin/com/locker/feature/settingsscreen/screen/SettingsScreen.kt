@@ -145,6 +145,7 @@ fun SettingsScreen(
 			ColorPickerDialog(
 				title = stringResource(type.titleRes),
 				onDismissRequest = { editableColor.value = null },
+				strings = strings,
 				onColorSelected = {
 					fireEvent(UpdateColorsEvent(currentTheme.update(colorType = type, color = it)))
 					editableColor.value = null

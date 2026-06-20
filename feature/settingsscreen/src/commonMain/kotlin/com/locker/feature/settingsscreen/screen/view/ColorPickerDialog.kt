@@ -1,55 +1,66 @@
 package com.locker.feature.settingsscreen.screen.view
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.locker.feature.component.TicTacToeButton
 import com.locker.feature.core.theme.TicTacToeTheme
+import com.locker.feature.settingsscreen.screen.model.SettingsScreenState
+import kotlin.math.PI
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 @Composable
 fun ColorPickerDialog(
 	title: String,
+	strings: SettingsScreenState,
 	onDismissRequest: () -> Unit,
 	onColorSelected: (Color) -> Unit
 ) {
 	val themeColors = TicTacToeTheme.colors
 	val typography = TicTacToeTheme.typography
-	val gridState = rememberLazyGridState()
-	val colors = listOf(
-		Color(0xFF000000), Color(0xFFFFFFFF), Color(0xFFFF0000),
-		Color(0xFF00FF00), Color(0xFF0000FF), Color(0xFFFFFF00),
-		Color(0xFF00FFFF), Color(0xFFFF00FF), Color(0xFFFFA500),
-		Color(0xFF808080), Color(0xFF800000), Color(0xFF008000),
-		Color(0xFF000080), Color(0xFF808000), Color(0xFF800080),
-		Color(0xFF008080), Color(0xFFE91E63), Color(0xFF9C27B0),
-		Color(0xFF3F51B5), Color(0xFF00BCD4), Color(0xFF4CAF50),
-		Color(0xFFFFEB3B), Color(0xFFFF9800), Color(0xFF795548),
-		Color(0xFF1A1A1A), Color(0xFF2E7D32), Color(0xFF1565C0),
-		Color(0xFFC62828), Color(0xFFF9A825), Color(0xFF6A1B9A)
-	)
+	
+	val initialHsv = remember { colorToHsv(themeColors.accent) }
+	var currentHue by remember { mutableFloatStateOf(initialHsv.first) }
+	var currentSaturation by remember { mutableFloatStateOf(initialHsv.second) }
+	var currentBrightness by remember { mutableFloatStateOf(initialHsv.third) }
+
+	val selectedColor = hsvToColor(currentHue, currentSaturation, currentBrightness)
 
 	Dialog(onDismissRequest = onDismissRequest) {
 		Surface(
@@ -58,8 +69,8 @@ fun ColorPickerDialog(
 			tonalElevation = 6.dp
 		) {
 			Column(
+				horizontalAlignment = Alignment.CenterHorizontally,
 				modifier = Modifier.padding(24.dp),
-				horizontalAlignment = Alignment.CenterHorizontally
 			) {
 				Text(
 					text = title,
@@ -68,62 +79,201 @@ fun ColorPickerDialog(
 					modifier = Modifier.padding(bottom = 24.dp)
 				)
 
-				Box(modifier = Modifier.height(240.dp)) {
-					LazyVerticalGrid(
-						state = gridState,
-						columns = GridCells.Fixed(5),
-						horizontalArrangement = Arrangement.spacedBy(12.dp),
-						verticalArrangement = Arrangement.spacedBy(12.dp),
-						modifier = Modifier.fillMaxSize()
-					) {
-						items(colors) { color ->
-							Box(
-								modifier = Modifier
-									.aspectRatio(1f)
-									.clip(CircleShape)
-									.background(color)
-									.clickable { onColorSelected(color) }
-							)
-						}
-					}
+				Row(
+					verticalAlignment = Alignment.CenterVertically,
+					horizontalArrangement = Arrangement.SpaceEvenly,
+					modifier = Modifier
+						.fillMaxWidth()
+						.height(200.dp),
+				) {
+					ColorWheel(
+						hue = currentHue,
+						saturation = currentSaturation,
+						brightness = currentBrightness,
+						onColorChanged = { h, s ->
+							currentHue = h
+							currentSaturation = s
+						},
+						modifier = Modifier.size(180.dp),
+					)
 
-					if (gridState.canScrollBackward) {
-						Box(
-							modifier = Modifier
-								.fillMaxWidth()
-								.height(32.dp)
-								.align(Alignment.TopCenter)
-								.background(
-									Brush.verticalGradient(
-										colors = listOf(themeColors.background, Color.Transparent)
-									)
-								)
-						)
-					}
-
-					if (gridState.canScrollForward) {
-						Box(
-							modifier = Modifier
-								.fillMaxWidth()
-								.height(32.dp)
-								.align(Alignment.BottomCenter)
-								.background(
-									Brush.verticalGradient(
-										colors = listOf(Color.Transparent, themeColors.background)
-									)
-								)
-						)
-					}
+					Box(
+						modifier = Modifier
+							.size(60.dp)
+							.clip(CircleShape)
+							.background(selectedColor)
+					)
 				}
 
-				TicTacToeButton(
-					text = "cancel",
-					onClick = onDismissRequest,
+				Column(
 					modifier = Modifier
-						.align(Alignment.End)
+						.fillMaxWidth()
 						.padding(top = 16.dp)
-				)
+				) {
+					Text(
+						text = strings.brightnessColor,
+						style = typography.bodyMedium,
+						color = themeColors.accent
+					)
+
+					Slider(
+						value = currentBrightness,
+						onValueChange = { currentBrightness = it },
+						colors = SliderDefaults.colors(
+							thumbColor = themeColors.accent,
+							activeTrackColor = themeColors.accent,
+							inactiveTrackColor = themeColors.additionalContainer
+						),
+						modifier = Modifier.fillMaxWidth()
+					)
+				}
+
+				Row(
+					horizontalArrangement = Arrangement.spacedBy(space = 8.dp, alignment = Alignment.End),
+					modifier = Modifier
+						.fillMaxWidth()
+						.padding(top = 24.dp),
+				) {
+					TicTacToeButton(
+						text = strings.cancelColor,
+						onClick = onDismissRequest,
+						containerColor = Color.Transparent,
+						contentColor = themeColors.accent
+					)
+
+					TicTacToeButton(
+						text = strings.selectColor,
+						onClick = {
+							onColorSelected(selectedColor)
+						}
+					)
+				}
 			}
 		}
 	}
+}
+
+@Composable
+fun ColorWheel(
+	modifier: Modifier = Modifier,
+	hue: Float,
+	saturation: Float,
+	brightness: Float,
+	onColorChanged: (Float, Float) -> Unit
+) {
+	var center by remember { mutableStateOf(Offset.Zero) }
+	var radius by remember { mutableStateOf(0f) }
+
+	Canvas(
+		modifier = modifier
+			.pointerInput(Unit) {
+				detectTapGestures { offset ->
+					val (h, s) = getHsvAtOffset(offset, center, radius)
+					onColorChanged(h, s)
+				}
+			}
+			.pointerInput(Unit) {
+				detectDragGestures { change, _ ->
+					change.consume()
+					val (h, s) = getHsvAtOffset(change.position, center, radius)
+					onColorChanged(h, s)
+				}
+			}
+	) {
+		center = size.center
+		radius = size.minDimension / 2
+
+		rotate(-90f, center) {
+			drawCircle(
+				brush = Brush.sweepGradient(
+					colors = listOf(
+						Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.Red
+					),
+					center = center
+				),
+				radius = radius
+			)
+
+			drawCircle(
+				brush = Brush.radialGradient(
+					colors = listOf(Color.White, Color.Transparent),
+					center = center,
+					radius = radius
+				),
+				radius = radius
+			)
+		}
+		
+		drawCircle(
+			color = Color.Black.copy(alpha = 1f - brightness),
+			radius = radius,
+			center = center
+		)
+
+		val angleRad = (hue - 90f) * PI.toFloat() / 180f
+		val dist = saturation * radius
+		val selectorOffset = Offset(
+			x = center.x + dist * cos(angleRad),
+			y = center.y + dist * sin(angleRad)
+		)
+
+		drawCircle(
+			color = Color.White,
+			radius = 8.dp.toPx(),
+			center = selectorOffset,
+			style = Stroke(width = 2.dp.toPx())
+		)
+		drawCircle(
+			color = Color.Black,
+			radius = 6.dp.toPx(),
+			center = selectorOffset,
+			style = Stroke(width = 1.dp.toPx())
+		)
+	}
+}
+
+private fun getHsvAtOffset(offset: Offset, center: Offset, radius: Float): Pair<Float, Float> {
+	val dx = offset.x - center.x
+	val dy = offset.y - center.y
+	val distance = sqrt(dx * dx + dy * dy)
+
+	var angle = atan2(dy, dx) * 180f / PI.toFloat()
+	if (angle < 0) angle += 360f
+
+	val hue = (angle + 90f) % 360f
+	val saturation = (distance / radius).coerceIn(0f, 1f)
+	return Pair(hue, saturation)
+}
+
+private fun hsvToColor(hue: Float, saturation: Float, value: Float): Color {
+	val c = value * saturation
+	val x = c * (1f - kotlin.math.abs((hue / 60f) % 2f - 1f))
+	val m = value - c
+	val (r, g, b) = when {
+		hue < 60 -> Triple(c, x, 0f)
+		hue < 120 -> Triple(x, c, 0f)
+		hue < 180 -> Triple(0f, c, x)
+		hue < 240 -> Triple(0f, x, c)
+		hue < 300 -> Triple(x, 0f, c)
+		else -> Triple(c, 0f, x)
+	}
+	return Color(r + m, g + m, b + m)
+}
+
+private fun colorToHsv(color: Color): Triple<Float, Float, Float> {
+	val r = color.red
+	val g = color.green
+	val b = color.blue
+	val max = maxOf(r, maxOf(g, b))
+	val min = minOf(r, minOf(g, b))
+	val d = max - min
+	val h = when (max) {
+		min -> 0f
+		r -> (60 * ((g - b) / d) + 360) % 360
+		g -> (60 * ((b - r) / d) + 120) % 360
+		else -> (60 * ((r - g) / d) + 240) % 360
+	}
+	val s = if (max == 0f) 0f else d / max
+	val v = max
+	return Triple(h, s, v)
 }

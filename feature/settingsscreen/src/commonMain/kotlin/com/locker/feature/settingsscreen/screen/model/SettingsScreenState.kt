@@ -8,4 +8,7 @@ data class SettingsScreenState(
 	val accentContainer: String = "",
 	val saveButton: String = "",
 	val userThemes: String = "",
+	val selectColor: String = "",
+	val cancelColor: String = "",
+	val brightnessColor: String = "",
 )
