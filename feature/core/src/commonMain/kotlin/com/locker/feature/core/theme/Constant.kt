@@ -18,6 +18,7 @@ const val LOW_ALPHA = 0.2f
 const val HALF_ALPHA = 0.5f
 
 const val MENU_BUTTON_PERCENT = 0.8f
+const val MENU_BUTTON_SMALL_PERCENT = 0.6f
 
 const val MIN_INNER_COLOR_PERCENT = 0.6f
 const val MAX_INNER_COLOR_PERCENT = 0.8f
