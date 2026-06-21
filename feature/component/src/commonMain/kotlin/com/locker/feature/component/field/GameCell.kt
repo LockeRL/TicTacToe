@@ -16,11 +16,16 @@ fun GameCell(
 ) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = modifier.clickable { onCellClick() }
+        modifier = modifier
+            .clickable { onCellClick() },
     ) {
         val player = (state as? CellState.Occupied)?.player
         if (player != null) {
-	        PlayerIcon(player = player, modifier = Modifier.fillMaxSize())
+	        PlayerIcon(
+                player = player,
+                modifier = Modifier
+                    .fillMaxSize(),
+            )
         }
     }
 }

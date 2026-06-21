@@ -43,8 +43,8 @@ private fun DrawScope.drawRowLine(
 ) {
     val strokeWidthPx = border.strokeWidth.toPx()
     if (strokeWidthPx == 0f) return
-    if (row < 0 || row >= dimensionSize) return
-    if (percentage > 1f || percentage < 0f) return
+    if (row !in 0..<dimensionSize) return
+    if (percentage !in 0f..1f) return
     drawPath(
         Path().apply {
             val width = size.width
@@ -60,7 +60,7 @@ private fun DrawScope.drawRowLine(
             lineTo(end, curHeight)
             close()
         },
-        color = border.color
+        color = border.color,
     )
 }
 
@@ -72,8 +72,8 @@ private fun DrawScope.drawColumnLine(
 ) {
     val strokeWidthPx = border.strokeWidth.toPx()
     if (strokeWidthPx == 0f) return
-    if (row < 0 || row >= dimensionSize) return
-    if (percentage > 1f || percentage < 0f) return
+    if (row !in 0..<dimensionSize) return
+    if (percentage !in 0f..1f) return
     drawPath(
         Path().apply {
             val height = size.height
@@ -89,7 +89,7 @@ private fun DrawScope.drawColumnLine(
             lineTo(curWidth, end)
             close()
         },
-        color = border.color
+        color = border.color,
     )
 }
 
@@ -99,7 +99,7 @@ private fun DrawScope.drawMainDiagonal(
 ) {
     val strokeWidthPx = border.strokeWidth.toPx() / DIAGONAL_DIFF_COEFFICIENT
     if (strokeWidthPx == 0f) return
-    if (percentage > 1f || percentage < 0f) return
+    if (percentage !in 0f..1f) return
     drawPath(
         Path().apply {
             val height = size.height
@@ -118,7 +118,7 @@ private fun DrawScope.drawMainDiagonal(
             lineTo(startWidth, startHeight + strokeWidthPx)
             close()
         },
-        color = border.color
+        color = border.color,
     )
 }
 
@@ -128,7 +128,7 @@ private fun DrawScope.drawSideDiagonal(
 ) {
     val strokeWidthPx = border.strokeWidth.toPx()  / DIAGONAL_DIFF_COEFFICIENT
     if (strokeWidthPx == 0f) return
-    if (percentage > 1f || percentage < 0f) return
+    if (percentage !in 0f..1f) return
 
     drawPath(
         Path().apply {
@@ -148,6 +148,6 @@ private fun DrawScope.drawSideDiagonal(
             lineTo(endWidth - strokeWidthPx, startHeight)
             close()
         },
-        color = border.color
+        color = border.color,
     )
 }

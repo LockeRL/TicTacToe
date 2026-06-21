@@ -25,14 +25,15 @@ fun Header(
     val typography = TicTacToeTheme.typography
 
     Column(
-        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier.fillMaxWidth(),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.height(48.dp)
+            modifier = Modifier
+                .height(48.dp),
         ) {
             Text(
                 text = header.playingAs,
@@ -46,7 +47,7 @@ fun Header(
                     tint = colors.accentContainer,
                     contentDescription = null,
                     modifier = Modifier
-                        .size(32.dp)
+                        .size(32.dp),
                 )
             }
         }

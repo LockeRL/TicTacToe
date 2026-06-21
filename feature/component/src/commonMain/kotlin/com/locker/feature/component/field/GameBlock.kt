@@ -32,13 +32,14 @@ fun MatrixFieldBlock(
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
+        modifier = modifier,
     ) {
         for (i in 0..<dimensionSize) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f),
             ) {
                 for (j in 0..<dimensionSize) {
                     Box(
@@ -87,7 +88,7 @@ fun GameBlockContainer(
             content = content,
             modifier = Modifier
                 .fillMaxSize()
-                .alpha(shadowAlpha)
+                .alpha(shadowAlpha),
         )
 
         if (boardState != BoardState.InProgress) {
@@ -103,7 +104,7 @@ fun GameBlockContainer(
                             row = if (boardState is BoardState.Winner.Row) boardState.rowNum else null,
                             mainDiagonal = boardState is BoardState.Winner.MainDiagonal,
                             sideDiagonal = boardState is BoardState.Winner.SideDiagonal
-                        )
+                        ),
                 )
             }
 
@@ -112,7 +113,7 @@ fun GameBlockContainer(
                     state = if (boardState is BoardState.Winner) boardState.winner else CellState.Empty,
                     modifier = Modifier
                         .fillMaxSize()
-                        .alpha(if (showAlphaAnimation) winAlpha else 0f)
+                        .alpha(if (showAlphaAnimation) winAlpha else 0f),
                 )
             }
         }

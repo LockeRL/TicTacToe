@@ -36,28 +36,30 @@ fun NextGameContent(
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.padding(bottom = 32.dp)
+        modifier = modifier
+            .padding(bottom = 32.dp),
     ) {
         if (endGame.icon != null) {
             Icon(
                 painter = painterResource(endGame.icon),
                 tint = colors.accentContainer,
                 contentDescription = null,
-                modifier = Modifier.size(64.dp)
+                modifier = Modifier
+                    .size(64.dp),
             )
         }
 
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
         ) {
 
             Text(
                 text = endGame.title,
                 color = colors.accentContainer,
                 style = typography.titleLarge,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier
+                    .padding(8.dp),
             )
 
             PlayerSelector(
@@ -68,7 +70,7 @@ fun NextGameContent(
             DifficultySelector(
                 selectedDifficulty = endGame.difficulty,
                 onDifficultySelected = { fireEvent(UpdateBotDifficulty(it)) },
-                modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
+                modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT),
             )
 
             Column(
@@ -79,13 +81,13 @@ fun NextGameContent(
                 TicTacToeButton(
                     text = endGame.nextGame,
                     onClick = { fireEvent(NextGameEvent) },
-                    modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
+                    modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT),
                 )
 
                 TicTacToeButton(
                     text = endGame.mainMenu,
                     onClick = { fireEvent(MainMenuEvent) },
-                    modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
+                    modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT),
                 )
             }
         }

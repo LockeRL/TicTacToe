@@ -116,7 +116,7 @@ fun MainScreenContent(
 					modifier = Modifier.fillMaxWidth(MENU_BUTTON_SMALL_PERCENT),
 					containerColor = Color.Transparent,
 					contentColor = colors.additional,
-					borderStroke = BorderStroke(2.dp, colors.additional)
+					borderStroke = BorderStroke(width = 2.dp, color = colors.additional)
 				)
 			}
 		}

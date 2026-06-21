@@ -46,7 +46,7 @@ fun DifficultySelector(
 			.height(height)
 			.clip(RoundedCornerShape(16.dp))
 			.background(colors.accent.copy(alpha = 0.1f))
-			.padding(4.dp)
+			.padding(4.dp),
 	) {
 		val width = maxWidth
 		val itemWidth = width / difficulties.size
@@ -60,19 +60,19 @@ fun DifficultySelector(
 			modifier = Modifier
 				.offset(x = indicatorOffset.value)
 				.size(width = itemWidth, height = indicatorHeight)
-				.background(colors.accent, RoundedCornerShape(12.dp))
+				.background(colors.accent, RoundedCornerShape(12.dp)),
 		)
 
 		Row(modifier = Modifier.fillMaxWidth()) {
 			difficulties.forEach { difficulty ->
 				Box(
+					contentAlignment = Alignment.Center,
 					modifier = Modifier
 						.weight(1f)
 						.height(indicatorHeight)
 						.clickableWithoutIndication {
 							onDifficultySelected(difficulty)
 						},
-					contentAlignment = Alignment.Center
 				) {
 					Text(
 						text = stringResource(difficulty.title).uppercase(),
@@ -108,40 +108,42 @@ fun PlayerSelector(
 			.size(width = containerWidth, height = containerHeight)
 			.clip(RoundedCornerShape(20.dp))
 			.background(colors.accent.copy(alpha = 0.1f))
-			.padding(innerPadding)
+			.padding(innerPadding),
 	) {
 		val indicatorOffset by animateDpAsState(
 			targetValue = (itemSize + spacing) * selectedIndex,
-			animationSpec = tween(300)
+			animationSpec = tween(300),
 		)
 
 		Box(
 			modifier = Modifier
 				.offset(x = indicatorOffset)
 				.size(itemSize)
-				.background(colors.accent, RoundedCornerShape(16.dp))
+				.background(colors.accent, RoundedCornerShape(16.dp)),
 		)
 
 		Row(
-			modifier = Modifier.fillMaxWidth(),
-			horizontalArrangement = Arrangement.spacedBy(spacing)
+			horizontalArrangement = Arrangement.spacedBy(spacing),
+			modifier = Modifier
+				.fillMaxWidth(),
 		) {
 			players.forEach { player ->
 				val isSelected = selectedPlayer == player
 				Box(
+					contentAlignment = Alignment.Center,
 					modifier = Modifier
 						.size(itemSize)
 						.clickableWithoutIndication {
 							onSymbolSelected(player)
 
 						},
-					contentAlignment = Alignment.Center
 				) {
 					Icon(
 						painter = painterResource(player.icon),
 						contentDescription = null,
 						tint = if (isSelected) colors.accentContainer else colors.accent,
-						modifier = Modifier.size(48.dp)
+						modifier = Modifier
+							.size(48.dp),
 					)
 				}
 			}

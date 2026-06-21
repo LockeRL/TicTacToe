@@ -17,7 +17,7 @@ class HardBot : TicTacToeBot() {
 
     override fun getMove(field: GameField, activePlayer: Player, activeBlock: Pair<Int, Int>?): Move? {
         startTimeMark = timeSource.markNow()
-        val possibleMoves = getPossibleMoves(field, activeBlock)
+        val possibleMoves = getPossibleMoves(field = field, activeBlock = activeBlock)
         if (possibleMoves.isEmpty()) return null
 
         val opponent = if (activePlayer == Player.CROSS) Player.CIRCLE else Player.CROSS

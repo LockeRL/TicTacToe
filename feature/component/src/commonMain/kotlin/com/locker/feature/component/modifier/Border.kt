@@ -40,7 +40,7 @@ private fun DrawScope.drawTopBorder(
 ) {
     val strokeWidthPx = border.strokeWidth.toPx()
     if (strokeWidthPx == 0f) return
-    if (percentage > 1f || percentage < 0f) return
+    if (percentage !in 0f..1f) return
     drawPath(
         Path().apply {
             val width = size.width
@@ -52,7 +52,7 @@ private fun DrawScope.drawTopBorder(
             lineTo(end, 0f)
             close()
         },
-        color = border.color
+        color = border.color,
     )
 }
 
@@ -64,7 +64,7 @@ private fun DrawScope.drawBottomBorder(
 ) {
     val strokeWidthPx = border.strokeWidth.toPx()
     if (strokeWidthPx == 0f) return
-    if (percentage > 1f || percentage < 0f) return
+    if (percentage !in 0f..1f) return
     drawPath(
         Path().apply {
             val width = size.width
@@ -77,7 +77,7 @@ private fun DrawScope.drawBottomBorder(
             lineTo(end, height)
             close()
         },
-        color = border.color
+        color = border.color,
     )
 }
 
@@ -89,7 +89,7 @@ private fun DrawScope.drawStartBorder(
 ) {
     val strokeWidthPx = border.strokeWidth.toPx()
     if (strokeWidthPx == 0f) return
-    if (percentage > 1f || percentage < 0f) return
+    if (percentage !in 0f..1f) return
     drawPath(
         Path().apply {
             val height = size.height
@@ -101,7 +101,7 @@ private fun DrawScope.drawStartBorder(
             lineTo(0f, end)
             close()
         },
-        color = border.color
+        color = border.color,
     )
 }
 
@@ -113,7 +113,7 @@ private fun DrawScope.drawEndBorder(
 ) {
     val strokeWidthPx = border.strokeWidth.toPx()
     if (strokeWidthPx == 0f) return
-    if (percentage > 1f || percentage < 0f) return
+    if (percentage !in 0f..1f) return
     drawPath(
         Path().apply {
             val width = size.width
@@ -126,6 +126,6 @@ private fun DrawScope.drawEndBorder(
             lineTo(width, end)
             close()
         },
-        color = border.color
+        color = border.color,
     )
 }

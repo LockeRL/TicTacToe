@@ -2,7 +2,6 @@ package com.locker.feature.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -37,11 +36,12 @@ fun TicTacToeButton(
         contentPadding = contentPadding,
         border = borderStroke,
         enabled = enabled,
-        modifier = modifier.height(40.dp)
+        modifier = modifier
+            .height(40.dp),
     ) {
         Text(
             text = text.uppercase(),
-            style = typography.bodyMedium
+            style = typography.bodyMedium,
         )
     }
 }
@@ -53,7 +53,6 @@ fun ButtonPreview() {
         TicTacToeButton(
             text = "Play",
             onClick = {},
-            modifier = Modifier.fillMaxWidth(0.5f)
         )
     }
 }

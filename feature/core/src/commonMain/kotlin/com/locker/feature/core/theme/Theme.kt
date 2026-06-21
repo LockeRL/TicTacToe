@@ -35,7 +35,7 @@ private fun Color.animateColor(): Color {
 	val animatedColor by animateColorAsState(
 		targetValue = this,
 		label = "color_animation",
-		animationSpec = tween(THEME_COLORS_CHANGE_ANIM_DURATION)
+		animationSpec = tween(THEME_COLORS_CHANGE_ANIM_DURATION),
 	)
 	return animatedColor
 }

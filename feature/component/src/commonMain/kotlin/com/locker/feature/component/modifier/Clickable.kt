@@ -11,6 +11,6 @@ fun Modifier.clickableWithoutIndication(
 	Modifier.clickable(
 		interactionSource = interactionSource,
 		indication = null,
-		onClick = onClick
+		onClick = onClick,
 	)
 )

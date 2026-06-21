@@ -37,12 +37,14 @@ fun TicTacToeIconButton(
         ),
         contentPadding = PaddingValues(),
         elevation = null,
-        modifier = modifier.clip(shape)
+        modifier = modifier
+            .clip(shape),
     ) {
         Icon(
             painter = icon,
             contentDescription = contentDescription,
-            modifier = iconModifier.clip(shape)
+            modifier = iconModifier
+                .clip(shape),
         )
     }
 }

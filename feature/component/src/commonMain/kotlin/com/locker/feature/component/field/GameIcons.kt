@@ -16,7 +16,7 @@ fun PlayerIconWithState(
 ) {
     PlayerIcon(
         player = player.value,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -30,6 +30,6 @@ fun PlayerIcon(
         painter = painterResource(player.icon),
         tint = color,
         contentDescription = null,
-        modifier = modifier
+        modifier = modifier,
     )
 }

@@ -90,7 +90,7 @@ private fun ColorsRow(
 				isActive = isActive(color.id, index),
 				modifier = Modifier
 					.size(32.dp)
-					.padding(2.dp)
+					.padding(2.dp),
 			)
 		}
 	}
@@ -112,7 +112,7 @@ fun ColorContainer(
 	Box(
 		modifier = modifier
 			.clip(CircleShape)
-			.background(if (isActive) colors.accent else colors.background)
+			.background(if (isActive) colors.accent else colors.background),
 	) {
 		Box(
 			modifier = Modifier
@@ -120,7 +120,7 @@ fun ColorContainer(
 				.fillMaxSize(innerCirclePercent)
 				.clickable { onColorClick() }
 				.background(if (isActive) colors.background else colors.accent)
-				.align(Alignment.Center)
+				.align(Alignment.Center),
 		)
 	}
 }
@@ -130,14 +130,15 @@ fun ColorContainer(
 fun ColorContainerPreview() {
 	Box(
 		modifier = Modifier
-			.fillMaxSize(0.5f)
-			.aspectRatio(1f)
+			.size(100.dp)
+			.aspectRatio(1f),
 	) {
 		ColorContainer(
 			colors = AppColorTheme.DEFAULT,
 			isActive = false,
 			onColorClick = {},
-			modifier = Modifier.fillMaxSize()
+			modifier = Modifier
+				.fillMaxSize(),
 		)
 	}
 }
