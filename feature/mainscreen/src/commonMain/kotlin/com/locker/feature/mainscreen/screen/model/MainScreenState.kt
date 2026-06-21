@@ -5,4 +5,5 @@ data class MainScreenState(
 	val secondTitle: String = "",
 	val playVsFriend: String = "",
 	val playVsBot: String = "",
+	val rules: String = "",
 )

@@ -21,6 +21,7 @@ import com.locker.feature.core.screen.ProvideScreenEvents
 import com.locker.feature.core.theme.MENU_BUTTON_PERCENT
 import com.locker.feature.mainscreen.screen.event.BotPlayClickEvent
 import com.locker.feature.mainscreen.screen.event.PlayClickEvent
+import com.locker.feature.mainscreen.screen.event.RulesClickEvent
 import com.locker.feature.mainscreen.screen.model.MainScreenState
 import com.locker.feature.mainscreen.screen.view.MainMenuText
 import org.koin.compose.koinInject
@@ -96,6 +97,12 @@ fun MainScreenContent(
 				TicTacToeButton(
 					text = state.playVsFriend,
 					onClick = { fireEvent(PlayClickEvent) },
+					modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
+				)
+
+				TicTacToeButton(
+					text = state.rules,
+					onClick = { fireEvent(RulesClickEvent) },
 					modifier = Modifier.fillMaxWidth(MENU_BUTTON_PERCENT)
 				)
 			}

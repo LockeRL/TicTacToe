@@ -1,7 +1,7 @@
 package com.locker.feature.component.modifier
 
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import kotlin.math.sqrt
@@ -16,7 +16,9 @@ fun Modifier.matrixLine(
     sideDiagonal: Boolean = false,
     mainDiagonal: Boolean = false
 ): Modifier =
-    drawBehind {
+    drawWithContent {
+        drawContent()
+
         row?.let {
             drawRowLine(border, dimensionSize, it, border.percentage)
         }

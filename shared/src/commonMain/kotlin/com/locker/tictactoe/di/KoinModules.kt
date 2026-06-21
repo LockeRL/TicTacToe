@@ -8,6 +8,7 @@ import com.locker.feature.gamebotscreen.di.botGameModule
 import com.locker.feature.gamescreen.di.gameScreenModule
 import com.locker.feature.mainscreen.di.mainScreenModule
 import com.locker.feature.settingsscreen.di.settingsScreenModule
+import com.locker.feature.tutorialscreen.di.tutorialScreenModule
 import org.koin.core.module.Module
 
 internal val coreModules: List<Module> = listOf(
@@ -22,6 +23,7 @@ internal val screenModules: List<Module> = listOf(
 	gameScreenModule,
 	botGameModule,
 	settingsScreenModule,
+	tutorialScreenModule,
 )
 
 expect val platformModules: List<Module>
