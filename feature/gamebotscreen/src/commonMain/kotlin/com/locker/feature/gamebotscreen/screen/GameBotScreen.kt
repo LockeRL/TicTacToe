@@ -1,6 +1,7 @@
 package com.locker.feature.gamebotscreen.screen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -18,6 +19,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,6 +33,7 @@ import com.locker.feature.component.field.GameCell
 import com.locker.feature.component.modifier.Border
 import com.locker.feature.core.screen.LocalFireEvent
 import com.locker.feature.core.screen.ProvideScreenEvents
+import com.locker.feature.core.theme.ACTIVE_BLOCK_DURATION
 import com.locker.feature.core.theme.DefaultShape
 import com.locker.feature.core.theme.FADE_WIN_BLOCK_TIME
 import com.locker.feature.core.theme.HALF_ALPHA
@@ -192,8 +195,13 @@ fun BotGameFieldBlock(
 ) {
 	val colors = TicTacToeTheme.colors
 
-	val isActive = block.isActive.collectAsState()
-	val winState = block.winState.collectAsState()
+	val isActive by block.isActive.collectAsState()
+	val winState by block.winState.collectAsState()
+	val activeBlockColor by animateColorAsState(
+		targetValue = if (isActive) colors.accent.copy(alpha = LOW_ALPHA) else Color.Transparent,
+		animationSpec = tween(durationMillis = ACTIVE_BLOCK_DURATION)
+	)
+
 	GameBlockContainer(
 		dimensionSize = block.dimension,
 		border = Border(
@@ -201,10 +209,10 @@ fun BotGameFieldBlock(
 			color = colors.additional.copy(HALF_ALPHA),
 			percentage = SUB_FIELD_LINE_LENGTH_PERCENT
 		),
-		boardState = winState.value,
+		boardState = winState,
 		modifier = modifier
 			.clip(DefaultShape)
-			.background(if (isActive.value) colors.accent.copy(alpha = LOW_ALPHA) else Color.Transparent)
+			.background(activeBlockColor)
 	) { i, j ->
 		val cell = block.getCellFlow(i, j).collectAsState()
 		GameCell(

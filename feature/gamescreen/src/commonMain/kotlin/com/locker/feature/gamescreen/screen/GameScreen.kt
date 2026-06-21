@@ -1,6 +1,7 @@
 package com.locker.feature.gamescreen.screen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -42,6 +43,7 @@ import com.locker.feature.core.theme.SUB_FIELD_LINE_LENGTH_PERCENT
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamescreen.screen.event.CellClickEvent
 import com.locker.feature.component.field.GameCell
+import com.locker.feature.core.theme.ACTIVE_BLOCK_DURATION
 import com.locker.feature.gamescreen.screen.view.PlayerTurnIconWithText
 import com.locker.feature.gamescreen.screen.model.EndGameScreenState
 import com.locker.feature.gamescreen.screen.view.NextGameContent
@@ -181,6 +183,11 @@ fun GameFieldBlock(
 
 	val isActive by block.isActive.collectAsState()
 	val winState by block.winState.collectAsState()
+	val activeBlockColor by animateColorAsState(
+		targetValue = if (isActive) colors.accent.copy(alpha = LOW_ALPHA) else Color.Transparent,
+		animationSpec = tween(durationMillis = ACTIVE_BLOCK_DURATION)
+	)
+
 	GameBlockContainer(
 		dimensionSize = block.dimension,
 		border = Border(
@@ -191,7 +198,7 @@ fun GameFieldBlock(
 		boardState = winState,
 		modifier = modifier
 			.clip(DefaultShape)
-			.background(if (isActive) colors.accent.copy(alpha = LOW_ALPHA) else Color.Transparent)
+			.background(activeBlockColor)
 	) { i, j ->
 		val cell = block.getCellFlow(i, j).collectAsState()
 		GameCell(
