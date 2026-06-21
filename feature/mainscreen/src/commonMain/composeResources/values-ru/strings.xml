@@ -1,0 +1,7 @@
+<resources>
+    <string name="play_vs_friend">Играть с другом</string>
+    <string name="play_vs_bot">Играть с ботом</string>
+    <string name="tic_x_tac">Tic x Tac</string>
+    <string name="toe">Toe</string>
+    <string name="rules">Правила</string>
+</resources>

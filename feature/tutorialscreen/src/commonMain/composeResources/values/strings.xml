@@ -1,0 +1,15 @@
+<resources>
+    <string name="tutorial_title">How to Play</string>
+    <string name="tutorial_next">Next</string>
+    <string name="tutorial_got_it">Got it!</string>
+    <string name="tutorial_next_move_title">Next Move</string>
+    <string name="tutorial_next_move_desc">Your move in a small square determines where the opponent must play on the large board.</string>
+    <string name="tutorial_free_move_title">Free Move</string>
+    <string name="tutorial_free_move_desc">If you are sent to a block that is already finished, you can play anywhere on the board.</string>
+    <string name="tutorial_how_to_win_title">How to Win</string>
+    <string name="tutorial_how_to_win_desc">Win small blocks to claim them on the large board. Get three in a row on the large board to win!</string>
+    <string name="tutorial_win_block_title">Win a Block</string>
+    <string name="tutorial_win_block_desc">To win a small block, get three symbols in a row within it. The entire block will then be marked with your symbol.</string>
+    <string name="tutorial_draw_in_block_title">Draw in a Block</string>
+    <string name="tutorial_draw_in_block_desc">If a small block ends in a draw, it becomes blocked for everyone, and no one gets the point for it on the large board.</string>
+</resources>

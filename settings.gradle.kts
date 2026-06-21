@@ -48,4 +48,5 @@ include(":feature:gamescreen")
 include(":feature:mainscreen")
 include(":feature:gamebotscreen")
 include(":feature:settingsscreen")
+include(":feature:tutorialscreen")
 

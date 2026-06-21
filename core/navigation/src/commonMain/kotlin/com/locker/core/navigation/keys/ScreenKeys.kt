@@ -8,6 +8,9 @@ import kotlinx.serialization.Serializable
 data object MainScreenNavKey : BaseNavKey
 
 @Serializable
+data object TutorialScreenNavKey : BaseNavKey
+
+@Serializable
 data object GameScreenNavKey : BaseNavKey
 
 @Serializable

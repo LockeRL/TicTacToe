@@ -3,4 +3,5 @@
     <string name="play_vs_bot">Play VS Bot</string>
     <string name="tic_x_tac">Tic x Tac</string>
     <string name="toe">Toe</string>
+    <string name="rules">Rules</string>
 </resources>

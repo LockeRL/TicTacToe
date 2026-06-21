@@ -3,7 +3,6 @@ package com.locker.feature.component
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -25,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.locker.core.models.Difficulty
 import com.locker.core.models.Player
+import com.locker.feature.component.modifier.clickableWithoutIndication
 import com.locker.feature.core.theme.TicTacToeTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -69,10 +69,7 @@ fun DifficultySelector(
 					modifier = Modifier
 						.weight(1f)
 						.height(indicatorHeight)
-						.clickable(
-							interactionSource = null,
-							indication = null,
-						) {
+						.clickableWithoutIndication {
 							onDifficultySelected(difficulty)
 						},
 					contentAlignment = Alignment.Center
@@ -134,11 +131,9 @@ fun PlayerSelector(
 				Box(
 					modifier = Modifier
 						.size(itemSize)
-						.clickable(
-							interactionSource = null,
-							indication = null,
-						) {
+						.clickableWithoutIndication {
 							onSymbolSelected(player)
+
 						},
 					contentAlignment = Alignment.Center
 				) {
