@@ -1,6 +1,7 @@
 package com.locker.feature.colorpicker.view
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateDpAsState
@@ -52,6 +53,16 @@ fun PalettePicker(
 		animationSpec = tween(easing = LinearEasing)
 	)
 
+	val containerColor by animateColorAsState(
+		targetValue = if (isExpanded.value) themeColors.accent else themeColors.background,
+		animationSpec = tween()
+	)
+
+	val contentColor by animateColorAsState(
+		targetValue = if (isExpanded.value) themeColors.background else themeColors.additionalContainer,
+		animationSpec = tween()
+	)
+
 	Box(
 		modifier = modifier
 	) {
@@ -89,8 +100,8 @@ fun PalettePicker(
 			shape = CircleShape,
 			onClick = { isExpanded.value = !isExpanded.value },
 			contentDescription = "palette_icon",
-			containerColor = if (isExpanded.value) themeColors.accent else themeColors.background,
-			contentColor = if (isExpanded.value) themeColors.background else themeColors.additionalContainer,
+			containerColor = containerColor,
+			contentColor = contentColor,
 			modifier = Modifier
 				.size(buttonSize)
 				.align(Alignment.CenterEnd),
