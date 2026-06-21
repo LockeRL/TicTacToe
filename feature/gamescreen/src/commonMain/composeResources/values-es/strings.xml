@@ -1,0 +1,5 @@
+<resources>
+    <string name="turn">Turno</string>
+    <string name="wins">Gana</string>
+    <string name="draw">Empate</string>
+</resources>

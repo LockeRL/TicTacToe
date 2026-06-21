@@ -1,0 +1,7 @@
+<resources>
+    <string name="next_game">Следующая игра</string>
+    <string name="main_menu">Главное меню</string>
+    <string name="easy_bot">Легко</string>
+    <string name="medium_bot">Средне</string>
+    <string name="hard_bot">Сложно</string>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="play_vs_friend">Jouer avec un ami</string>
+    <string name="play_vs_bot">Jouer contre un bot</string>
+    <string name="rules">Règles</string>
+</resources>

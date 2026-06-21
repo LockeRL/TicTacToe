@@ -1,0 +1,5 @@
+<resources>
+    <string name="turn">Tour</string>
+    <string name="wins">Victoire</string>
+    <string name="draw">Égalité</string>
+</resources>

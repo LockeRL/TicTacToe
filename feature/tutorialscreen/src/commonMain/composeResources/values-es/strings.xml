@@ -1,0 +1,15 @@
+<resources>
+    <string name="tutorial_title">Cómo jugar</string>
+    <string name="tutorial_next">Siguiente</string>
+    <string name="tutorial_got_it">¡Entendido!</string>
+    <string name="tutorial_next_move_title">Siguiente movimiento</string>
+    <string name="tutorial_next_move_desc">Tu movimiento en un cuadrado pequeño determina dónde debe jugar el oponente en el tablero grande.</string>
+    <string name="tutorial_free_move_title">Movimiento libre</string>
+    <string name="tutorial_free_move_desc">Si te envían a un bloque que ya está terminado, puedes jugar en cualquier parte del tablero.</string>
+    <string name="tutorial_how_to_win_title">Cómo ganar</string>
+    <string name="tutorial_how_to_win_desc">Gana bloques pequeños para reclamarlos en el tablero grande. ¡Consigue tres en raya en el tablero grande para ganar!</string>
+    <string name="tutorial_win_block_title">Ganar un bloque</string>
+    <string name="tutorial_win_block_desc">Para ganar un bloque pequeño, consigue tres símbolos en raya dentro de él. El bloque completo se marcará con tu símbolo.</string>
+    <string name="tutorial_draw_in_block_title">Empate en un bloque</string>
+    <string name="tutorial_draw_in_block_desc">Si un bloque pequeño termina en empate, se bloquea para todos y nadie obtiene el punto en el tablero grande.</string>
+</resources>

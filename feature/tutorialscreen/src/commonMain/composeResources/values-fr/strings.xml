@@ -1,0 +1,15 @@
+<resources>
+    <string name="tutorial_title">Comment jouer</string>
+    <string name="tutorial_next">Suivant</string>
+    <string name="tutorial_got_it">Compris !</string>
+    <string name="tutorial_next_move_title">Prochain coup</string>
+    <string name="tutorial_next_move_desc">Votre coup dans un petit carré détermine où l'adversaire doit jouer sur le grand plateau.</string>
+    <string name="tutorial_free_move_title">Coup libre</string>
+    <string name="tutorial_free_move_desc">Si vous êtes envoyé dans un bloc déjà terminé, vous pouvez jouer n'importe où sur le plateau.</string>
+    <string name="tutorial_how_to_win_title">Comment gagner</string>
+    <string name="tutorial_how_to_win_desc">Gagnez des petits blocs pour les revendiquer sur le grand plateau. Obtenez trois en ligne sur le grand plateau pour gagner !</string>
+    <string name="tutorial_win_block_title">Gagner un bloc</string>
+    <string name="tutorial_win_block_desc">Pour gagner un petit bloc, alignez trois symboles à l'intérieur. Le bloc entier sera alors marqué de votre symbole.</string>
+    <string name="tutorial_draw_in_block_title">Égalité dans un bloc</string>
+    <string name="tutorial_draw_in_block_desc">Si un petit bloc se termine par une égalité, il devient bloqué pour tout le monde, et personne ne marque de point sur le grand plateau.</string>
+</resources>

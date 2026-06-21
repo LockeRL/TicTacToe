@@ -1,0 +1,7 @@
+<resources>
+    <string name="next_game">Jeu suivant</string>
+    <string name="main_menu">Menu principal</string>
+    <string name="easy_bot">Facile</string>
+    <string name="medium_bot">Moyen</string>
+    <string name="hard_bot">Difficile</string>
+</resources>

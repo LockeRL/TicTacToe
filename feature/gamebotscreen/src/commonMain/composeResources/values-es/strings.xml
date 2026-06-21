@@ -1,0 +1,11 @@
+<resources>
+    <string name="next_game">Siguiente juego</string>
+    <string name="main_menu">Menú principal</string>
+    <string name="your_turn">Tu turno</string>
+    <string name="bot_thinking">El bot está pensando...</string>
+    <string name="you_won">¡Ganaste!</string>
+    <string name="you_lost">¡Perdiste!</string>
+    <string name="draw_game">¡Es un empate!</string>
+    <string name="playing_as">Jugando como:</string>
+    <string name="bot_turn">Turno del bot</string>
+</resources>

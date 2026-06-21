@@ -1,0 +1,11 @@
+<resources>
+    <string name="next_game">Следующая игра</string>
+    <string name="main_menu">Главное меню</string>
+    <string name="your_turn">Ваш ход</string>
+    <string name="bot_thinking">Бот думает...</string>
+    <string name="you_won">Вы победили!</string>
+    <string name="you_lost">Вы проиграли!</string>
+    <string name="draw_game">Ничья!</string>
+    <string name="playing_as">Играете за:</string>
+    <string name="bot_turn">Ход бота</string>
+</resources>

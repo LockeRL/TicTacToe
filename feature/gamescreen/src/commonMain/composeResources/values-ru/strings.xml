@@ -1,0 +1,5 @@
+<resources>
+    <string name="turn">Ход</string>
+    <string name="wins">Победа</string>
+    <string name="draw">Ничья</string>
+</resources>

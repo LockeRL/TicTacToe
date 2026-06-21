@@ -1,7 +1,7 @@
 <resources>
     <string name="play_vs_friend">Play VS Friend</string>
     <string name="play_vs_bot">Play VS Bot</string>
-    <string name="tic_x_tac">Tic x Tac</string>
-    <string name="toe">Toe</string>
+    <string name="tic_x_tac" translatable="false">Tic x Tac</string>
+    <string name="toe" translatable="false">Toe</string>
     <string name="rules">Rules</string>
 </resources>

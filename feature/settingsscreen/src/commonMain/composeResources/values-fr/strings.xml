@@ -1,0 +1,12 @@
+<resources>
+    <string name="user_themes">Thèmes utilisateur</string>
+    <string name="background_color">Arrière-plan</string>
+    <string name="accent_color">Texte et lignes principales</string>
+    <string name="additional_color">Lignes intérieures</string>
+    <string name="additional_container_color">Boutons système</string>
+    <string name="accent_container_color">Joueurs</string>
+    <string name="save_button">Sauvegarder</string>
+    <string name="select_color">Sélectionner</string>
+    <string name="cancel_color">Annuler</string>
+    <string name="brightness_color">Luminosité</string>
+</resources>

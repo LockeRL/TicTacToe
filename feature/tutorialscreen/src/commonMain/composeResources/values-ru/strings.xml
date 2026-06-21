@@ -1,0 +1,15 @@
+<resources>
+    <string name="tutorial_title">Как играть</string>
+    <string name="tutorial_next">Далее</string>
+    <string name="tutorial_got_it">Понятно!</string>
+    <string name="tutorial_next_move_title">Следующий ход</string>
+    <string name="tutorial_next_move_desc">Ваш ход в маленьком квадрате определяет, где противник должен ходить на большом поле.</string>
+    <string name="tutorial_free_move_title">Свободный ход</string>
+    <string name="tutorial_free_move_desc">Если вас отправили в блок, который уже завершен, вы можете ходить в любом месте поля.</string>
+    <string name="tutorial_how_to_win_title">Как победить</string>
+    <string name="tutorial_how_to_win_desc">Побеждайте в маленьких блоках, чтобы занять их на большом поле. Соберите три в ряд на большом поле, чтобы выиграть!</string>
+    <string name="tutorial_win_block_title">Победа в блоке</string>
+    <string name="tutorial_win_block_desc">Чтобы выиграть маленький блок, соберите три символа в ряд внутри него. Весь блок будет отмечен вашим символом.</string>
+    <string name="tutorial_draw_in_block_title">Ничья в блоке</string>
+    <string name="tutorial_draw_in_block_desc">Если маленький блок заканчивается вничью, он становится заблокированным для всех, и никто не получает за него очко на большом поле.</string>
+</resources>
