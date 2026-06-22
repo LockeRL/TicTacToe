@@ -5,8 +5,6 @@ import com.locker.core.models.Player
 import com.locker.feature.gamebotscreen.model.Move
 
 class EasyBot : TicTacToeBot() {
-    override fun getMove(field: GameField, activePlayer: Player, activeBlock: Pair<Int, Int>?): Move? {
-        val possibleMoves = getPossibleMoves(field = field, activeBlock = activeBlock)
-        return possibleMoves.randomOrNull()
-    }
+    override fun getMove(field: GameField, activePlayer: Player, activeBlock: Pair<Int, Int>?): Move? =
+        getRandomMove(field = field, activeBlock = activeBlock)
 }

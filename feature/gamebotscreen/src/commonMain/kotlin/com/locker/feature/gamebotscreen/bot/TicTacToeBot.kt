@@ -11,6 +11,9 @@ abstract class TicTacToeBot {
 
     abstract fun getMove(field: GameField, activePlayer: Player, activeBlock: Pair<Int, Int>?): Move?
 
+    fun getRandomMove(field: GameField, activeBlock: Pair<Int, Int>?): Move? =
+        getPossibleMoves(field, activeBlock).randomOrNull()
+
     protected fun getPossibleMoves(field: GameField, activeBlock: Pair<Int, Int>?): List<Move> {
         val moves = mutableListOf<Move>()
         if (activeBlock != null) {
