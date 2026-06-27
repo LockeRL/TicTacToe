@@ -63,7 +63,7 @@ class SettingsViewModel(
 
 	private fun saveTheme(theme: AppColorTheme) {
 		viewModelScope.launch {
-			themeRepository.insertColorTheme(
+			val id = themeRepository.insertColorTheme(
 				AppColors(
 					background = theme.background,
 					accent = theme.accent,
@@ -73,6 +73,7 @@ class SettingsViewModel(
 					isSystem = false
 				)
 			)
+			themeRepository.selectColorTheme(id)
 		}
 	}
 }

@@ -41,11 +41,10 @@ internal class ColorThemeDaoService(
 		}
 	}
 
-	override suspend fun insertTheme(theme: AppColors) {
+	override suspend fun insertTheme(theme: AppColors): Int =
 		withContext(dispatchers) {
-			dao.insertTheme(theme.toEntity())
+			dao.insertTheme(theme.toEntity()).toInt()
 		}
-	}
 
 	override suspend fun deleteTheme(id: Int) {
 		withContext(dispatchers) {

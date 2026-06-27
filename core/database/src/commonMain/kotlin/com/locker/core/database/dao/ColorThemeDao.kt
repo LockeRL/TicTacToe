@@ -26,7 +26,7 @@ interface ColorThemeDao {
 	suspend fun insertThemes(themes: List<ColorThemeEntity>)
 
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
-	suspend fun insertTheme(theme: ColorThemeEntity)
+	suspend fun insertTheme(theme: ColorThemeEntity): Long
 
 	@Query("UPDATE ColorThemeEntity SET isSelected = false")
 	suspend fun deselectAll()

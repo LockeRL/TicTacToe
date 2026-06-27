@@ -21,9 +21,8 @@ internal class ThemeRepository(
 		colorsDaoService.selectTheme(id)
 	}
 
-	override suspend fun insertColorTheme(colors: AppColors) {
+	override suspend fun insertColorTheme(colors: AppColors): Int =
 		colorsDaoService.insertTheme(colors)
-	}
 
 	override suspend fun deleteColorTheme(id: Int) {
 		colorsDaoService.deleteTheme(id)

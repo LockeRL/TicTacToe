@@ -9,6 +9,6 @@ interface IColorThemeDaoService {
 	fun getCurrentTheme(): Flow<AppColors>
 	suspend fun getCurrentThemeId(): Int?
 	suspend fun selectTheme(id: Int)
-	suspend fun insertTheme(theme: AppColors)
+	suspend fun insertTheme(theme: AppColors): Int
 	suspend fun deleteTheme(id: Int)
 }
