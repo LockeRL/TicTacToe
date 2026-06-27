@@ -79,7 +79,7 @@ fun TutorialScreenContent(
 			text = state.title,
 			style = TicTacToeTheme.typography.headlineMedium,
 			color = TicTacToeTheme.colors.accentContainer,
-			modifier = Modifier.padding(vertical = 24.dp)
+			modifier = Modifier.padding(bottom = 24.dp)
 		)
 
 		HorizontalPager(
