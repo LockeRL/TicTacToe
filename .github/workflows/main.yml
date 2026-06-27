@@ -69,7 +69,7 @@ jobs:
             -scheme iosApp \
             -sdk iphonesimulator \
             -configuration Debug \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -destination 'platform=iOS Simulator,name=iPhone 17,OS=latest' \
             -derivedDataPath build-ios \
             clean build
 
