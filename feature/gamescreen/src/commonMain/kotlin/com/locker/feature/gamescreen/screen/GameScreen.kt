@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -43,15 +42,16 @@ import com.locker.feature.core.theme.SUB_FIELD_LINE_LENGTH_PERCENT
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamescreen.screen.event.CellClickEvent
 import com.locker.feature.component.field.GameCell
+import com.locker.feature.core.is600
 import com.locker.feature.core.theme.ACTIVE_BLOCK_DURATION
 import com.locker.feature.gamescreen.screen.view.PlayerTurnIconWithText
 import com.locker.feature.gamescreen.screen.model.EndGameScreenState
 import com.locker.feature.gamescreen.screen.view.NextGameContent
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun GameScreen(
-	viewModel: GameScreenViewModel = koinInject(),
+	viewModel: GameScreenViewModel = koinViewModel(),
 	modifier: Modifier = Modifier
 ) {
 	ProvideScreenEvents(
@@ -92,13 +92,14 @@ private fun GameScreenContent(
 				)
 			),
 			modifier = Modifier
-				.widthIn(max = 400.dp)
 				.padding(bottom = 40.dp)
 		) {
 			GameFieldContent(
 				field = field,
 				boardState = boardState,
 				player = player,
+				modifier = Modifier
+					.fillMaxSize()
 			)
 		}
 
@@ -145,12 +146,12 @@ private fun GameFieldContent(
 
 		GameBlockContainer(
 			dimensionSize = field.dimension,
-			border = Border(strokeWidth = 1.dp, color = colors.accent),
+			border = Border(strokeWidth = if (is600()) 2.dp else 1.dp, color = colors.accent),
 			boardState = boardState.value,
 			showAlphaAnimation = false,
 			showGameCell = false,
 			modifier = Modifier
-				.fillMaxWidth()
+				.weight(weight = 1f, fill = false)
 				.aspectRatio(1f)
 		) { i, j ->
 			GameFieldBlock(
@@ -191,7 +192,7 @@ fun GameFieldBlock(
 	GameBlockContainer(
 		dimensionSize = block.dimension,
 		border = Border(
-			strokeWidth = (0.5).dp,
+			strokeWidth = if(is600()) 1.dp else (0.5).dp,
 			color = colors.additional.copy(HALF_ALPHA),
 			percentage = SUB_FIELD_LINE_LENGTH_PERCENT
 		),

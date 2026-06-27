@@ -1,11 +1,15 @@
 package com.locker.feature.settingsscreen.screen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -13,8 +17,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.locker.feature.component.TicTacToeButton
 import com.locker.feature.core.screen.LocalFireEvent
 import com.locker.feature.core.screen.ProvideScreenEvents
@@ -62,8 +68,10 @@ fun SettingsScreen(
 	modifier: Modifier = Modifier,
 ) {
 	val fireEvent = LocalFireEvent.current
+	val colors = TicTacToeTheme.colors
 	val currentTheme = theme.value.animate()
 	val strings = strings.value
+	val listState = rememberLazyListState()
 	val editableColor = remember { mutableStateOf<ColorType?>(null) }
 
 	Box(
@@ -78,6 +86,7 @@ fun SettingsScreen(
 		) {
 			ThemePreview(theme = currentTheme)
 
+
 			AnimatedVisibility(
 				visible = userThemes.value.isNotEmpty()
 			) {
@@ -89,48 +98,99 @@ fun SettingsScreen(
 				)
 			}
 
-			Column(
-				verticalArrangement = Arrangement.spacedBy(16.dp),
-				horizontalAlignment = Alignment.CenterHorizontally
+			Box(
+				modifier = Modifier
+					.weight(weight = 1f, fill = false)
 			) {
-				ColorSettingItem(
-					label = strings.background,
-					color = currentTheme.background,
-					modifier = Modifier.fillMaxWidth(),
-				) {
-					editableColor.value = ColorType.BACKGROUND
+				if (listState.canScrollBackward) {
+					Box(
+						modifier = Modifier
+							.fillMaxWidth()
+							.height(16.dp)
+							.zIndex(2f)
+							.background(
+								brush = Brush.verticalGradient(
+									0f to colors.background,
+									1f to Color.Transparent
+								)
+							)
+							.align(Alignment.TopCenter)
+					)
 				}
 
-				ColorSettingItem(
-					label = strings.accent,
-					color = currentTheme.accent,
-					modifier = Modifier.fillMaxWidth()
-				) {
-					editableColor.value = ColorType.ACCENT
+				if (listState.canScrollForward) {
+					Box(
+						modifier = Modifier
+							.fillMaxWidth()
+							.height(16.dp)
+							.zIndex(2f)
+							.background(
+								brush = Brush.verticalGradient(
+									0f to Color.Transparent,
+									1f to colors.background
+								)
+							)
+							.align(Alignment.BottomCenter)
+					)
 				}
 
-				ColorSettingItem(
-					label = strings.additional,
-					color = currentTheme.additional,
-					modifier = Modifier.fillMaxWidth(),
+				LazyColumn(
+					verticalArrangement = Arrangement.spacedBy(16.dp),
+					horizontalAlignment = Alignment.CenterHorizontally,
+					state = listState,
+					userScrollEnabled = listState.canScrollBackward || listState.canScrollForward,
+					modifier = Modifier
+						.zIndex(1f)
 				) {
-					editableColor.value = ColorType.ADDITIONAL
-				}
+					item {
+						ColorSettingItem(
+							label = strings.background,
+							color = currentTheme.background,
+							modifier = Modifier.fillMaxWidth(),
+						) {
+							editableColor.value = ColorType.BACKGROUND
+						}
+					}
 
-				ColorSettingItem(
-					label = strings.additionalContainer,
-					color = currentTheme.additionalContainer,
-					modifier = Modifier.fillMaxWidth(),
-				) {
-					editableColor.value = ColorType.ADDITIONAL_CONTAINER
-				}
+					item {
+						ColorSettingItem(
+							label = strings.accent,
+							color = currentTheme.accent,
+							modifier = Modifier.fillMaxWidth()
+						) {
+							editableColor.value = ColorType.ACCENT
+						}
+					}
 
-				ColorSettingItem(
-					label = strings.accentContainer,
-					color = currentTheme.accentContainer,
-					modifier = Modifier.fillMaxWidth(),
-				) {
-					editableColor.value = ColorType.ACCENT_CONTAINER
+					item {
+						ColorSettingItem(
+							label = strings.additional,
+							color = currentTheme.additional,
+							modifier = Modifier.fillMaxWidth(),
+						) {
+							editableColor.value = ColorType.ADDITIONAL
+						}
+					}
+
+					item {
+						ColorSettingItem(
+							label = strings.additionalContainer,
+							color = currentTheme.additionalContainer,
+							modifier = Modifier.fillMaxWidth(),
+						) {
+							editableColor.value = ColorType.ADDITIONAL_CONTAINER
+						}
+					}
+
+					item {
+						ColorSettingItem(
+							label = strings.accentContainer,
+							color = currentTheme.accentContainer,
+							modifier = Modifier.fillMaxWidth(),
+						) {
+							editableColor.value = ColorType.ACCENT_CONTAINER
+						}
+					}
 				}
 			}
 

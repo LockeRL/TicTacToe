@@ -16,7 +16,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
 @Composable
-fun TutorialNextMove() {
+fun TutorialNextMove(
+	modifier: Modifier = Modifier
+) {
 	var step by remember { mutableStateOf(0) }
 
 	LaunchedEffect(Unit) {
@@ -33,20 +35,19 @@ fun TutorialNextMove() {
 	val highlightedBlockRow = 0
 	val highlightedBlockCol = 0
 
-	Box(modifier = Modifier.fillMaxSize()) {
-		TutorialField(
-			isBlockActive = { i, j ->
-				step >= 2 && i == highlightedBlockRow && j == highlightedBlockCol
-			},
-		) { fieldI, fieldJ, i, j ->
-			if (step >= 1 && fieldI == 1 && fieldJ == 2 && i == 0 && j == 0) {
-				GameCell(
-					state = CellState.Occupied(Player.CROSS),
-					modifier = Modifier.fillMaxSize()
-				)
-			} else {
-				Box(Modifier.fillMaxSize())
-			}
+	TutorialField(
+		modifier = modifier,
+		isBlockActive = { i, j ->
+			step >= 2 && i == highlightedBlockRow && j == highlightedBlockCol
+		},
+	) { fieldI, fieldJ, i, j ->
+		if (step >= 1 && fieldI == 1 && fieldJ == 2 && i == 0 && j == 0) {
+			GameCell(
+				state = CellState.Occupied(Player.CROSS),
+				modifier = Modifier.fillMaxSize()
+			)
+		} else {
+			Box(Modifier.fillMaxSize())
 		}
 	}
 }

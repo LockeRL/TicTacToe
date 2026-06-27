@@ -28,11 +28,11 @@ import com.locker.feature.mainscreen.screen.event.PlayClickEvent
 import com.locker.feature.mainscreen.screen.event.RulesClickEvent
 import com.locker.feature.mainscreen.screen.model.MainScreenState
 import com.locker.feature.mainscreen.screen.view.MainMenuText
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MainScreen(
-	viewModel: MainScreenViewModel = koinInject(),
+	viewModel: MainScreenViewModel = koinViewModel(),
 	modifier: Modifier = Modifier
 ) {
 	ProvideScreenEvents(

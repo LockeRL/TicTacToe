@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,6 +21,7 @@ import com.locker.feature.component.field.GameCell
 import com.locker.feature.component.field.MatrixFieldBlock
 import com.locker.feature.component.modifier.Border
 import com.locker.feature.component.modifier.matrixLine
+import com.locker.feature.core.is600
 import com.locker.feature.core.theme.DefaultShape
 import com.locker.feature.core.theme.HALF_ALPHA
 import com.locker.feature.core.theme.LOW_ALPHA
@@ -40,12 +40,11 @@ fun TutorialField(
 
 	GameBlockContainer(
 		dimensionSize = 3,
-		border = Border(strokeWidth = 1.dp, color = colors.accent),
+		border = Border(strokeWidth = if (is600()) 2.dp else 1.dp, color = colors.accent),
 		boardState = BoardState.InProgress,
 		showAlphaAnimation = false,
 		showGameCell = false,
 		modifier = modifier
-			.fillMaxWidth()
 			.aspectRatio(1f)
 			.matrixLine(
 				border = Border(strokeWidth = 8.dp, color = colors.accent),
@@ -115,7 +114,7 @@ fun GameFieldBlock(
 	MatrixFieldBlock(
 		dimensionSize = 3,
 		border = Border(
-			strokeWidth = (0.5).dp,
+			strokeWidth = if (is600()) 1.dp else (0.5).dp,
 			color = colors.additional.copy(HALF_ALPHA),
 			percentage = SUB_FIELD_LINE_LENGTH_PERCENT
 		),

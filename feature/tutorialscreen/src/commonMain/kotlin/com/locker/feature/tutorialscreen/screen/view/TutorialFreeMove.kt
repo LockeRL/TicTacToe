@@ -17,7 +17,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
 @Composable
-fun TutorialFreeMove() {
+fun TutorialFreeMove(
+	modifier: Modifier = Modifier
+) {
 	var step by remember { mutableStateOf(0) }
 
 	LaunchedEffect(Unit) {
@@ -31,38 +33,37 @@ fun TutorialFreeMove() {
 		}
 	}
 
-	Box(modifier = Modifier.fillMaxSize()) {
-		TutorialField(
-			isBlockActive = { i, j ->
-				val isMiddleBlock = i == 1 && j == 1
-				step >= 2 && !isMiddleBlock
-			},
-			blockState = { i, j ->
-				if (i == 1 && j == 1) {
-					BoardState.Winner.MainDiagonal(CellState.Occupied(Player.CIRCLE))
-				} else {
-					BoardState.InProgress
-				}
+	TutorialField(
+		modifier = modifier,
+		isBlockActive = { i, j ->
+			val isMiddleBlock = i == 1 && j == 1
+			step >= 2 && !isMiddleBlock
+		},
+		blockState = { i, j ->
+			if (i == 1 && j == 1) {
+				BoardState.Winner.MainDiagonal(CellState.Occupied(Player.CIRCLE))
+			} else {
+				BoardState.InProgress
 			}
-		) { fieldI, fieldJ, i, j ->
-			when {
-				step >= 1 && fieldI == 2 && fieldJ == 0 && i == 1 && j == 1 -> {
-					GameCell(
-						state = CellState.Occupied(Player.CROSS),
-						modifier = Modifier.fillMaxSize()
-					)
-				}
+		}
+	) { fieldI, fieldJ, i, j ->
+		when {
+			step >= 1 && fieldI == 2 && fieldJ == 0 && i == 1 && j == 1 -> {
+				GameCell(
+					state = CellState.Occupied(Player.CROSS),
+					modifier = Modifier.fillMaxSize()
+				)
+			}
 
-				fieldI == 1 && fieldJ == 1 && i == j -> {
-					GameCell(
-						state = CellState.Occupied(Player.CIRCLE),
-						modifier = Modifier.fillMaxSize()
-					)
-				}
+			fieldI == 1 && fieldJ == 1 && i == j -> {
+				GameCell(
+					state = CellState.Occupied(Player.CIRCLE),
+					modifier = Modifier.fillMaxSize()
+				)
+			}
 
-				else -> {
-					Box(Modifier.fillMaxSize())
-				}
+			else -> {
+				Box(Modifier.fillMaxSize())
 			}
 		}
 	}

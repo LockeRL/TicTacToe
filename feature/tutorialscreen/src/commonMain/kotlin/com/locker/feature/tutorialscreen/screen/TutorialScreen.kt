@@ -6,12 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -23,8 +23,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.locker.feature.component.TicTacToeButton
 import com.locker.feature.core.screen.LocalFireEvent
 import com.locker.feature.core.screen.ProvideScreenEvents
@@ -37,13 +40,13 @@ import com.locker.feature.tutorialscreen.screen.view.TutorialFreeMove
 import com.locker.feature.tutorialscreen.screen.view.TutorialHowToWin
 import com.locker.feature.tutorialscreen.screen.view.TutorialNextMove
 import com.locker.feature.tutorialscreen.screen.view.TutorialWinBlock
-import org.koin.compose.koinInject
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun TutorialScreen(
-	viewModel: TutorialScreenViewModel = koinInject(),
+	viewModel: TutorialScreenViewModel = koinViewModel(),
 	modifier: Modifier = Modifier
 ) {
 	ProvideScreenEvents(
@@ -64,6 +67,8 @@ fun TutorialScreenContent(
 	screenState: State<TutorialScreenState>,
 	modifier: Modifier = Modifier
 ) {
+	val colors = TicTacToeTheme.colors
+	val typography = TicTacToeTheme.typography
 	val fireEvent = LocalFireEvent.current
 	val state = screenState.value
 	val pagerState = rememberPagerState { state.pages.size }
@@ -71,37 +76,70 @@ fun TutorialScreenContent(
 
 	Column(
 		horizontalAlignment = Alignment.CenterHorizontally,
+		verticalArrangement = Arrangement.spacedBy(24.dp),
 		modifier = modifier
 			.fillMaxSize()
 			.padding(16.dp),
 	) {
 		Text(
 			text = state.title,
-			style = TicTacToeTheme.typography.headlineMedium,
-			color = TicTacToeTheme.colors.accentContainer,
-			modifier = Modifier.padding(bottom = 24.dp)
+			style = typography.headlineMedium,
+			color = colors.accentContainer,
 		)
 
-		HorizontalPager(
-			state = pagerState,
-			modifier = Modifier.weight(1f).fillMaxWidth()
-		) { pageIndex ->
-			val page = state.pages.getOrNull(pageIndex)
-			if (page != null) {
-				TutorialPageContent(
-					pageType = page
-				)
+		Box(
+			modifier = Modifier
+			.weight(weight = 1f, fill = false)
+		) {
+			Box(
+				modifier = Modifier
+					.fillMaxHeight()
+					.width(16.dp)
+					.background(
+						brush = Brush.horizontalGradient(
+							0f to colors.background,
+							1f to Color.Transparent
+						)
+					)
+					.align(Alignment.CenterStart)
+					.zIndex(2f)
+			)
+
+			Box(
+				modifier = Modifier
+					.fillMaxHeight()
+					.width(16.dp)
+					.background(
+						brush = Brush.horizontalGradient(
+							0f to Color.Transparent,
+							1f to colors.background
+						)
+					)
+					.align(Alignment.CenterEnd)
+					.zIndex(2f)
+			)
+
+			HorizontalPager(
+				state = pagerState,
+				modifier = Modifier
+					.fillMaxSize()
+					.zIndex(1f)
+			) { pageIndex ->
+				val page = state.pages.getOrNull(pageIndex)
+				if (page != null) {
+					TutorialPageContent(
+						pageType = page,
+						modifier = Modifier
+							.fillMaxSize()
+					)
+				}
 			}
 		}
-
-		Spacer(modifier = Modifier.height(16.dp))
 
 		PageIndicator(
 			pageCount = state.pages.size,
 			currentPage = pagerState.currentPage
 		)
-
-		Spacer(modifier = Modifier.height(24.dp))
 
 		TicTacToeButton(
 			text = if (pagerState.currentPage == state.pages.size - 1) state.gotIt else state.next,
@@ -118,7 +156,6 @@ fun TutorialScreenContent(
 			},
 			modifier = Modifier
 				.fillMaxWidth(0.7f)
-				.padding(bottom = 32.dp)
 		)
 	}
 }
@@ -156,7 +193,7 @@ fun TutorialPageContent(
 	val typography = TicTacToeTheme.typography
 
 	Column(
-		modifier = modifier.fillMaxSize(),
+		modifier = modifier,
 		horizontalAlignment = Alignment.CenterHorizontally,
 		verticalArrangement = Arrangement.spacedBy(24.dp)
 	) {
@@ -176,18 +213,15 @@ fun TutorialPageContent(
 				.padding(horizontal = 16.dp)
 		)
 
-		Box(
-			modifier = Modifier
-				.fillMaxWidth(),
-			contentAlignment = Alignment.Center
-		) {
-			when (pageType) {
-				TutorialPageType.NEXT_MOVE -> TutorialNextMove()
-				TutorialPageType.FREE_MOVE -> TutorialFreeMove()
-				TutorialPageType.WIN_BLOCK -> TutorialWinBlock()
-				TutorialPageType.DRAW_IN_BLOCK -> TutorialDrawInBlock()
-				TutorialPageType.HOW_TO_WIN -> TutorialHowToWin()
-			}
+		val pageModifier = Modifier
+			.weight(1f, false)
+
+		when (pageType) {
+			TutorialPageType.NEXT_MOVE -> TutorialNextMove(modifier = pageModifier)
+			TutorialPageType.FREE_MOVE -> TutorialFreeMove(modifier = pageModifier)
+			TutorialPageType.WIN_BLOCK -> TutorialWinBlock(modifier = pageModifier)
+			TutorialPageType.DRAW_IN_BLOCK -> TutorialDrawInBlock(modifier = pageModifier)
+			TutorialPageType.HOW_TO_WIN -> TutorialHowToWin(modifier = pageModifier)
 		}
 	}
 }

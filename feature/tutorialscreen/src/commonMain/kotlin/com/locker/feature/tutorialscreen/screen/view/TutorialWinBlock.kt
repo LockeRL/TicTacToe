@@ -16,7 +16,9 @@ import com.locker.feature.component.field.GameCell
 import kotlinx.coroutines.delay
 
 @Composable
-fun TutorialWinBlock() {
+fun TutorialWinBlock(
+	modifier: Modifier = Modifier
+) {
 	var step by remember { mutableStateOf(0) }
 
 	LaunchedEffect(Unit) {
@@ -38,33 +40,32 @@ fun TutorialWinBlock() {
 		0 to 1,
 	)
 
-	Box(modifier = Modifier.fillMaxSize()) {
-		TutorialField(
-			isBlockActive = { i, j ->
-				val isMiddleBlock = i == 1 && j == 1
-				step < 1 && isMiddleBlock
-			},
-			blockState = { i, j ->
-				if (i == 1 && j == 1 && step == 1) {
-					BoardState.Winner.Row(winner = CellState.Occupied(Player.CROSS), rowNum = 1)
-				} else {
-					BoardState.InProgress
-				}
-			}
-		) { fieldI, fieldJ, i, j ->
-			if (fieldI == 1 && fieldJ == 1) {
-				GameCell(
-					state = when {
-						i to j in crosses -> CellState.Occupied(Player.CROSS)
-						i to j in circles -> CellState.Occupied(Player.CIRCLE)
-						step == 1 && i == 1 && j == 2 -> CellState.Occupied(Player.CROSS)
-						else -> CellState.Empty
-					},
-					modifier = Modifier.fillMaxSize()
-				)
+	TutorialField(
+		modifier = modifier,
+		isBlockActive = { i, j ->
+			val isMiddleBlock = i == 1 && j == 1
+			step < 1 && isMiddleBlock
+		},
+		blockState = { i, j ->
+			if (i == 1 && j == 1 && step == 1) {
+				BoardState.Winner.Row(winner = CellState.Occupied(Player.CROSS), rowNum = 1)
 			} else {
-				Box(Modifier.fillMaxSize())
+				BoardState.InProgress
 			}
+		}
+	) { fieldI, fieldJ, i, j ->
+		if (fieldI == 1 && fieldJ == 1) {
+			GameCell(
+				state = when {
+					i to j in crosses -> CellState.Occupied(Player.CROSS)
+					i to j in circles -> CellState.Occupied(Player.CIRCLE)
+					step == 1 && i == 1 && j == 2 -> CellState.Occupied(Player.CROSS)
+					else -> CellState.Empty
+				},
+				modifier = Modifier.fillMaxSize()
+			)
+		} else {
+			Box(Modifier.fillMaxSize())
 		}
 	}
 }

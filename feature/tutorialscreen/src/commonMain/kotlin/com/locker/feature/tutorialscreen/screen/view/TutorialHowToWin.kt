@@ -1,6 +1,5 @@
 package com.locker.feature.tutorialscreen.screen.view
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,7 +16,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
 @Composable
-fun TutorialHowToWin() {
+fun TutorialHowToWin(
+	modifier: Modifier = Modifier
+) {
 	var step by remember { mutableStateOf(0) }
 
 	LaunchedEffect(Unit) {
@@ -63,56 +64,55 @@ fun TutorialHowToWin() {
 		)
 	)
 
-	Box(modifier = Modifier.fillMaxSize()) {
-		TutorialField(
-			isBlockActive = { i, j ->
-				step < 1 && i == 1 && j == 2
-			},
-			boardState = if (step == 1) {
-				BoardState.Winner.Row(winner = CellState.Occupied(Player.CROSS), rowNum = 1)
-			} else {
-				BoardState.InProgress
-			},
-			blockState = { i, j ->
-				val crossesList = crossesMap[i to j] ?: emptyList()
-				val circlesList = circlesMap[i to j] ?: emptyList()
-				when {
-					crossesList.size == 3 -> BoardState.Winner.Row(
-						winner = CellState.Occupied(Player.CROSS),
-						rowNum = 2,
-					)
+	TutorialField(
+		modifier = modifier,
+		isBlockActive = { i, j ->
+			step < 1 && i == 1 && j == 2
+		},
+		boardState = if (step == 1) {
+			BoardState.Winner.Row(winner = CellState.Occupied(Player.CROSS), rowNum = 1)
+		} else {
+			BoardState.InProgress
+		},
+		blockState = { i, j ->
+			val crossesList = crossesMap[i to j] ?: emptyList()
+			val circlesList = circlesMap[i to j] ?: emptyList()
+			when {
+				crossesList.size == 3 -> BoardState.Winner.Row(
+					winner = CellState.Occupied(Player.CROSS),
+					rowNum = 2,
+				)
 
-					circlesList.size == 3 -> BoardState.Winner.Row(
-						winner = CellState.Occupied(Player.CIRCLE),
-						rowNum = 1,
-					)
+				circlesList.size == 3 -> BoardState.Winner.Row(
+					winner = CellState.Occupied(Player.CIRCLE),
+					rowNum = 1,
+				)
 
-					step == 1 && i == 1 && j == 2 -> BoardState.Winner.Row(
-						winner = CellState.Occupied(Player.CROSS),
-						rowNum = 2,
-					)
+				step == 1 && i == 1 && j == 2 -> BoardState.Winner.Row(
+					winner = CellState.Occupied(Player.CROSS),
+					rowNum = 2,
+				)
 
-					else -> BoardState.InProgress
-				}
+				else -> BoardState.InProgress
 			}
-		) { fieldI, fieldJ, i, j ->
-			GameCell(
-				state = when {
-					(i to j) in crossesMap.getOrElse(
-						key = fieldI to fieldJ, defaultValue = { emptyList() }
-					) -> CellState.Occupied(Player.CROSS)
-
-					(i to j) in circlesMap.getOrElse(
-						key = fieldI to fieldJ, defaultValue = { emptyList() }
-					) -> CellState.Occupied(Player.CIRCLE)
-
-					step == 1 && fieldI == 1 && fieldJ == 2 && i == 2 && j == 2 ->
-						CellState.Occupied(Player.CROSS)
-
-					else -> CellState.Empty
-				},
-				modifier = Modifier.fillMaxSize()
-			)
 		}
+	) { fieldI, fieldJ, i, j ->
+		GameCell(
+			state = when {
+				(i to j) in crossesMap.getOrElse(
+					key = fieldI to fieldJ, defaultValue = { emptyList() }
+				) -> CellState.Occupied(Player.CROSS)
+
+				(i to j) in circlesMap.getOrElse(
+					key = fieldI to fieldJ, defaultValue = { emptyList() }
+				) -> CellState.Occupied(Player.CIRCLE)
+
+				step == 1 && fieldI == 1 && fieldJ == 2 && i == 2 && j == 2 ->
+					CellState.Occupied(Player.CROSS)
+
+				else -> CellState.Empty
+			},
+			modifier = Modifier.fillMaxSize()
+		)
 	}
 }
