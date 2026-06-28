@@ -38,6 +38,8 @@ class GameBotScreenViewModel(
 	initialUserPlayer: Player
 ) : BaseViewModel() {
 
+	private var playedAs: Player = initialUserPlayer
+
 	private val _difficulty = MutableStateFlow(initialDifficulty)
 
 	private val _userPlayer = MutableStateFlow(initialUserPlayer)
@@ -132,6 +134,7 @@ class GameBotScreenViewModel(
 				winner = ((field.winState.value as? BoardState.Winner)?.winner as? CellState.Occupied)?.player,
 				userPlayer = user,
 				difficulty = difficulty,
+				playedAs = playedAs
 			)
 		}
 	}.launchIn(viewModelScope)
@@ -165,5 +168,6 @@ class GameBotScreenViewModel(
 
 	private fun reset() {
 		gameController.reset()
+		playedAs = _userPlayer.value
 	}
 }

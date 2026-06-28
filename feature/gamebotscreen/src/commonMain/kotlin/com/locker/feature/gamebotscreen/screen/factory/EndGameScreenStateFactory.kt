@@ -17,10 +17,11 @@ object EndGameScreenStateFactory {
 		winner: Player?,
 		userPlayer: Player,
 		difficulty: Difficulty,
+		playedAs: Player,
 	): EndGameScreenState = EndGameScreenState(
 		icon = winner?.icon,
 		title = when (winner) {
-			userPlayer -> getString(GameRes.string.you_won)
+			playedAs -> getString(GameRes.string.you_won)
 			null -> getString(GameRes.string.draw_game)
 			else -> getString(GameRes.string.you_lost)
 		},
