@@ -25,6 +25,10 @@ android {
     namespace = "com.locker.tictactoe"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
+    androidResources {
+        localeFilters.addAll(listOf("en", "ru", "fr", "es"))
+    }
+
     defaultConfig {
         applicationId = "com.locker.tictactoe"
         minSdk = libs.versions.android.minSdk.get().toInt()
@@ -32,16 +36,24 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
