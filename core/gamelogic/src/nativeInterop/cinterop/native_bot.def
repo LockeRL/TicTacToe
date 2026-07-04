@@ -1,0 +1,7 @@
+headers = ultimate_ttt.h
+headerFilter = ultimate_ttt.h
+package = com.locker.core.gamelogic.native
+
+---
+
+#include "ultimate_ttt.c"

@@ -26,6 +26,14 @@ kotlin {
             baseName = "GameLogic"
             isStatic = true
         }
+
+        iosTarget.compilations.getByName("main") {
+            val nativeBot by cinterops.creating {
+                definitionFile.set(project.file("src/nativeInterop/cinterop/native_bot.def"))
+                packageName("com.locker.core.gamelogic.native")
+                includeDirs(project.file("../nativebot/src/main/cpp"))
+            }
+        }
     }
 
     sourceSets {
@@ -38,6 +46,10 @@ kotlin {
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
             implementation(libs.kotlinx.coroutines.core)
+        }
+        
+        androidMain.dependencies {
+            implementation(projects.core.nativebot)
         }
     }
 }

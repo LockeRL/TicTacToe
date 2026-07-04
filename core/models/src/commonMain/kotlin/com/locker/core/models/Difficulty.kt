@@ -10,5 +10,5 @@ import org.jetbrains.compose.resources.StringResource
 enum class Difficulty(val title: StringResource) {
     EASY(Res.string.easy_bot),
     MEDIUM(Res.string.medium_bot),
-    HARD(Res.string.hard_bot)
+    HARD(Res.string.hard_bot),
 }

@@ -4,7 +4,7 @@ import com.locker.core.gamelogic.controller.block.GameBlock
 import com.locker.core.gamelogic.controller.block.GameField
 import com.locker.core.gamelogic.model.BoardState
 import com.locker.core.gamelogic.model.CellState
-import com.locker.core.gamelogic.model.Move
+import com.locker.core.models.model.Move
 import com.locker.core.models.Player
 
 abstract class TicTacToeBot {

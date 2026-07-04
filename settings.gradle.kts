@@ -39,6 +39,7 @@ include(":core:database")
 include(":core:models")
 include(":core:data")
 include(":core:gamelogic")
+include(":core:nativebot")
 
 // Feature
 include(":feature:core")
