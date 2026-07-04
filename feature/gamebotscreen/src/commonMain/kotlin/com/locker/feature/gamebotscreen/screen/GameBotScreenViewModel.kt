@@ -8,9 +8,9 @@ import com.locker.core.models.Difficulty
 import com.locker.core.models.Player
 import com.locker.core.navigation.Navigator
 import com.locker.core.navigation.keys.MainScreenNavKey
+import com.locker.core.gamelogic.bot.BotFactory
 import com.locker.feature.core.screen.BaseViewModel
 import com.locker.feature.core.screen.ScreenEvent
-import com.locker.feature.gamebotscreen.bot.BotFactory
 import com.locker.feature.gamebotscreen.screen.event.CellClickEvent
 import com.locker.feature.gamebotscreen.screen.event.MainMenuEvent
 import com.locker.feature.gamebotscreen.screen.event.NextGameEvent

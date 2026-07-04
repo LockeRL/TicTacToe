@@ -1,7 +1,6 @@
-package com.locker.feature.gamebotscreen.bot
+package com.locker.core.gamelogic.bot
 
 import com.locker.core.models.Difficulty
-
 
 object BotFactory {
     fun createBot(difficulty: Difficulty): TicTacToeBot {
