@@ -1,12 +1,12 @@
 package com.locker.core.gamelogic.bot
 
 import com.locker.core.gamelogic.controller.block.GameField
+import com.locker.core.gamelogic.interop.getNativeMove
 import com.locker.core.gamelogic.model.BoardState
 import com.locker.core.gamelogic.model.CellState
 import com.locker.core.models.model.Move
 import com.locker.core.models.Player
 
-expect fun getNativeMove(board: IntArray, macroBoard: IntArray, activeBlock: Int, player: Int, depth: Int): Move?
 
 class HardBot : TicTacToeBot() {
     override fun getMove(field: GameField, activePlayer: Player, activeBlock: Pair<Int, Int>?): Move? {

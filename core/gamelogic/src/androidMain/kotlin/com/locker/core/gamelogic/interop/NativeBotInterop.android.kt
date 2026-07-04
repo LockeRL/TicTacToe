@@ -1,4 +1,4 @@
-package com.locker.core.gamelogic.bot
+package com.locker.core.gamelogic.interop
 
 import com.locker.core.models.model.Move
 import com.locker.core.nativebot.NativeBotBridge
