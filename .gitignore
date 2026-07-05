@@ -11,6 +11,13 @@ captures
 .externalNativeBuild
 .cxx
 
+# Build artifacts and profiles
+release/
+debug/
+*.apk
+*.aab
+*.dm
+
 # iOS
 Pods/
 *.moved-aside
