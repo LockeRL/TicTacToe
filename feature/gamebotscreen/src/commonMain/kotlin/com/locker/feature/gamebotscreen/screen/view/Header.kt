@@ -3,8 +3,6 @@ package com.locker.feature.gamebotscreen.screen.view
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -14,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.dp
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamebotscreen.screen.model.HeaderState
@@ -57,7 +56,7 @@ fun Header(
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(32.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .height(48.dp)
         ) {
@@ -70,9 +69,11 @@ fun Header(
             if (!header.isUserTurn) {
                 CircularProgressIndicator(
                     color = colors.accent,
+                    trackColor = colors.accent.copy(alpha = 0.2f),
+                    strokeCap = StrokeCap.Round,
+                    strokeWidth = 4.dp,
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .aspectRatio(1f)
+                        .size(32.dp)
                 )
             }
         }
