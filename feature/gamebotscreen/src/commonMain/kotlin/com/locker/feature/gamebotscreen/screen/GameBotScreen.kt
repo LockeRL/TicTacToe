@@ -143,7 +143,10 @@ private fun BotGameFieldContent(
 
 		GameBlockContainer(
 			dimensionSize = field.dimension,
-			border = Border(strokeWidth = if (is600()) 2.dp else 1.dp, color = colors.accent),
+			border = Border(
+				strokeWidth = if (is600()) 2.dp else 1.dp,
+				color = colors.accent,
+			),
 			boardState = boardState.value,
 			showAlphaAnimation = false,
 			showGameCell = false,

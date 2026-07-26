@@ -23,13 +23,19 @@ fun PlayerIconWithState(
 @Composable
 fun PlayerIcon(
     player: Player,
-    color: Color = TicTacToeTheme.colors.accentContainer,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color? = null,
 ) {
     Icon(
         painter = painterResource(player.icon),
-        tint = color,
+        tint = color ?: player.color(),
         contentDescription = null,
         modifier = modifier,
     )
+}
+
+@Composable
+fun Player.color(): Color {
+    val colors = TicTacToeTheme.colors
+    return if (this == Player.CROSS) colors.accent else colors.additional
 }

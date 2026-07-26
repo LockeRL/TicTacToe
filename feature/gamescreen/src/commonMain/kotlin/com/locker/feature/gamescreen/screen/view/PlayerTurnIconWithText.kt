@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.locker.core.models.Player
 import com.locker.feature.component.field.PlayerIconWithState
+import com.locker.feature.component.field.color
 import com.locker.feature.core.theme.TicTacToeTheme
 import com.locker.feature.gamescreen.Res
 import com.locker.feature.gamescreen.turn
@@ -31,7 +32,7 @@ fun PlayerTurnIconWithText(
     ) {
         Text(
             text = "${stringResource(Res.string.turn)}:",
-            color = TicTacToeTheme.colors.accentContainer,
+            color = player.value.color(),
             style = typography.titleLarge
         )
         PlayerIconWithState(

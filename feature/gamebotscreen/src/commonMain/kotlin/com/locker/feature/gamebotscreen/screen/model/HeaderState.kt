@@ -1,9 +1,9 @@
 package com.locker.feature.gamebotscreen.screen.model
 
-import org.jetbrains.compose.resources.DrawableResource
+import com.locker.core.models.Player
 
 data class HeaderState(
-	val icon: DrawableResource? = null,
+	val player: Player? = null,
 	val playingAs: String = "",
 	val subtitle: String = "",
 	val isUserTurn: Boolean = true,

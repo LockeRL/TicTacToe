@@ -46,7 +46,10 @@ fun NextGameContent(
 			text = endGame.title,
 			color = colors.accentContainer,
 			style = typography.titleLarge,
-			modifier = Modifier.padding(8.dp)
+			modifier = Modifier.padding(
+				top = 8.dp,
+				bottom = 32.dp,
+			)
 		)
 
 		Column(

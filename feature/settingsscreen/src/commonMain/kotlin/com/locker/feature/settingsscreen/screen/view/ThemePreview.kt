@@ -57,19 +57,30 @@ fun ThemePreview(theme: AppColorTheme) {
 				modifier = Modifier
 					.fillMaxSize()
 					.matrixLine(
-						border = Border(strokeWidth = 4.dp, color = theme.accent),
+						border = Border(strokeWidth = 4.dp, color = theme.additional),
 						dimensionSize = 3,
 						mainDiagonal = true,
 					)
 			) { i, j ->
 				Box(modifier = Modifier.fillMaxSize()) {
-					if (i == j) {
-						PlayerIcon(
-							player = Player.CIRCLE,
-							color = theme.accentContainer,
-							modifier = Modifier
-								.fillMaxSize()
-						)
+					when {
+						i == j -> {
+							PlayerIcon(
+								player = Player.CIRCLE,
+								color = theme.additional,
+								modifier = Modifier
+									.fillMaxSize()
+							)
+						}
+
+						i + j == 3 -> {
+							PlayerIcon(
+								player = Player.CROSS,
+								color = theme.accent,
+								modifier = Modifier
+									.fillMaxSize()
+							)
+						}
 					}
 				}
 			}

@@ -15,7 +15,7 @@ object HeaderStateFactory {
 		isBotThinking: Boolean,
 		isUserTurn: Boolean,
 	): HeaderState = HeaderState(
-		icon = player.icon,
+		player = player,
 		playingAs = getString(Res.string.playing_as),
 		subtitle = getString(
 			when {

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -73,13 +72,12 @@ fun GameBlockContainer(
 ) {
     val colors = TicTacToeTheme.colors
 
-    val winAlpha by animateFloatAsState(
+    val winAlpha = animateFloatAsState(
         targetValue = if (boardState == BoardState.InProgress) 0f else 1f,
-        label = "winner_block",
         animationSpec = tween(durationMillis = FADE_WIN_BLOCK_TIME)
     )
 
-    val shadowAlpha = max(0.2f, 1f - if (showAlphaAnimation) winAlpha else 0f)
+    val shadowAlpha = max(0.2f, 1f - if (showAlphaAnimation) winAlpha.value else 0f)
 
     Box(modifier = modifier) {
         MatrixFieldBlock(
@@ -92,13 +90,18 @@ fun GameBlockContainer(
         )
 
         if (boardState != BoardState.InProgress) {
-            if (!showWinAfterAnimation || winAlpha == 0f) {
+            if (!showWinAfterAnimation || winAlpha.value == 0f) {
                 Box(
                     modifier = Modifier
                         .alpha(shadowAlpha)
                         .fillMaxSize()
                         .matrixLine(
-                            border = Border(strokeWidth = 4.dp, color = colors.accent),
+                            border = Border(
+                                strokeWidth = 4.dp,
+                                color = ((boardState as? BoardState.Winner)?.winner as? CellState.Occupied)
+                                    ?.player?.color()
+                                    ?: colors.accent,
+                            ),
                             dimensionSize = dimensionSize,
                             column = if (boardState is BoardState.Winner.Column) boardState.columnNum else null,
                             row = if (boardState is BoardState.Winner.Row) boardState.rowNum else null,
@@ -113,7 +116,7 @@ fun GameBlockContainer(
                     state = if (boardState is BoardState.Winner) boardState.winner else CellState.Empty,
                     modifier = Modifier
                         .fillMaxSize()
-                        .alpha(if (showAlphaAnimation) winAlpha else 0f),
+                        .alpha(if (showAlphaAnimation) winAlpha.value else 0f),
                 )
             }
         }

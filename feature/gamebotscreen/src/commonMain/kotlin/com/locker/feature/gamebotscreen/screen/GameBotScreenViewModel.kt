@@ -116,7 +116,7 @@ class GameBotScreenViewModel(
 	) { isThinking, activePlayer, userPlayer, boardState ->
 		if (boardState == BoardState.InProgress) {
 			_header.value = HeaderStateFactory.create(
-				player = activePlayer,
+				player = _userPlayer.value,
 				isBotThinking = isThinking,
 				isUserTurn = activePlayer == userPlayer,
 			)

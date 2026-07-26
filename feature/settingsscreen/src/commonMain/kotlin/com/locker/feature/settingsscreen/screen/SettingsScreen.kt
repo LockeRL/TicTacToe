@@ -86,7 +86,6 @@ fun SettingsScreen(
 		) {
 			ThemePreview(theme = currentTheme)
 
-
 			AnimatedVisibility(
 				visible = userThemes.value.isNotEmpty()
 			) {
