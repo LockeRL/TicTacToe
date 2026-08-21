@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.locker.feature.component.TicTacToeButton
+import com.locker.feature.core.isTablet
 import com.locker.feature.core.screen.LocalFireEvent
 import com.locker.feature.core.screen.ProvideScreenEvents
 import com.locker.feature.core.theme.TicTacToeTheme
@@ -83,7 +84,7 @@ fun TutorialScreenContent(
 	) {
 		Text(
 			text = state.title,
-			style = typography.headlineMedium,
+			style = if (isTablet()) typography.headlineLarge else typography.headlineMedium,
 			color = colors.accentContainer,
 		)
 
@@ -199,14 +200,14 @@ fun TutorialPageContent(
 	) {
 		Text(
 			text = stringResource(pageType.title),
-			style = typography.headlineSmall,
+			style = if (isTablet()) typography.headlineMedium else typography.headlineSmall,
 			color = colors.accent,
 			textAlign = TextAlign.Center
 		)
 
 		Text(
 			text = stringResource(pageType.description),
-			style = typography.bodyLarge,
+			style = if (isTablet()) typography.headlineSmall else typography.bodyLarge,
 			color = colors.accentContainer.copy(alpha = 0.8f),
 			textAlign = TextAlign.Center,
 			modifier = Modifier

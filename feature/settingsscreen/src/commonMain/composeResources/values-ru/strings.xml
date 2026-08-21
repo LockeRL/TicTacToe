@@ -1,7 +1,7 @@
 <resources>
     <string name="user_themes">Пользовательские темы</string>
     <string name="background_color">Фон</string>
-    <string name="accent_color">Текст, основные линии и крестики</string>
+    <string name="accent_color">Основные линии и крестики</string>
     <string name="additional_color">Внутренние линии и нолики</string>
     <string name="additional_container_color">Системные кнопки</string>
     <string name="accent_container_color">Вторичный цвет текста</string>

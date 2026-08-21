@@ -1,7 +1,7 @@
 <resources>
     <string name="user_themes">Temas de usuario</string>
     <string name="background_color">Fondo</string>
-    <string name="accent_color">Texto, líneas principales y cruces</string>
+    <string name="accent_color">Líneas principales y cruces</string>
     <string name="additional_color">Líneas interiores y círculos</string>
     <string name="additional_container_color">Botones del sistema</string>
     <string name="accent_container_color">Color de texto secundario</string>
