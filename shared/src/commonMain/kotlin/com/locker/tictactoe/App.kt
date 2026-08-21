@@ -1,9 +1,9 @@
 package com.locker.tictactoe
 
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.WindowInsets
@@ -18,7 +18,7 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Scaffold
@@ -33,10 +33,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.ui.NavDisplay
 import com.locker.core.navigation.Navigator
-import com.locker.core.navigation.rememberNavigationState
-import com.locker.core.navigation.toEntries
 import com.locker.core.navigation.keys.MainScreenNavKey
 import com.locker.core.navigation.keys.SettingsScreenNavKey
+import com.locker.core.navigation.rememberNavigationState
+import com.locker.core.navigation.toEntries
 import com.locker.feature.colorpicker.view.ColorsViewModel
 import com.locker.feature.component.modifier.conditional
 import com.locker.feature.core.theme.SCREEN_CHANGE_ANIM_DURATION
@@ -90,7 +90,7 @@ fun App(
 							.size(if (currentKey == MainScreenNavKey) 32.dp else 24.dp),
 						modifier = Modifier
 							.background(backgroundColor)
-							.windowInsetsPadding(WindowInsets.statusBars)
+							.windowInsetsPadding(WindowInsets.systemBars)
 							.fillMaxWidth()
 					)
 				},
